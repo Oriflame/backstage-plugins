@@ -1,0 +1,36 @@
+{
+    "name": "ori-backstage-plugins",
+    "description": "Oriflame plugins for Backstage.",
+    "maintainers": [
+        "jvilimek@users.noreply.github.com",
+        "OSWDVLPPlatform@oriflame.com",
+        "GlobalITCOEdevelopmentTooling@Oriflame.com"
+    ],
+    "version": "0.1.0",
+    "private": true,
+    "engines": {
+        "node": "14 || 16"
+    },
+    "scripts": {},
+    "workspaces": {
+        "packages": [
+            "plugins/*"
+        ]
+    },
+    "resolutions": {},
+    "dependencies": {},
+    "devDependencies": {},
+    "prettier": "@spotify/prettier-config",
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,mjs,cjs}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,md}": [
+            "prettier --write"
+        ],
+        "*.md": [
+            "node ./scripts/check-docs-quality"
+        ]
+    }
+}
