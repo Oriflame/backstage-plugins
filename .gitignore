@@ -348,3 +348,13 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+dist-types
+dist-workspace
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
