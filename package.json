@@ -13,6 +13,7 @@
     },
     "scripts": {
         "build": "lerna run build",
+        "lint": "lerna run lint --since origin/main --",
         "test": "lerna run test --since origin/main -- --coverage --runInBand"
     },
     "workspaces": {
