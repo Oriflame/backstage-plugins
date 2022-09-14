@@ -12,6 +12,7 @@
         "node": "14 || 16"
     },
     "scripts": {
+        "build": "lerna run build",
         "test": "lerna run test --since origin/main -- --coverage --runInBand"
     },
     "workspaces": {
