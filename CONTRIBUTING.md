@@ -45,6 +45,14 @@ So...feel ready to jump in? Let's do this. 💯 👏
 
 Start by reading repository README to get set up for local development. If you need help, just jump into [our GitHub discussions](https://github.com/Oriflame/backstage-plugins/discussions).
 
+## Commits signing
+
+We do require that all commits are signed. How to sign commits: [signing-commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
+
+Don't forget to specify correct git user for signature, e.g. run `git config user.email jvilimek@users.noreply.github.com`.
+
+See also [telling-git-about-your-signing-key](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key).
+
 ## Coding Guidelines
 
 We use the backstage-cli to build, serve, lint, test and package all the plugins.
