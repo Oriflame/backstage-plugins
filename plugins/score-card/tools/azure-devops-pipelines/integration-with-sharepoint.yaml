@@ -90,7 +90,7 @@ jobs:
     condition: eq(variables['Build.SourceBranch'],'refs/heads/main') # TODO: fix branch name
 
   #commit&push changes
-  - task: PowerShell@2
+  - task: PowerShell@2.210.0
     displayName: 'Auto commit changes'
     inputs:
       filePath: './scripts/push-changes.ps1'
