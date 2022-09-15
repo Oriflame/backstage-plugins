@@ -1,15 +1,9 @@
 # backstage-plugins
 
-Oriflame Backstage plugins
+Oriflame Backstage plugins.
 
-## TODO
+## List of plugins
 
-How to sign commits <https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits>.
-
-`git config user.email jvilimek@users.noreply.github.com`
-
-<https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key>
-
-git config user.signingkey 179BDF0991C840FA
-
-`git commit -S -m "TBD"`
+Name | Description
+---------|----------
+ [score-card](https://github.com/Oriflame/backstage-plugins/blob/main/plugins/score-card/README.md) | Main idea behind it comes from a need to somehow visualize maturity of our services and to establish a process how to improve it (discuss with the teams what to focus on next).
