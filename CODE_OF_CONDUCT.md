@@ -4,7 +4,7 @@ We subscribe to the same [Spotify FOSS Code of Conduct](https://github.com/backs
 
 ## Reporting issues
 
-If you experience or witness unacceptable behavior—or have any other concerns—please report it by contacting us via foss@roadie.io. All reports will be handled with discretion. In your report please include:
+If you experience or witness unacceptable behavior—or have any other concerns—please report it by contacting us, see [Oriflame GitHub Home Page](https://github.com/Oriflame)). All reports will be handled with discretion. In your report please include:
 
 - Your contact information.
 - Names (real, nicknames, or pseudonyms) of any individuals involved. If there are additional witnesses, please include them as well. Your account of what occurred, and if you believe the incident is ongoing. If there is a publicly available record (e.g. a mailing list archive or a public IRC logger), please include a link.
