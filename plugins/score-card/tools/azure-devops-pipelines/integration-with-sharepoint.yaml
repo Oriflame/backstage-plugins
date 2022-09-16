@@ -37,7 +37,7 @@ jobs:
   - template: ./templates/checkout-branch-properly.yaml
 
   # get items from sharpeoint list and updates local files
-  - task: AzureCLI@2
+  - task: AzureCLI@2.208.0
     displayName: 'Update system-scores from sharepoint'
     inputs:
       azureSubscription: BackstageCatalogSharepointIntegration # TODO: create the service connection, see documentation
@@ -57,7 +57,7 @@ jobs:
       pwsh: true
 
   # always (e.g. during PR) upload also to DEV storage. if this would cause any issue (like overwriting data from regular main run over branch data), remove it 
-  - task: AzureCLI@1
+  - task: AzureCLI@2.208.0
     displayName: 'Uploading to DEV storage'
     inputs:
       azureSubscription: BackstageCatalogSharepointIntegration
@@ -73,7 +73,7 @@ jobs:
       # ^^^^ TODO fix account name, destination paths,...
 
   # when on MAIN branch upload to oribackstagedevpublic storage
-  - task: AzureCLI@1
+  - task: AzureCLI@2.208.0
     displayName: 'Uploading to LIVE storage'
     inputs:
       azureSubscription: BackstageCatalogSharepointIntegration
