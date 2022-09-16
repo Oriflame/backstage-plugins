@@ -16,25 +16,19 @@
 
 import React from 'react';
 import { Route } from 'react-router';
-import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
+import { apiDocsPlugin } from '@backstage/plugin-api-docs';
 import {
   CatalogEntityPage,
   CatalogIndexPage,
   catalogPlugin,
 } from '@backstage/plugin-catalog';
 import {
-  CatalogImportPage,
   catalogImportPlugin,
 } from '@backstage/plugin-catalog-import';
 import {
-  ScaffolderFieldExtensions,
-  ScaffolderPage,
   scaffolderPlugin,
 } from '@backstage/plugin-scaffolder';
 import { orgPlugin } from '@backstage/plugin-org';
-import { SearchPage } from '@backstage/plugin-search';
-import { TechRadarPage } from '@backstage/plugin-tech-radar';
-import { TechdocsPage } from '@backstage/plugin-techdocs';
 import { UserSettingsPage } from '@backstage/plugin-user-settings';
 import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
@@ -45,7 +39,6 @@ import { FlatRoutes } from '@backstage/core-app-api';
 import { createApp } from '@backstage/app-defaults';
 import { HomepageCompositionRoot } from '@backstage/plugin-home';
 import { HomePage } from './components/home/HomePage';
-import { SelectFieldFromApiExtension } from '@roadiehq/plugin-scaffolder-frontend-module-http-request-field';
 
 const app = createApp({
   apis,
@@ -81,19 +74,6 @@ const routes = (
     >
       {entityPage}
     </Route>
-    <Route path="/docs" element={<TechdocsPage />} />
-    <Route path="/create" element={<ScaffolderPage />}>
-      <ScaffolderFieldExtensions>
-        <SelectFieldFromApiExtension />
-      </ScaffolderFieldExtensions>
-    </Route>
-    <Route path="/api-docs" element={<ApiExplorerPage />} />
-    <Route
-      path="/tech-radar"
-      element={<TechRadarPage width={1500} height={800} />}
-    />
-    <Route path="/catalog-import" element={<CatalogImportPage />} />
-    <Route path="/search" element={<SearchPage />} />
     <Route path="/settings" element={<UserSettingsPage />} />
   </FlatRoutes>
 );
