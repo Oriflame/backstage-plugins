@@ -7,7 +7,7 @@
  */
 
 // eslint-disable-next-line notice/notice
-const { version } = require('../package.json');
+import { version } from '../package.json';
 
 import Router from 'express-promise-router';
 import {
@@ -23,23 +23,23 @@ import {
   ServerTokenManager,
 } from '@backstage/backend-common';
 import { Config } from '@backstage/config';
-import healthcheck from './plugins/healthcheck';
+import healthcheck from './plugins/healthcheck.js';
 import { TaskScheduler } from '@backstage/backend-tasks';
-import app from './plugins/app';
-import auth from './plugins/auth';
-import catalog from './plugins/catalog';
-import scaffolder from './plugins/scaffolder';
-import proxy from './plugins/proxy';
-import { PluginEnvironment } from './types';
+import app from './plugins/app.js';
+import auth from './plugins/auth.js';
+import catalog from './plugins/catalog.js';
+import scaffolder from './plugins/scaffolder.js';
+import proxy from './plugins/proxy.js';
+import { PluginEnvironment } from './types.js';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
-import {serializeError} from 'serialize-error';
+import { serializeError } from 'serialize-error';
 
 const safeFatalError = async (message: string, error?: Error) => {
   try {
     // if available, use the root logger (shall send the message to AppInsights too)
     const logger = getRootLogger();
     logger.error(message);
-    logger.error(`Full error: ${serializeError(error)}`)
+    logger.error(`Full error: ${serializeError(error)}`);
   } catch (_e) {
     console.error(message);
   }
