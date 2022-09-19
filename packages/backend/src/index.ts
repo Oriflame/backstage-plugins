@@ -32,12 +32,14 @@ import scaffolder from './plugins/scaffolder';
 import proxy from './plugins/proxy';
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
+import {serializeError} from 'serialize-error';
 
 const safeFatalError = async (message: string, error?: Error) => {
   try {
     // if available, use the root logger (shall send the message to AppInsights too)
     const logger = getRootLogger();
     logger.error(message);
+    logger.error(`Full error: ${serializeError(error)}`)
   } catch (_e) {
     console.error(message);
   }

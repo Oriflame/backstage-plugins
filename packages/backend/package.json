@@ -43,7 +43,8 @@
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "knex": "^0.21.6",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "serialize-error": "^11.0.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.18.0",
