@@ -24,7 +24,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: yarn dev
-          wait-on: 'http://localhost:3000, http://localhost:7007'
+          wait-on: 'http://localhost:3000, http://localhost:7007/healthcheck'
           project: ./packages/app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
