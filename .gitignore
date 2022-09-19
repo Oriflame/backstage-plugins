@@ -354,3 +354,7 @@ dist-workspace
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+
+# cypress screenshots and videos output
+
+**/cypress-out/

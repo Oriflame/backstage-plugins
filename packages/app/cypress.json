@@ -2,11 +2,13 @@
   "baseUrl": "http://localhost:3000",
   "fixturesFolder": "./cypress/fixtures",
   "integrationFolder": "./cypress/integration",
-  "defaultCommandTimeout": 60000,
-  "viewportHeight": 900,
-  "responseTimeout": 60000,
-  "requestTimeout": 30000,
-  "viewportWidth": 1440,
+  "screenshotsFolder": "./cypress-out/screenshots",
+  "videosFolder": "./cypress-out/videos",
+  "defaultCommandTimeout": 10000,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "responseTimeout": 10000,
+  "requestTimeout": 10000,
   "supportFile": "./cypress/support",
   "pluginsFile": "./cypress/plugins"
 }

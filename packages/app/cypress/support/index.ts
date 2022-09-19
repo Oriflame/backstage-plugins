@@ -30,4 +30,12 @@ Cypress.Commands.add('saveGithubToken', () => {
   );
 });
 
+Cypress.Commands.add('checkForErrors', () => {
+  cy.get('div[role="alert"]').should('not.exist');
+});
+
+Cypress.Commands.add('getByTestId', (testId: string) => {
+  cy.get(`[data-testid="${testId}"]`);
+});
+
 export {};

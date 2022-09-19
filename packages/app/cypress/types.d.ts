@@ -23,5 +23,7 @@ declare namespace Cypress {
      */
     loginAsGuest(): Chainable<Element>;
     saveGithubToken(): Chainable<Element>;
+    checkForErrors(): Chainable<Element>;
+    getByTestId(): Chainable<Element>;
   }
 }
