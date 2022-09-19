@@ -27,8 +27,8 @@ describe('App', () => {
           data: {
             app: { title: 'Test' },
             backend: { baseUrl: 'http://localhost:7007' },
-            techdocs: {
-              storageUrl: 'http://localhost:7007/api/techdocs/static/docs',
+            scorecards: {
+              jsonDataUrl: 'http://localhost:8090/plugins/score-card/sample-data/',
             },
           },
           context: 'test',

@@ -33,7 +33,6 @@
     "@backstage/plugin-permission-node": "^0.6.0",
     "@backstage/plugin-proxy-backend": "^0.2.8",
     "@backstage/plugin-scaffolder-backend": "^1.0.0",
-    "@backstage/plugin-techdocs-backend": "^1.0.0",
     "@gitbeaker/node": "^29.2.0",
     "@octokit/rest": "^18.5.3",
     "better-sqlite3": "^7.5.1",
