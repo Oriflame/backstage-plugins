@@ -13,8 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createRouteRef } from '@backstage/core-plugin-api';
+var path = require('path');
 
-export const rootRouteRef = createRouteRef({
-  id: 'score-card',
-});
+module.exports = {
+  root: true,
+  plugins: ['notice'],
+  rules: {
+    'notice/notice': [
+      'error',
+      {
+        // eslint-disable-next-line no-restricted-syntax
+        templateFile: path.resolve(__dirname, '../scripts/copyright-header.txt'),
+        templateVars: {
+          NAME: 'Oriflame',
+        },
+        varRegexps: { NAME: /(Oriflame)/ },
+        onNonMatchingHeader: 'replace',
+      },
+    ],
+  },
+};
