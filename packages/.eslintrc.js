@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oriflame
+ * Copyright 2022 Oriflame (Based on https://github.com/RoadieHQ/roadie-backstage-plugins source copyrighted by Larder Software Limited)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ module.exports = {
       'error',
       {
         // eslint-disable-next-line no-restricted-syntax
-        templateFile: path.resolve(__dirname, './scripts/copyright-header.txt'),
+        templateFile: path.resolve(__dirname, '../scripts/copyright-header.txt'),
         templateVars: {
-          NAME: 'Oriflame',
+          NAME: 'Oriflame (Based on https://github.com/RoadieHQ/roadie-backstage-plugins source copyrighted by Larder Software Limited)',
         },
-        varRegexps: { NAME: /(Oriflame)/ },
+        varRegexps: { NAME: /(Oriflame \([^\)]+\))/ },
         onNonMatchingHeader: 'replace',
       },
     ],
