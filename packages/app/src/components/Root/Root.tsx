@@ -27,12 +27,13 @@ import {
 import {
   Sidebar,
   sidebarConfig,
-  // SidebarDivider,
+  SidebarDivider,
   SidebarGroup,
   SidebarItem,
   SidebarPage,
   useSidebarOpenState,
 } from '@backstage/core-components';
+import Score from '@material-ui/icons/Score';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -77,7 +78,10 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       {/* <SidebarItem icon={HomeIcon} to="/" text="Home" /> */}
       <SidebarItem icon={LibraryBooks} to="catalog" text="Catalog" />
       {/* End global nav */}
-      {/* <SidebarDivider /> */}
+
+      <SidebarDivider />
+      <SidebarItem icon={Score} to="score-board" text="Score board" />
+      <SidebarDivider />
       <SidebarGroup
         label="Settings"
         icon={<UserSettingsSignInAvatar />}

@@ -35,6 +35,7 @@ import {
   EntityOwnershipCard,
 } from '@backstage/plugin-org';
 
+import { EntityScoreCardContent } from '@ori/backstage-plugin-score-card';
 const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
     <Grid item md={6}>
@@ -144,6 +145,15 @@ const systemPage = (
         </Grid>
       </Grid>
     </EntityLayout.Route>
+
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
+
     <EntityLayout.Route path="/diagram" title="Diagram">
       <EntityCatalogGraphCard />
     </EntityLayout.Route>
