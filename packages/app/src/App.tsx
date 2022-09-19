@@ -15,19 +15,12 @@
  */
 
 import React from 'react';
-import { Route } from 'react-router';
-import { apiDocsPlugin } from '@backstage/plugin-api-docs';
+import { Navigate, Route } from 'react-router';
 import {
   CatalogEntityPage,
   CatalogIndexPage,
   catalogPlugin,
 } from '@backstage/plugin-catalog';
-import {
-  catalogImportPlugin,
-} from '@backstage/plugin-catalog-import';
-import {
-  scaffolderPlugin,
-} from '@backstage/plugin-scaffolder';
 import { orgPlugin } from '@backstage/plugin-org';
 import { UserSettingsPage } from '@backstage/plugin-user-settings';
 import { apis } from './apis';
@@ -37,21 +30,11 @@ import { Root } from './components/Root';
 import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
 import { FlatRoutes } from '@backstage/core-app-api';
 import { createApp } from '@backstage/app-defaults';
-import { HomepageCompositionRoot } from '@backstage/plugin-home';
-import { HomePage } from './components/home/HomePage';
+import { ScoreBoardPage } from '@ori/backstage-plugin-score-card';
 
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
-    bind(catalogPlugin.externalRoutes, {
-      createComponent: scaffolderPlugin.routes.root,
-    });
-    bind(apiDocsPlugin.externalRoutes, {
-      registerApi: catalogImportPlugin.routes.importPage,
-    });
-    bind(scaffolderPlugin.externalRoutes, {
-      registerComponent: catalogImportPlugin.routes.importPage,
-    });
     bind(orgPlugin.externalRoutes, {
       catalogIndex: catalogPlugin.routes.catalogIndex,
     });
@@ -63,10 +46,7 @@ const AppRouter = app.getRouter();
 
 const routes = (
   <FlatRoutes>
-    <Route path="/" element={<HomepageCompositionRoot />}>
-      <HomePage />
-    </Route>
-
+    <Navigate key="/" to="catalog" />
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
@@ -75,6 +55,8 @@ const routes = (
       {entityPage}
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
+
+    <Route path="/score-board" element={<ScoreBoardPage />} />
   </FlatRoutes>
 );
 

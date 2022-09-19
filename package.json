@@ -12,6 +12,12 @@
         "node": "14 || 16"
     },
     "scripts": {
+        "dev": "concurrently \"yarn start\" \"yarn start-backend\"",
+        "dev:ci": "concurrently \"http-server --port 3000 --proxy http://localhost:3000? packages/app/dist\" \"yarn start-backend\"",
+        "start": "yarn workspace app start",
+        "start-backend": "yarn workspace backend start",
+        "start-backend:ci": "yarn workspace backend backstage-cli package build && node packages/backend",
+        "start:ci": "concurrently \"yarn start\" \"yarn start-backend:ci\"",
         "build": "lerna run build",
         "lint": "lerna run lint --since origin/main --",
         "test": "lerna run test --since origin/main -- --coverage --runInBand",
@@ -21,10 +27,14 @@
     },
     "workspaces": {
         "packages": [
+            "packages/*",
             "plugins/*"
         ]
     },
-    "resolutions": {},
+  "resolutions": {
+    "@types/react": "^17",
+    "@types/react-dom": "^17"
+  },
     "dependencies": {
         "@changesets/cli": "2.24.4"
     },

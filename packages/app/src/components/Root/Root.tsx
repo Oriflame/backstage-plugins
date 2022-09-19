@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line notice/notice
-import React, { useContext, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Link, makeStyles } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import MapIcon from '@material-ui/icons/MyLocation';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
+import { NavLink } from 'react-router-dom';
+import {
+  Settings as SidebarSettings,
+  UserSettingsSignInAvatar,
+} from '@backstage/plugin-user-settings';
 import {
   Sidebar,
-  SidebarPage,
   sidebarConfig,
-  SidebarContext,
+  // SidebarDivider,
+  SidebarGroup,
   SidebarItem,
-  SidebarDivider,
-  SidebarSpace,
+  SidebarPage,
+  useSidebarOpenState,
 } from '@backstage/core-components';
-import { NavLink } from 'react-router-dom';
-import { Settings as SidebarSettings } from '@backstage/plugin-user-settings';
-import { SidebarSearch } from '@backstage/plugin-search';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -55,7 +51,7 @@ const useSidebarLogoStyles = makeStyles({
 
 const SidebarLogo = () => {
   const classes = useSidebarLogoStyles();
-  const { isOpen } = useContext(SidebarContext);
+  const { isOpen } = useSidebarOpenState();
 
   return (
     <div className={classes.root}>
@@ -64,6 +60,7 @@ const SidebarLogo = () => {
         to="/"
         underline="none"
         className={classes.link}
+        aria-label="Home"
       >
         {isOpen ? <LogoFull /> : <LogoIcon />}
       </Link>
@@ -75,20 +72,19 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
       <SidebarLogo />
-      <SidebarSearch />
-      <SidebarDivider />
+      {/* <SidebarDivider /> */}
       {/* Global nav, not org-specific */}
-      <SidebarItem icon={HomeIcon} to="/" text="Home" />
+      {/* <SidebarItem icon={HomeIcon} to="/" text="Home" /> */}
       <SidebarItem icon={LibraryBooks} to="catalog" text="Catalog" />
-      <SidebarItem icon={ExtensionIcon} to="api-docs" text="APIs" />
-      <SidebarItem icon={MenuBookIcon} to="docs" text="Docs" />
-      <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
       {/* End global nav */}
-      <SidebarDivider />
-      <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
-      <SidebarSpace />
-      <SidebarDivider />
-      <SidebarSettings />
+      {/* <SidebarDivider /> */}
+      <SidebarGroup
+        label="Settings"
+        icon={<UserSettingsSignInAvatar />}
+        to="/settings"
+      >
+        <SidebarSettings />
+      </SidebarGroup>
     </Sidebar>
     {children}
   </SidebarPage>
