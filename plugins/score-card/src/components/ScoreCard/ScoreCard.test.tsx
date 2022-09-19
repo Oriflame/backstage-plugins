@@ -15,11 +15,11 @@
  */
 import React from 'react';
 import { act, render } from '@testing-library/react';
-import { ScoreCard } from './ScoreCard';
+import { ScoreCard } from './ScoreCard.js';
 import { TestApiProvider } from '@backstage/test-utils';
-import { ScoringDataApi, scoringDataApiRef } from '../../api';
+import { ScoringDataApi, scoringDataApiRef } from '../../api/index.js';
 import { Entity } from '@backstage/catalog-model';
-import { SystemScoreExtended } from '../../api/types';
+import { SystemScoreExtended } from '../../api/types.js';
 import { errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';

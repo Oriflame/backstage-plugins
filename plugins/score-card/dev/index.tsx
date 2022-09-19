@@ -30,7 +30,7 @@ import {
   entityTeamC,
   entityWithoutScoringData,
   entityGuestUser,
-} from './sample-entities';
+} from './sample-entities.js';
 import { CatalogEntityPage } from '@backstage/plugin-catalog';
 import {
   CatalogRequestOptions,

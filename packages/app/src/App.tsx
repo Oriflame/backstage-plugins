@@ -24,9 +24,9 @@ import {
 } from '@backstage/plugin-catalog';
 import { orgPlugin } from '@backstage/plugin-org';
 import { UserSettingsPage } from '@backstage/plugin-user-settings';
-import { apis } from './apis';
-import { entityPage } from './components/catalog/EntityPage';
-import { Root } from './components/Root';
+import { apis } from './apis.js';
+import { entityPage } from './components/catalog/EntityPage.js';
+import { Root } from './components/Root/index.js';
 
 import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
 import { FlatRoutes } from '@backstage/core-app-api';

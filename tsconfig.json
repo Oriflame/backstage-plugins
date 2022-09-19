@@ -13,6 +13,8 @@
   "compilerOptions": {
     "outDir": "dist-types",
     "rootDir": ".",
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "module": "node16",
+    "moduleResolution": "node16"
   }
 }

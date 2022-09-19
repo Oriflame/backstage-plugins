@@ -15,4 +15,4 @@
  */
 
 // eslint-disable-next-line notice/notice
-export { Root } from './Root';
+export { Root } from './Root.js';

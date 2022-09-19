@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { ScoreCard } from './ScoreCard';
+export { ScoreCard } from './ScoreCard.js';

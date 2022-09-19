@@ -36,11 +36,11 @@ import {
   getScoreTableEntries,
   SystemScoreTableEntry,
 } from './helpers/getScoreTableEntries';
-import { areaColumn } from './columns/areaColumn';
-import { detailsColumn } from './columns/detailsColumn';
-import { scorePercentColumn } from './columns/scorePercentColumn';
-import { titleColumn } from './columns/titleColumn';
-import { getReviewerLink } from './sub-components/getReviewerLink';
+import { areaColumn } from './columns/areaColumn.js';
+import { detailsColumn } from './columns/detailsColumn.js';
+import { scorePercentColumn } from './columns/scorePercentColumn.js';
+import { titleColumn } from './columns/titleColumn.js';
+import { getReviewerLink } from './sub-components/getReviewerLink.js';
 import { scoringDataApiRef } from '../../api';
 
 // lets prepare some styles

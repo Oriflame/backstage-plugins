@@ -22,8 +22,8 @@ import {
   configApiRef,
 } from '@backstage/core-plugin-api';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';
-import { ScoringDataJsonClient } from './api';
-import { scoringDataApiRef } from './api';
+import { ScoringDataJsonClient } from './api/index.js';
+import { scoringDataApiRef } from './api/index.js';
 
 import { rootRouteRef } from './routes';
 
@@ -54,7 +54,7 @@ export const ScoreBoardPage = scoreCardPlugin.provide(
   createRoutableExtension({
     name: 'score-board-page',
     component: () =>
-      import('./components/ScoreBoardPage').then(m => m.ScoreBoardPage),
+      import('./components/ScoreBoardPage/index.js').then(m => m.ScoreBoardPage),
     mountPoint: rootRouteRef,
   }),
 );
@@ -63,7 +63,7 @@ export const EntityScoreCardContent = scoreCardPlugin.provide(
   createComponentExtension({
     name: 'score-board-card',
     component: {
-      lazy: () => import('./components/ScoreCard').then(m => m.ScoreCard),
+      lazy: () => import('./components/ScoreCard/index.js').then(m => m.ScoreCard),
     },
   }),
 );

@@ -18,8 +18,8 @@
 import React, { PropsWithChildren } from 'react';
 import { Link, makeStyles } from '@material-ui/core';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
-import LogoFull from './LogoFull';
-import LogoIcon from './LogoIcon';
+import LogoFull from './LogoFull.js';
+import LogoIcon from './LogoIcon.js';
 import { NavLink } from 'react-router-dom';
 import {
   Settings as SidebarSettings,

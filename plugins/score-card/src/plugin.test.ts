@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { scoreCardPlugin } from './plugin';
+import { scoreCardPlugin } from './plugin.js';
 
 describe('score-card', () => {
   it('should export plugin', () => {

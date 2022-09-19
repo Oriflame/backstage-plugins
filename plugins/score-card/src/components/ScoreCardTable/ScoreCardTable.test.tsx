@@ -15,7 +15,7 @@
  */
 import React from 'react';
 import { act, render } from '@testing-library/react';
-import { ScoreCardTable } from './ScoreCardTable';
+import { ScoreCardTable } from './ScoreCardTable.js';
 import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';

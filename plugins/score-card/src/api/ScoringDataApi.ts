@@ -15,7 +15,7 @@
  */
 import { Entity } from '@backstage/catalog-model';
 import { createApiRef } from '@backstage/core-plugin-api';
-import { SystemScoreExtended } from './types';
+import { SystemScoreExtended } from './types.js';
 
 export const scoringDataApiRef = createApiRef<ScoringDataApi>({
   id: 'plugin.scoringdata.service',

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type { SystemScore, SystemScoreArea, SystemScoreEntry } from './types';
-export { ScoreSuccessEnum } from './types';
-export { scoringDataApiRef } from './ScoringDataApi';
-export type { ScoringDataApi } from './ScoringDataApi';
-export { ScoringDataJsonClient } from './ScoringDataJsonClient';
+export type { SystemScore, SystemScoreArea, SystemScoreEntry } from './types.js';
+export { ScoreSuccessEnum } from './types.js';
+export { scoringDataApiRef } from './ScoringDataApi.js';
+export type { ScoringDataApi } from './ScoringDataApi.js';
+export { ScoringDataJsonClient } from './ScoringDataJsonClient.js';

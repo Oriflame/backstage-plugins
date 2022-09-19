@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ScoringDataApi } from './ScoringDataApi';
+import { ScoringDataApi } from './ScoringDataApi.js';
 import { ConfigApi, FetchApi } from '@backstage/core-plugin-api';
-import { SystemScore, SystemScoreExtended } from './types';
+import { SystemScore, SystemScoreExtended } from './types.js';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,

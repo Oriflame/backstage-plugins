@@ -28,7 +28,7 @@ import {
 } from '@backstage/plugin-scaffolder-backend';
 import Docker from 'dockerode';
 import { Router } from 'express';
-import type { PluginEnvironment } from '../types';
+import type { PluginEnvironment } from '../types.js';
 import { ScmIntegrations } from '@backstage/integration';
 import { Config } from '@backstage/config';
 

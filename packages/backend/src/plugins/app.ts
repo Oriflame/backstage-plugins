@@ -1,7 +1,7 @@
 /* eslint-disable notice/notice */
 import { createRouter } from '@backstage/plugin-app-backend';
 import { Router } from 'express';
-import { PluginEnvironment } from '../types';
+import { PluginEnvironment } from '../types.js';
 
 export default async function createPlugin({
   logger,

@@ -5,7 +5,7 @@ import {
 } from '@backstage/plugin-catalog-backend';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
-import { PluginEnvironment } from '../types';
+import { PluginEnvironment } from '../types.js';
 import { Duration } from 'luxon';
 
 export default async function createPlugin(
