@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'renovate.js'
+      - './renovate.js'
   push:
     branches:
       - main
     paths:
-      - 'renovate.js'
+      - './renovate.js'
 
 jobs:
   validate:
