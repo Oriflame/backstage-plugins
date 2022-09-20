@@ -62,6 +62,7 @@ async function main() {
     'diff',
     '--name-only',
     parentRef,
+    '--',
     "'*/package.json'", // Git treats this as what would usually be **/package.json
   );
   const packageList = diff
