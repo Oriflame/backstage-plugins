@@ -12,10 +12,10 @@
   "backstage": {
     "role": "frontend-plugin"
   },
-  "homepage": "https://backstage.io",
+  "homepage": "https://github.com/Oriflame/backstage-plugins/tree/main/plugins/score-card",
   "repository": {
     "type": "git",
-    "url": "https://github.com/backstage/backstage",
+    "url": "https://github.com/Oriflame/backstage-plugins",
     "directory": "plugins/score-card"
   },
   "keywords": [
