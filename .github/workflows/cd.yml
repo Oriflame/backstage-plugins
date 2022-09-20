@@ -64,7 +64,7 @@ jobs:
   release:
     needs: build
 
-    if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release
+    if: needs.build.outputs.needs_release != 'true' || github.event.inputs.create_release
 
     runs-on: ubuntu-latest
 
