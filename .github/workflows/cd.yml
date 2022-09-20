@@ -21,6 +21,9 @@ jobs:
       NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
+      - name: Check of github.event.before
+        run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
+
       - name: Checkout repository
         uses: actions/checkout@main
 
@@ -31,16 +34,13 @@ jobs:
 
       - run: yarn install --frozen-lockfile
 
-      - name: Fetch HEAD commit for release check
-        if: ${{ github.event.before == '0000000000000000000000000000000000000000' }}
-        run: git fetch origin 'HEAD'
-
       - name: Fetch previous commit for release check
         if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
         run: git fetch origin '${{ github.event.before }}'
 
       - name: Check if release
         id: release_check
+        if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
         run: node scripts/check-if-release.js
         env:
           COMMIT_SHA_BEFORE: '${{ github.event.before }}'
