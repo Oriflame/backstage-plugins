@@ -29,14 +29,11 @@ const { resolve: resolvePath } = require('path');
 const { promises: fs } = require('fs');
 const { promisify } = require('util');
 
-if (
+const parentRef =
   !process.env.COMMIT_SHA_BEFORE ||
   process.env.COMMIT_SHA_BEFORE === '0000000000000000000000000000000000000000'
-) {
-  const parentRef = 'HEAD^';
-} else {
-  const parentRef = process.env.COMMIT_SHA_BEFORE;
-}
+    ? 'HEAD^'
+    : process.env.COMMIT_SHA_BEFORE;
 
 const execFile = promisify(execFileCb);
 
