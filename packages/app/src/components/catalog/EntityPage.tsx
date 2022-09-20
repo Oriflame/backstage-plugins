@@ -36,7 +36,7 @@ import {
   EntityOwnershipCard,
 } from '@backstage/plugin-org';
 
-import { EntityScoreCardContent } from '@ori/backstage-plugin-score-card';
+import { EntityScoreCardContent } from '@oriflame/backstage-plugin-score-card';
 
 const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
