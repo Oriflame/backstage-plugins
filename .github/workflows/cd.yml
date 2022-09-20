@@ -32,14 +32,18 @@ jobs:
         run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
 
       - name: Checkout repository
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@main
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/ # Needed for auth
 
-      - run: yarn install --frozen-lockfile
+      - name: yarn install
+        uses: backstage/actions/yarn-install@v0.5.3
+        with:
+          cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
       - name: Fetch previous commit for release check
         if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
@@ -52,11 +56,24 @@ jobs:
         env:
           COMMIT_SHA_BEFORE: '${{ github.event.before }}'
 
-      - name: build type declarations
-        run: yarn tsc
+      - name: validate config
+        run: yarn backstage-cli config:check --lax
 
-      - name: build packages
-        run: yarn build
+      - name: lint
+        run: yarn backstage-cli repo lint
+
+      - name: type checking and declarations
+        run: yarn tsc:full
+
+      - name: build
+        run: yarn backstage-cli repo build --all
+
+      - name: verify type dependencies
+        run: yarn lint:type-deps
+
+      - name: test (and upload coverage)
+        run: |
+          yarn lerna -- run test -- --coverage --runInBand
 
   # A separate release build that is only run for commits that are the result of merging the "Version Packages" PR
   # We can't re-use the output from the above step, but we'll have a guaranteed node_modules cache and
@@ -78,33 +95,37 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@main
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@main
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn install --frozen-lockfile
+          registry-url: https://registry.npmjs.org/ # Needed for auth
+
+      - name: yarn install
+        uses: backstage/actions/yarn-install@v0.5.3
+        with:
+          cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
       - name: build type declarations
-        run: yarn tsc
+        run: yarn tsc:full
 
       - name: build packages
         run: yarn backstage-cli repo build
 
-      - name: 'Login to npmjs npm repo .npmrc'
-        shell: bash
+      # Publishes current version of packages that are not already present in the registry
+      - name: publish
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > .npmrc
-          echo "_auth = ${{ secrets.NPM_CONFIG__AUTH }}" >> .npmrc
-          echo "always-auth = true" >> .npmrc
-      # Publishes current version of packages that are not already present in the registry.
-      - name: Run publish
-        run: |
-          git config --global user.email "pipelines@oriflame.com"
-          git config --global user.name "oriflame-pipeline"
-          lerna publish from-package --yes --no-verify-access
-      # Creates the next available tag with format "release-<year>-<month>-<day>[.<n>]"
+          if [ -f ".changeset/pre.json" ]; then
+              yarn lerna -- publish from-package --yes --dist-tag next
+          else
+              yarn lerna -- publish from-package --yes
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Grabs the version in the root package.json and creates a tag on GitHub
       - name: Create a release tag
         id: create_tag
         run: node scripts/create-release-tag.js
