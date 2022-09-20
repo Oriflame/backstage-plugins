@@ -31,7 +31,7 @@ import { Root } from './components/Root';
 import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
 import { FlatRoutes } from '@backstage/core-app-api';
 import { createApp } from '@backstage/app-defaults';
-import { ScoreBoardPage } from '@ori/backstage-plugin-score-card';
+import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 
 const app = createApp({
   apis,

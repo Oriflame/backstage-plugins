@@ -1,5 +1,5 @@
 {
-  "name": "@ori/backstage-plugin-score-card",
+  "name": "@oriflame/backstage-plugin-score-card",
   "version": "0.4.1",
   "main": "src/index.ts",
   "types": "src/index.ts",

@@ -1,4 +1,4 @@
-# @ori/backstage-plugin-score-card
+# @oriflame/backstage-plugin-score-card
 
 ## 0.4.1
 
