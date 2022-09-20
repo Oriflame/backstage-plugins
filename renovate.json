@@ -1,6 +1,54 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>Oriflame/renovate-config"
+    "config:js-lib",
+    ":rebaseStalePrs",
+    ":automergePatch",
+    "docker:disable"
+  ],
+  "assignees": [
+    "jvilimek"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "stabilityDays": 3,
+  "internalChecksFilter": "strict",
+  "bumpVersion": "patch",
+  "packageRules": [
+    {
+      "paths": [
+        "packages/app/package.json"
+      ],
+      "addLabels": [
+        "packages"
+      ]
+    },
+    {
+      "paths": [
+        "packages/backend/package.json"
+      ],
+      "addLabels": [
+        "packages"
+      ]
+    },
+    {
+      "description": "In case of eslint package update change the label to [linting]",
+      "matchPackagePatterns": [
+        "eslint"
+      ],
+      "labels": [
+        "linting"
+      ]
+    },
+    {
+      "description": "In case we have optional dependencies change add [optional] label",
+      "matchDepTypes": [
+        "optionalDependencies"
+      ],
+      "addLabels": [
+        "optional"
+      ]
+    }
   ]
 }
