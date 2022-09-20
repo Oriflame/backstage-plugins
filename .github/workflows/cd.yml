@@ -3,7 +3,7 @@ name: 'CD pipeline'
 on:
   workflow_dispatch:
   push:
-    branches: [feature/cd-pipeline] #TODO: change to main
+    branches: [feature/cd-pipeline,test/*] #TODO: change to main
 
 jobs:
   build:
