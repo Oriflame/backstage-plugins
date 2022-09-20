@@ -14,7 +14,7 @@ on:
         type: boolean
         default: 'true'
   push:
-    branches: [feature/cd-pipeline,test/*] #TODO: change to main
+    branches: [main]
 
 jobs:
   build:
