@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 /* eslint-disable import/no-extraneous-dependencies */
 /*
  * Copyright 2020 The Backstage Authors
@@ -17,8 +16,34 @@
  * limitations under the License.
  */
 
-const { Octokit } = require('@octokit/rest');
+/**
+ * This script creates a release on GitHub for the Backstage repository.
+ * Given a git tag, it identifies the PR created by changesets which is responsible for creating
+ * the git tag. It then uses the PR description consisting of changelogs for packages as the
+ * release description.
+ *
+ * Example:
+ *
+ * Set GITHUB_TOKEN environment variable.
+ *
+ * (Dry Run mode, will create a DRAFT release, but will not publish it.)
+ * (Draft releases are visible to maintainers and do not notify users.)
+ * $ node scripts/get-release-description v0.4.1
+ *
+ * This will open the git tree at this tag https://github.com/backstage/backstage/tree/v0.4.1
+ * It will identify https://github.com/backstage/backstage/pull/3668 as the responsible changeset PR.
+ * And will use everything in the PR description under "Releases" section.
+ *
+ * (Production or GitHub Actions Mode)
+ * $ node scripts/get-release-description v0.4.1 true
+ *
+ * This will do the same steps as above, and will publish the Release with the description.
+ */
 
+const { Octokit } = require('@octokit/rest');
+const semver = require('semver');
+
+// See Examples above to learn about these command line arguments.
 const [TAG_NAME, BOOL_CREATE_RELEASE] = process.argv.slice(2);
 
 if (!BOOL_CREATE_RELEASE) {
@@ -27,11 +52,11 @@ if (!BOOL_CREATE_RELEASE) {
   );
 }
 
-const GH_OWNER = 'RoadieHQ';
-const GH_REPO = 'roadie-backstage-plugins';
+const GH_OWNER = 'Oriflame';
+const GH_REPO = 'backstage-plugins';
 const EXPECTED_COMMIT_MESSAGE = /^Merge pull request #(?<prNumber>[0-9]+) from/;
 const CHANGESET_RELEASE_BRANCH =
-  'roadie-backstage-plugins/changeset-release/main';
+  'backstage-plugins/changeset-release/main';
 
 // Initialize a GitHub client
 const { GITHUB_TOKEN } = process.env;
@@ -40,7 +65,7 @@ const octokit = new Octokit({
 });
 
 // Get the message of the commit responsible for a tag
-async function getCommitMessageUsingTagName(tagName) {
+async function getCommitUsingTagName(tagName) {
   // Get the tag SHA using the provided tag name
   const refData = await octokit.git.getRef({
     owner: GH_OWNER,
@@ -71,6 +96,9 @@ async function getCommitMessageUsingTagName(tagName) {
     );
   }
   const commitSha = tagData.data.object.sha;
+  console.log(
+    `The commit for the tag is https://github.com/backstage/backstage/commit/${commitSha}`,
+  );
 
   // Get the commit message using the commit SHA
   const commitData = await octokit.git.getCommit({
@@ -86,34 +114,59 @@ async function getCommitMessageUsingTagName(tagName) {
     );
   }
 
-  return commitData.data.message;
+  // Example Commit Message
+  // Merge pull request #3555 from backstage/changeset-release/master Version Packages
+  return { sha: commitSha, message: commitData.data.message };
 }
 
 // There is a PR number in our expected commit message. Get the description of that PR.
-async function getReleaseDescriptionFromCommitMessage(commitMessage) {
-  // It should exactly match the pattern of changeset commit message, or else will abort.
-  const expectedMessage = RegExp(EXPECTED_COMMIT_MESSAGE);
-  if (!expectedMessage.test(commitMessage)) {
-    throw new Error(
-      `Expected regex did not match commit message: ${commitMessage}`,
-    );
-  }
+async function getReleaseDescriptionFromCommit(commit) {
+  let pullRequestBody = undefined;
 
-  // Get the PR description from the commit message
-  const prNumber = commitMessage.match(expectedMessage).groups.prNumber;
-  const { data } = await octokit.pulls.get({
-    owner: GH_OWNER,
-    repo: GH_REPO,
-    pull_number: prNumber,
-  });
+  const { data: pullRequests } =
+    await octokit.repos.listPullRequestsAssociatedWithCommit({
+      owner: GH_OWNER,
+      repo: GH_REPO,
+      commit_sha: commit.sha,
+    });
+  if (pullRequests.length === 1) {
+    pullRequestBody = pullRequests[0].body;
+  } else {
+    console.warn(
+      `Found ${pullRequests.length} pull requests for commit ${commit.sha}, falling back to parsing commit message`,
+    );
+
+    // It should exactly match the pattern of changeset commit message, or else will abort.
+    const expectedMessage = RegExp(EXPECTED_COMMIT_MESSAGE);
+    if (!expectedMessage.test(commit.message)) {
+      throw new Error(
+        `Expected regex did not match commit message: ${commit.message}`,
+      );
+    }
+
+    // Get the PR description from the commit message
+    const prNumber = commit.message.match(expectedMessage).groups.prNumber;
+    console.log(
+      `Identified the changeset Pull request - https://github.com/backstage/backstage/pull/${prNumber}`,
+    );
+
+    const { data } = await octokit.pulls.get({
+      owner: GH_OWNER,
+      repo: GH_REPO,
+      pull_number: prNumber,
+    });
+
+    pullRequestBody = data.body;
+  }
 
   // Use the PR description to prepare for the release description
-  const isChangesetRelease = commitMessage.includes(CHANGESET_RELEASE_BRANCH);
+  const isChangesetRelease = commit.message.includes(CHANGESET_RELEASE_BRANCH);
   if (isChangesetRelease) {
-    return data.body.split('\n').slice(3).join('\n');
+    const lines = pullRequestBody.split('\n');
+    return lines.slice(lines.indexOf('# Releases') + 1).join('\n');
   }
 
-  return data.body;
+  return pullRequestBody;
 }
 
 // Create Release on GitHub.
@@ -129,7 +182,7 @@ async function createRelease(releaseDescription) {
     name: TAG_NAME,
     body: releaseDescription,
     draft: boolCreateDraft,
-    prerelease: false,
+    prerelease: Boolean(semver.prerelease(TAG_NAME)),
   });
 
   if (releaseResponse.status === 201) {
@@ -146,11 +199,8 @@ async function createRelease(releaseDescription) {
 }
 
 async function main() {
-  const commitMessage = await getCommitMessageUsingTagName(TAG_NAME);
-  const releaseDescription = await getReleaseDescriptionFromCommitMessage(
-    commitMessage,
-  );
-
+  const commit = await getCommitUsingTagName(TAG_NAME);
+  const releaseDescription = await getReleaseDescriptionFromCommit(commit);
   await createRelease(releaseDescription);
 }
 
