@@ -9,7 +9,7 @@
 #
 # Once the commands have been run, you can build the image using `yarn build-image`
 
-FROM node:14-buster-slim
+FROM node:18-buster-slim
 
 WORKDIR /app
 
