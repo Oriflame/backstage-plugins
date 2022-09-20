@@ -8,6 +8,11 @@ on:
         required: true
         type: boolean
         default: 'true'
+      publish_packages:
+        description: 'Publish npm packages'
+        required: true
+        type: boolean
+        default: 'true'
   push:
     branches: [feature/cd-pipeline,test/*] #TODO: change to main
 
@@ -28,7 +33,7 @@ jobs:
 
     steps:
       - name: Check of github.event.before
-        if: ${{ !github.event.inputs.create_release }}
+        if: ${{ !github.event.inputs.create_release && !github.event.inputs.publish_packages }}
         run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
 
       - name: Checkout repository
@@ -71,7 +76,7 @@ jobs:
       - name: verify type dependencies
         run: yarn lint:type-deps
 
-      - name: test (and upload coverage)
+      - name: test
         run: |
           yarn lerna -- run test -- --coverage --runInBand
 
@@ -81,7 +86,7 @@ jobs:
   release:
     needs: build
 
-    if: needs.build.outputs.needs_release != 'true' || github.event.inputs.create_release
+    if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release || github.event.inputs.publish_packages
 
     runs-on: ubuntu-latest
 
@@ -116,6 +121,7 @@ jobs:
 
       # Publishes current version of packages that are not already present in the registry
       - name: publish
+        if: needs.build.outputs.needs_release == 'true' || github.event.inputs.publish_packages
         run: |
           if [ -f ".changeset/pre.json" ]; then
               yarn lerna -- publish from-package --yes --dist-tag next
@@ -128,12 +134,14 @@ jobs:
       # Grabs the version in the root package.json and creates a tag on GitHub
       - name: Create a release tag
         id: create_tag
+        if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release
         run: node scripts/create-release-tag.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Convert the newly created tag into a release with changelog information
       - name: Create release on GitHub
+        if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release
         run: node scripts/create-github-release.js ${{ steps.create_tag.outputs.tag_name }} 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
