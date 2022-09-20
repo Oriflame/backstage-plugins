@@ -2,6 +2,12 @@ name: 'CD pipeline'
 
 on:
   workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create release'
+        required: true
+        type: boolean
+        default: 'true'
   push:
     branches: [feature/cd-pipeline,test/*] #TODO: change to main
 
@@ -22,6 +28,7 @@ jobs:
 
     steps:
       - name: Check of github.event.before
+        if: ${{ !github.event.inputs.create_release }}
         run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
 
       - name: Checkout repository
@@ -57,7 +64,7 @@ jobs:
   release:
     needs: build
 
-    if: needs.build.outputs.needs_release == 'true'
+    if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release
 
     runs-on: ubuntu-latest
 
