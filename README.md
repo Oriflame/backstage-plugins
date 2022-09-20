@@ -2,6 +2,10 @@
 
 Oriflame Backstage plugins.
 
+[![CI pipeline](https://github.com/Oriflame/backstage-plugins/actions/workflows/ci.yml/badge.svg)](https://github.com/Oriflame/backstage-plugins/actions/workflows/ci.yml)
+
+[![CD pipeline](https://github.com/Oriflame/backstage-plugins/actions/workflows/cd.yml/badge.svg)](https://github.com/Oriflame/backstage-plugins/actions/workflows/cd.yml)
+
 ## Getting started
 
 You may find our plugins in the `./plugins` folder. You may start each plugin in isolated mode (navigate to the plugin folder and run `yarn dev` or `yarn start:dev`, see respective README). You may start also the simple backstage host with the plugins integrated via `yarn dev` (in root folder). You may run `yarn test` to run jest tests. For more information see [CONTRIBUTING.md](./CONTRIBUTING.md).
