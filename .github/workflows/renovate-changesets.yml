@@ -1,14 +1,15 @@
 name: 'Renovate: Generate changeset'
 on:
-  pull_request_target:
-    paths:
-      - '.github/workflows/renovate-changesets.yml'
-      - '**/yarn.lock'
+  push:
+  # pull_request_target:
+  #   paths:
+  #     - '.github/workflows/renovate-changesets.yml'
+  #     - '**/yarn.lock'
 
 jobs:
   generate-changeset:
     runs-on: ubuntu-latest
-    if: github.actor == 'renovate[bot]'
+    #DEBUG: if: github.actor == 'renovate[bot]'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
