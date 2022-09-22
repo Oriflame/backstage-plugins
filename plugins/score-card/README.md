@@ -33,6 +33,13 @@ scorecards:
 
 In the above location it expects data in a format see [scoring data](https://github.com/backstage/backstage/tree/master/plugins/score-card/sample-data).
 
+### Configuration
+
+All configuration options:
+
+- `jsonDataUrl`[optional]: url for the JSON data client, see [ScoringDataJsonClient](#scoringdatajsonclient).
+- `wikiLinkTemplate`: the template for the link to the wiki. You may use any existing properties from the `SystemScoreEntry`, e.g. `"https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"`.
+
 ### How to use the plugin
 
 1. Add Score board to `packages/app/src/App.tsx`:
