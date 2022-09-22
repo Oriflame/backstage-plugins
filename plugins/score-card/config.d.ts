@@ -24,5 +24,10 @@ export interface Config {
      * @visibility frontend
      */
     jsonDataUrl?: string;
+    /**
+     * The template for the link to the wiki, e.g. "https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"
+     * @visibility frontend
+     */
+     wikiLinkTemplate?: string;
   };
 }
