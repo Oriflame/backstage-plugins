@@ -47,6 +47,7 @@ scaffolder:
 
 scorecards:
   jsonDataUrl: http://localhost:8090/plugins/score-card/sample-data/ #this is being served via http-server
+  wikiLinkTemplate: https://link-to-wiki/{id}
 
 catalog:
   rules:
