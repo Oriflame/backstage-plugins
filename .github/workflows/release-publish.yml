@@ -1,4 +1,4 @@
-name: 'CD pipeline'
+name: 'Release and publish Workflow'
 
 on:
   workflow_dispatch:
