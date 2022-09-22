@@ -18,22 +18,27 @@ import { TableColumn } from '@backstage/core-components';
 import { Link } from '@material-ui/core';
 import React from 'react';
 import { SystemScoreTableEntry } from '../helpers/getScoreTableEntries';
+import { getWikiUrl } from '../helpers/getWikiUrl';
 
-export const titleColumn: TableColumn<SystemScoreTableEntry> = {
-  title: <div style={{ minWidth: '7rem' }}>Requirement</div>,
-  field: 'title',
-  grouping: false,
-  width: '1%',
-  render: systemScoreEntry => (
-    <span>
-      <Link
-        href={`https://TBD/XXX/_wiki/wikis/XXX.wiki/${systemScoreEntry.id}`}
-        target="_blank"
-        data-id={systemScoreEntry.id}
-      >
-        {systemScoreEntry.title}
-      </Link>
-      {systemScoreEntry.isOptional ? ' (Optional)' : null}
-    </span>
-  ),
-};
+export function titleColumn(
+  wikiLinkTemplate: string,
+): TableColumn<SystemScoreTableEntry> {
+  return {
+    title: <div style={{ minWidth: '7rem' }}>Requirement</div>,
+    field: 'title',
+    grouping: false,
+    width: '1%',
+    render: systemScoreEntry => (
+      <span>
+        <Link
+          href={getWikiUrl(wikiLinkTemplate, systemScoreEntry)}
+          target="_blank"
+          data-id={systemScoreEntry.id}
+        >
+          {systemScoreEntry.title}
+        </Link>
+        {systemScoreEntry.isOptional ? ' (Optional)' : null}
+      </span>
+    ),
+  };
+}
