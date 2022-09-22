@@ -16,6 +16,34 @@ Name | Description
 ---------|----------
  [score-card](https://github.com/Oriflame/backstage-plugins/blob/main/plugins/score-card/README.md) | Main idea behind it comes from a need to somehow visualize maturity of our services and to establish a process how to improve it (discuss with the teams what to focus on next).
 
+## Workflows
+
+We use GitHub actions to check build, unit & end to end test and other validations during pull requests. We use them also to prepare releases and publish npm packages.
+
+In overview:
+
+- create branch, commit changes, run `yarn changeset`, commit and create PR -> [CI workflow](#ci-workflow) will run
+- once merged to `main` (on push) [Prepare release PR workflow](#prepare-release-pr-workflow) -> `Release new version(s)` pull request is created automatically. It shall increase versions of packages and update changelogs in respective plugins and cleanup the `.changeset` folder.
+- once this PR is merged to `main` [Release and publish Workflow](#release-and-publish-workflow) will create a new release on GitHub and also publishes changed plugins.
+
+### CI workflow
+
+Source: `.github/workflows/ci.yml`
+
+Shall be executed during `pull requests` to validate changes and also during push to `main` branch to keep validating the main trunk.
+
+## Prepare release PR workflow
+
+Source: `.github/workflows/release-prepare.yml`
+
+Shall be executed on push to `main`. It runs `yarn release` = increase versions of packages and update changelogs in respective plugins and cleanup the `.changeset` folder. It comit the changes in a new branch and prepare a new PR `Release new version(s)`.
+
+### Release and publish Workflow
+
+Source: `.github/workflows/ci.yml`
+
+Shall be executed on push to `main`. In case the package versions are changed (which are by the previous PR) it creates a new release on GitHub and also publishes changed plugins to npm repository.
+
 ## Thank you note
 
 When creating this repository (pipelines, e2e tests, monorepo setup...) we were inspired a lot by a following repository [roadie-backstage-plugins](https://github.com/RoadieHQ/roadie-backstage-plugins).
