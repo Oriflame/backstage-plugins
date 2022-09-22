@@ -67,6 +67,8 @@ jobs:
               return bumps;
             }
 
+            await exec.exec("git", ["pull"]);
+
             const branch = await exec.getExecOutput("git branch --show-current");
             //DEBUG if (!branch.stdout.startsWith("renovate/")) {
             //   console.log("Not a renovate branch, skipping");
