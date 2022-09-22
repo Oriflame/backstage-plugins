@@ -18,6 +18,6 @@ jobs:
         with:
           # Calls out to `changeset version`, but also runs prettier
           version: yarn release
-          title: Version Packages - plugins
+          title: 'Release new version(s)'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
