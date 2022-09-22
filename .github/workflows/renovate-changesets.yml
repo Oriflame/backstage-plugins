@@ -67,8 +67,6 @@ jobs:
               return bumps;
             }
 
-            await exec.exec("git", ["pull"]);
-
             const branch = await exec.getExecOutput("git branch --show-current");
             //DEBUG if (!branch.stdout.startsWith("renovate/")) {
             //   console.log("Not a renovate branch, skipping");
@@ -97,4 +95,4 @@ jobs:
             await createChangeset(fileName, packageBumps, packageNames);
             await exec.exec("git", ["add", fileName]);
             await exec.exec("git commit -C HEAD --amend --no-edit");
-            await exec.exec("git push");
+            await exec.exec("git push --force");
