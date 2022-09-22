@@ -14,7 +14,6 @@
   ],
   "stabilityDays": 3,
   "internalChecksFilter": "strict",
-  "bumpVersion": "patch",
   "packageRules": [
     {
       "paths": [
