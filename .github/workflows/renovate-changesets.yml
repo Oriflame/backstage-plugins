@@ -94,4 +94,4 @@ jobs:
             await createChangeset(fileName, packageBumps, packageNames);
             await exec.exec("git", ["add", fileName]);
             await exec.exec("git commit -C HEAD --amend --no-edit");
-            await exec.exec("git push --force");
+            await exec.exec("git push");
