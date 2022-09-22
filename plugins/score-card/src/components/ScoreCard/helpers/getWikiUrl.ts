@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-export interface Config {
-  /**
-   * Extra configuration for score card plugin
-   */
-  scorecards: {
-    /**
-     * The public absolute root URL with json file defining the score card entries.
-     * @visibility frontend
-     */
-    jsonDataUrl?: string;
-    /**
-     * The template for the link to the wiki, e.g. "https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"
-     * @visibility frontend
-     */
-     wikiLinkTemplate?: string;
-  };
+import { SystemScoreEntry } from '../../../api/types';
+
+export function getWikiUrl(
+  wikiLinkTemplate: string,
+  entry: SystemScoreEntry | null | undefined,
+): string {
+  if (!entry) return wikiLinkTemplate.replace(/\{[^\}]+\}/g, '');
+  return wikiLinkTemplate.replace(/\{[^\}]+\}/g, matched => {
+    const keyName = matched.substring(1, matched.length - 1);
+    const value = entry[keyName as keyof SystemScoreEntry];
+    return !value ? '' : value.toString();
+  });
 }

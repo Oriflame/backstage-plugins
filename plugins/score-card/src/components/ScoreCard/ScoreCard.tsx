@@ -29,7 +29,7 @@ import {
   Table,
   TableColumn,
 } from '@backstage/core-components';
-import { errorApiRef, useApi } from '@backstage/core-plugin-api';
+import { configApiRef, errorApiRef, useApi } from '@backstage/core-plugin-api';
 import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import {
@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
 const useScoringDataLoader = () => {
   const errorApi = useApi(errorApiRef);
   const scorigDataApi = useApi(scoringDataApiRef);
+  const config = useApi(configApiRef);
   const { entity } = useEntity();
 
   const { error, value, loading } = useAsync(
@@ -76,7 +77,11 @@ const useScoringDataLoader = () => {
     }
   }, [error, errorApi]);
 
-  return { loading, value, error };
+  const wikiLinkTemplate =
+    config.getOptionalString('scorecards.wikiLinkTemplate') ??
+    'https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}';
+
+  return { loading, value, wikiLinkTemplate, error };
 };
 
 export const ScoreCard = ({
@@ -85,9 +90,13 @@ export const ScoreCard = ({
   entity?: Entity;
   variant?: InfoCardVariants;
 }) => {
-  const { loading, error, value: data } = useScoringDataLoader();
-
-  // let's load the entity data from url defined in config
+  // let's load the entity data from url defined in config etc
+  const {
+    loading,
+    error,
+    value: data,
+    wikiLinkTemplate,
+  } = useScoringDataLoader();
 
   const classes = useStyles();
 
@@ -105,7 +114,7 @@ export const ScoreCard = ({
   // let's define the main table columns
   const columns: TableColumn<SystemScoreTableEntry>[] = [
     areaColumn(data),
-    titleColumn,
+    titleColumn(wikiLinkTemplate),
     detailsColumn,
     scorePercentColumn,
   ];

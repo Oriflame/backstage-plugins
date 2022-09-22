@@ -77,7 +77,7 @@ describe('score-card', () => {
         .should(
           'have.attr',
           'href',
-          'https://TBD/XXX/_wiki/wikis/XXX.wiki/2157',
+          'https://link-to-wiki/2157',
         );
     });
   });

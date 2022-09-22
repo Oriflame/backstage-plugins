@@ -20,10 +20,16 @@ import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
 import { SystemScoreExtended } from '../../api/types';
-import { errorApiRef } from '@backstage/core-plugin-api';
+import { configApiRef, errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
+import { ConfigReader } from '@backstage/core-app-api';
+
+const sharedConfigApiMock = new ConfigReader({
+  scorecards: { wikiLinkTemplate: 'https://mocked-wiki-url/{id}/{title}' },
+});
+const sharedErrorApi = { post: () => {} };
 
 describe('ScoreCard-EmptyData', () => {
   class MockClient implements ScoringDataApi {
@@ -40,7 +46,6 @@ describe('ScoreCard-EmptyData', () => {
       throw new Error('Method not implemented.');
     }
   }
-
   const mockClient = new MockClient();
 
   const entity: Entity = {
@@ -54,13 +59,13 @@ describe('ScoreCard-EmptyData', () => {
   it('should render a progress bar', async () => {
     jest.useFakeTimers();
 
-    const errorApi = { post: () => {} };
     const { getByTestId, findByTestId } = render(
       <ThemeProvider theme={lightTheme}>
         <TestApiProvider
           apis={[
-            [errorApiRef, errorApi],
+            [errorApiRef, sharedErrorApi],
             [scoringDataApiRef, mockClient],
+            [configApiRef, sharedConfigApiMock],
           ]}
         >
           <EntityProvider entity={entity}>
@@ -110,13 +115,13 @@ describe('ScoreCard-TestWithData', () => {
   it('should render a progress bar', async () => {
     jest.useFakeTimers();
 
-    const errorApi = { post: () => {} };
     const { getByTestId, findByTestId } = render(
       <ThemeProvider theme={lightTheme}>
         <TestApiProvider
           apis={[
-            [errorApiRef, errorApi],
+            [errorApiRef, sharedErrorApi],
             [scoringDataApiRef, mockClient],
+            [configApiRef, sharedConfigApiMock],
           ]}
         >
           <EntityProvider entity={entity}>
