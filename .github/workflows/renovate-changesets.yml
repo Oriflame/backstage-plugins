@@ -2,7 +2,7 @@ name: 'Renovate: Generate changeset'
 on:
   pull_request_target:
     paths:
-      - '.github/workflows/sync_renovate-changesets.yml'
+      - '.github/workflows/renovate-changesets.yml'
       - '**/yarn.lock'
 
 jobs:
