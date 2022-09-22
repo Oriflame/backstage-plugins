@@ -21,10 +21,9 @@ export function getWikiUrl(
   entry: SystemScoreEntry | null | undefined,
 ): string {
   if (!entry) return wikiLinkTemplate.replace(/\{[^\}]+\}/g, '');
-  wikiLinkTemplate.replace(/\{[^\}]+\}/g, matched => {
+  return wikiLinkTemplate.replace(/\{[^\}]+\}/g, matched => {
     const keyName = matched.substring(1, matched.length - 1);
     const value = entry[keyName as keyof SystemScoreEntry];
     return !value ? '' : value.toString();
   });
-  return '';
 }
