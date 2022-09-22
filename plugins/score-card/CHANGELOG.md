@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.0
+
+### Minor Changes
+
+- a94816d: New config [wikiLinkTemplate]
+
 ## 0.4.2
 
 ### Patch Changes

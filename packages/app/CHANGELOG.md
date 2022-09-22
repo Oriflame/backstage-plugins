@@ -1,5 +1,12 @@
 # app
 
+## 0.4.2
+
+### Patch Changes
+
+- Updated dependencies [a94816d]
+  - @oriflame/backstage-plugin-score-card@0.5.0
+
 ## 0.4.1
 
 ### Patch Changes
