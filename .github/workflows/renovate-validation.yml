@@ -1,4 +1,4 @@
-name: 'Validate renovate.json'
+name: 'Renovate: Validate configuration'
 
 on:
   pull_request:
