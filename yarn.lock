@@ -1333,6 +1333,14 @@
     "@backstage/types" "^1.0.0"
     lodash "^4.17.21"
 
+"@backstage/config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-1.0.2.tgz#539be20a83ba7e7b40637fc962e92d23c80c88c8"
+  integrity sha512-k/S6TIhuxQoKbxqiHx0fKKe8Yl9oDJeir3/XbNUn6JKbnNHinnI5nAmR0u9zO9/eDWW30gvBNBBJzHZydItWcA==
+  dependencies:
+    "@backstage/types" "^1.0.0"
+    lodash "^4.17.21"
+
 "@backstage/core-app-api@1.0.5", "@backstage/core-app-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@backstage/core-app-api/-/core-app-api-1.0.5.tgz#431151867f19c7f2180298a19aafa42a66dcb44c"
@@ -1394,6 +1402,49 @@
     zen-observable "^0.8.15"
     zod "^3.11.6"
 
+"@backstage/core-components@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@backstage/core-components/-/core-components-0.11.1.tgz#980ca07a9b301f247df702a5ae0e8002ab174aa9"
+  integrity sha512-P3ZZ8UWYmlFVcWjBiKvFSnVt0SKUTVqlHaVdmkO4ra7n4MU3lLnJihk982nmRAnz2XrhHo2zRsJaBZHCRoM6lw==
+  dependencies:
+    "@backstage/config" "^1.0.2"
+    "@backstage/core-plugin-api" "^1.0.6"
+    "@backstage/errors" "^1.1.1"
+    "@backstage/theme" "^0.2.16"
+    "@backstage/version-bridge" "^1.0.1"
+    "@material-table/core" "^3.1.0"
+    "@material-ui/core" "^4.12.2"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "4.0.0-alpha.57"
+    "@react-hookz/web" "^15.0.0"
+    "@types/react-sparklines" "^1.7.0"
+    "@types/react-text-truncate" "^0.14.0"
+    ansi-regex "^6.0.1"
+    classnames "^2.2.6"
+    d3-selection "^3.0.0"
+    d3-shape "^3.0.0"
+    d3-zoom "^3.0.0"
+    dagre "^0.8.5"
+    history "^5.0.0"
+    immer "^9.0.1"
+    lodash "^4.17.21"
+    pluralize "^8.0.0"
+    prop-types "^15.7.2"
+    qs "^6.9.4"
+    rc-progress "3.4.0"
+    react-helmet "6.1.0"
+    react-hook-form "^7.12.2"
+    react-markdown "^8.0.0"
+    react-sparklines "^1.7.0"
+    react-syntax-highlighter "^15.4.5"
+    react-text-truncate "^0.19.0"
+    react-use "^17.3.2"
+    react-virtualized-auto-sizer "^1.0.6"
+    react-window "^1.8.6"
+    remark-gfm "^3.0.1"
+    zen-observable "^0.8.15"
+    zod "^3.11.6"
+
 "@backstage/core-plugin-api@1.0.5", "@backstage/core-plugin-api@^1.0.3", "@backstage/core-plugin-api@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.0.5.tgz#a6d0dd8272e9175f381dee6e1090d758d408cca0"
@@ -1405,6 +1456,18 @@
     history "^5.0.0"
     prop-types "^15.7.2"
     react-router-dom "6.0.0-beta.0"
+    zen-observable "^0.8.15"
+
+"@backstage/core-plugin-api@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.0.6.tgz#7b9b7f7b10e9b5572e8b9e8c816e837d7b4d6ed0"
+  integrity sha512-IRB/wxSsSHIuamHQgqHxFCvvC6q8mnhRcicRAzACSJIM/KRAtYC8PEBd/OgaeHLJhxyaXNCGX7NQ4oADkhiWsA==
+  dependencies:
+    "@backstage/config" "^1.0.2"
+    "@backstage/types" "^1.0.0"
+    "@backstage/version-bridge" "^1.0.1"
+    history "^5.0.0"
+    prop-types "^15.7.2"
     zen-observable "^0.8.15"
 
 "@backstage/dev-utils@1.0.5":
@@ -1441,7 +1504,31 @@
     cross-fetch "^3.1.5"
     serialize-error "^8.0.1"
 
-"@backstage/integration-react@1.1.3", "@backstage/integration-react@^1.1.3":
+"@backstage/errors@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@backstage/errors/-/errors-1.1.1.tgz#e637737ccf4075a7d3b3ec9911d209266e5204f5"
+  integrity sha512-eSm5oc4+PmpdzREHZ00lFOYOm2JqZsC+NbRV3ChOOXId4ibdzQk97kgSw1a1n2vqu+9MNKpD55lpVMKnADRo7g==
+  dependencies:
+    "@backstage/types" "^1.0.0"
+    cross-fetch "^3.1.5"
+    serialize-error "^8.0.1"
+
+"@backstage/integration-react@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@backstage/integration-react/-/integration-react-1.1.4.tgz#7ab915a92bd4f62df69cf0654ad934564b8915f3"
+  integrity sha512-gJRNe2pHOuYN+SIL+wLPz2wvBWMmSBMRJDOht1P/GFD6Z7eyABEoEhjASPxwzPa38UIilaMuJDixXohHxvYUHg==
+  dependencies:
+    "@backstage/config" "^1.0.2"
+    "@backstage/core-components" "^0.11.1"
+    "@backstage/core-plugin-api" "^1.0.6"
+    "@backstage/integration" "^1.3.1"
+    "@backstage/theme" "^0.2.16"
+    "@material-ui/core" "^4.12.2"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "4.0.0-alpha.57"
+    react-use "^17.2.4"
+
+"@backstage/integration-react@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@backstage/integration-react/-/integration-react-1.1.3.tgz#f69ef35bf64e30cd12edf1c9e072f34dfc3293a0"
   integrity sha512-RLXXUR9ICqBw513cJkLhKJn4by4QGBxev5EtMZEQFzZp8NaljEud4BB2WN5qm5yuM0v8n6T55xlNfl3GKpRYyw==
@@ -1467,6 +1554,20 @@
     "@octokit/rest" "^19.0.3"
     cross-fetch "^3.1.5"
     git-url-parse "^12.0.0"
+    lodash "^4.17.21"
+    luxon "^3.0.0"
+
+"@backstage/integration@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.3.1.tgz#ae4a89531a555456074bb8aaff65b2acc680ebab"
+  integrity sha512-WaIiEx7b+0FWbIhdq5DrULKKVyJQos4neZQN4bhiKkVkMfkgq8+x4Uw/13haFj+qd0IB2BOdolJdJM1z+nOLeA==
+  dependencies:
+    "@backstage/config" "^1.0.2"
+    "@backstage/errors" "^1.1.1"
+    "@octokit/auth-app" "^4.0.0"
+    "@octokit/rest" "^19.0.3"
+    cross-fetch "^3.1.5"
+    git-url-parse "^13.0.0"
     lodash "^4.17.21"
     luxon "^3.0.0"
 
@@ -10409,12 +10510,27 @@ git-up@^6.0.0:
     is-ssh "^1.4.0"
     parse-url "^7.0.2"
 
+git-up@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/git-up/-/git-up-7.0.0.tgz#bace30786e36f56ea341b6f69adfd83286337467"
+  integrity sha512-ONdIrbBCFusq1Oy0sC71F5azx8bVkvtZtMJAsv+a6lz5YAmbNnLD6HAB4gptHZVLPR8S2/kVN6Gab7lryq5+lQ==
+  dependencies:
+    is-ssh "^1.4.0"
+    parse-url "^8.1.0"
+
 git-url-parse@^12.0.0:
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-12.0.0.tgz#4ba70bc1e99138321c57e3765aaf7428e5abb793"
   integrity sha512-I6LMWsxV87vysX1WfsoglXsXg6GjQRKq7+Dgiseo+h0skmp5Hp2rzmcEIRQot9CPA+uzU7x1x7jZdqvTFGnB+Q==
   dependencies:
     git-up "^6.0.0"
+
+git-url-parse@^13.0.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-13.1.0.tgz#07e136b5baa08d59fabdf0e33170de425adf07b4"
+  integrity sha512-5FvPJP/70WkIprlUZ33bm4UAaFdjcLkJLpWft1BeZKqwR0uhhNGoKwlUaPtVb4LxCSQ++erHapRak9kWGj+FCA==
+  dependencies:
+    git-up "^7.0.0"
 
 gitconfiglocal@^1.0.0:
   version "1.0.0"
@@ -15376,6 +15492,13 @@ parse-path@^5.0.0:
   dependencies:
     protocols "^2.0.0"
 
+parse-path@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/parse-path/-/parse-path-7.0.0.tgz#605a2d58d0a749c8594405d8cc3a2bf76d16099b"
+  integrity sha512-Euf9GG8WT9CdqwuWJGdf3RkUcTBArppHABkO7Lm8IzRQp0e2r/kkFnmhu4TSK30Wcu5rVAZLmfPKSBBi9tWFog==
+  dependencies:
+    protocols "^2.0.0"
+
 parse-url@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-7.0.2.tgz#d21232417199b8d371c6aec0cedf1406fd6393f0"
@@ -15385,6 +15508,13 @@ parse-url@^7.0.2:
     normalize-url "^6.1.0"
     parse-path "^5.0.0"
     protocols "^2.0.1"
+
+parse-url@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-8.1.0.tgz#972e0827ed4b57fc85f0ea6b0d839f0d8a57a57d"
+  integrity sha512-xDvOoLU5XRrcOZvnI6b8zA6n9O9ejNk/GExuz1yBuWUGn9KA97GI6HTs6u02wKara1CeVmZhH+0TZFdWScR89w==
+  dependencies:
+    parse-path "^7.0.0"
 
 parse5@6.0.1:
   version "6.0.1"
