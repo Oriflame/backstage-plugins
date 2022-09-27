@@ -1,5 +1,12 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.2
+
+### Patch Changes
+
+- 4da6557: Updated dependency `react` to `^16.13.1 || ^17.0.0 || ^18.0.0`.
+  Updated dependency `react-dom` to `^16.13.1 || ^17.0.0 || ^18.0.0`.
+
 ## 0.5.1
 
 ### Patch Changes
