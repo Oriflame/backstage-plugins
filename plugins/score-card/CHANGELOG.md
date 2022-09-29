@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.3
+
+### Patch Changes
+
+- 71b3b50: revert of React18 support
+
 ## 0.5.2
 
 ### Patch Changes
