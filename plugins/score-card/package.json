@@ -63,7 +63,7 @@
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "*",
     "@types/node": "*",
-    "@types/react": "^16.13.1 || ^17.0.0",
+    "@types/react": "18.0.21",
     "msw": "0.47.3",
     "cross-fetch": "3.1.5",
     "http-server": "14.1.1"
