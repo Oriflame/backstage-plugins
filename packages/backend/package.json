@@ -34,7 +34,7 @@
     "@backstage/plugin-proxy-backend": "^0.2.30",
     "@backstage/plugin-scaffolder-backend": "^1.6.0",
     "@gitbeaker/node": "35.7.0",
-    "@octokit/rest": "18.12.0",
+    "@octokit/rest": "19.0.4",
     "better-sqlite3": "7.6.2",
     "@types/luxon": "3.0.1",
     "luxon": "3.0.4",
