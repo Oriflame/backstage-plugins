@@ -1180,7 +1180,7 @@
     winston "^3.2.1"
     zod "^3.9.5"
 
-"@backstage/catalog-client@^1.1.0":
+"@backstage/catalog-client@1.1.0", "@backstage/catalog-client@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@backstage/catalog-client/-/catalog-client-1.1.0.tgz#66948ef9beb45d3211fbb5b2e5139d1869bb4f57"
   integrity sha512-qSAoWcvHtVQs2Y95qOS2dYicB5bbyHQlqUn4a4hKWLadeYj2rfofMGDskUbfztCdOdRy+jd7FZGADYslCnDXOw==
@@ -1207,7 +1207,7 @@
   resolved "https://registry.yarnpkg.com/@backstage/cli-common/-/cli-common-0.1.10.tgz#3b4ea32fe7adfd8efc8d5c760b20cf08c046cd6a"
   integrity sha512-5Nt88V32yciUlgr/XCWu2n9oSRD2XRBtkzGDDq4YTzXMJNty283DVi2c7xgeDPF2DN0d6fiENQAipp3oEulXTg==
 
-"@backstage/cli@^0.19.0":
+"@backstage/cli@0.19.0", "@backstage/cli@^0.19.0":
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/@backstage/cli/-/cli-0.19.0.tgz#96f87fd829bbbdf1e32c134f3456a8f5ac38a2b8"
   integrity sha512-JQji8WPphrSqTlTUMsmk7wtNbWGssY2RplLgvX4Wc53MvyfVNw1pC/RQPUqd0CTjj1HMPGI5JvcBhCAGE+RaMg==
@@ -1339,7 +1339,7 @@
     "@backstage/types" "^1.0.0"
     lodash "^4.17.21"
 
-"@backstage/core-app-api@^1.1.0":
+"@backstage/core-app-api@1.1.0", "@backstage/core-app-api@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@backstage/core-app-api/-/core-app-api-1.1.0.tgz#7ad4046591c5478acb4cc0ae8ad2788448af57ba"
   integrity sha512-PVmwaRIWrrvqNlqUpEL911llJqaScpgZEk7rV81+3QchyOa9Gm2Zh6WsKqb5q28SswYjEA70Zwt5pzUQsEcaFA==
@@ -1409,7 +1409,7 @@
     prop-types "^15.7.2"
     zen-observable "^0.8.15"
 
-"@backstage/dev-utils@^1.0.6":
+"@backstage/dev-utils@1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@backstage/dev-utils/-/dev-utils-1.0.6.tgz#cda6cdcfdaf5f932da7911ad071bb621945b55e5"
   integrity sha512-Nhm6ywcYdBugb5clUfIv1q2oEcOW4rpvQ4xpHI4GorPcEWJ9rYSjyuAAVT3hn37/8hGdTCDzTjTU4Mbfg4h1eg==
@@ -1706,7 +1706,7 @@
     yaml "^2.0.0"
     zen-observable "^0.8.15"
 
-"@backstage/plugin-catalog@^1.5.1":
+"@backstage/plugin-catalog@1.5.1", "@backstage/plugin-catalog@^1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-catalog/-/plugin-catalog-1.5.1.tgz#9e1be7715f95b755a2d813f58c63838e2be3a5f9"
   integrity sha512-b5hPu8lbj+RnxIippEyGXvxkzaCPABR0nNYN8ygZHdCYeN8hkFwzytRK4LyU8FDuX0I2Ca3nXtD0vgg75Hb2aA==
@@ -2033,7 +2033,7 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@backstage/test-utils@^1.2.0":
+"@backstage/test-utils@1.2.0", "@backstage/test-utils@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@backstage/test-utils/-/test-utils-1.2.0.tgz#4d951c0665e12a60bbed192e05aac773b630759a"
   integrity sha512-7oF9EvH221+79zKivqiaWmIghrwf187l2FeKJT1ZqRbvGbSLnBaPxXHJykU7vgEySqiwypygLFGmSsHRkZFmwg==
