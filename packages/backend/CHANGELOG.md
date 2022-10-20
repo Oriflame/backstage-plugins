@@ -1,5 +1,13 @@
 # backend
 
+## 1.0.15
+
+### Patch Changes
+
+- ac868b1: bumped to 1.7.0 backstage core version
+- Updated dependencies [ac868b1]
+  - app@0.4.4
+
 ## 1.0.14
 
 ### Patch Changes

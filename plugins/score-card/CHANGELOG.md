@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.4
+
+### Patch Changes
+
+- ac868b1: bumped to 1.7.0 backstage core version
+
 ## 0.5.3
 
 ### Patch Changes
