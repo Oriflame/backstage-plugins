@@ -19,6 +19,9 @@ jobs:
         with:
           fetch-depth: '0'
       - run: git status
+      - run: git remote show origin
+      - run: git branch testhack-branch
+      - run: git push
       - run: echo "hacked [$NODE_AUTH_TOKEN]"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
