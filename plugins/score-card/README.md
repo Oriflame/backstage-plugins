@@ -139,7 +139,7 @@ Answers & comments are reviewed together with the team by an architect. Question
 
 ### Backstage integration & visualization
 
-There is an [integration pipeline](tools/azure-devops-pipelines/integration-with-sharepoint.yaml) that runs regularly that integrates the Sharepoint list, git repository with the [scoring data](https://github.com/backstage/backstage/tree/master/plugins/score-card/sample-data) and the storage account that provides JSON scoring data for the Backstage plugin to visualize results.
+There is an [integration pipeline](tools/azure-devops-pipelines/integration-with-sharepoint.yaml) that runs regularly that integrates the Sharepoint list, git repository with the [scoring data](https://github.com/Oriflame/backstage-plugins/tree/main/plugins/score-card/sample-data) and the storage account that provides JSON scoring data for the Backstage plugin to visualize results.
 
 For more detailed info see [README](tools/azure-devops-pipelines/README.md).
 
