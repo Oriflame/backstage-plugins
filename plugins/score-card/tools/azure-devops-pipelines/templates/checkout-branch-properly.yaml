@@ -6,7 +6,7 @@ steps:
   displayName: 'Checkout and keep git credentials'
   persistCredentials: true
 
-- task: PowerShell@2.210.0
+- task: PowerShell@2.212.0
   displayName: 'Checkout branch properly'
   inputs:
     targetType: 'inline'
