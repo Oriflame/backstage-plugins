@@ -31,7 +31,7 @@ scorecards:
   jsonDataUrl: https://some.server/folder-with-data/
 ```
 
-In the above location it expects data in a format see [scoring data](https://github.com/backstage/backstage/tree/master/plugins/score-card/sample-data).
+In the above location it expects data in a format see [scoring data](./sample-data).
 
 ### Configuration
 
