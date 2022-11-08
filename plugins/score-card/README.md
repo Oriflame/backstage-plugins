@@ -41,6 +41,8 @@ backend:
     default-src: ["'self'", "raw.githubusercontent.com"]
 ```
 
+Also the server providing the data needs to have correctly configured CORS policy, i.e. return HTTP header `Access-Control-Allow-Origin` that should list domain from where you serve your backstage instance. See e.g. [how to configure CORS for Azure Blob Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
+
 ### Configuration
 
 All configuration options:
