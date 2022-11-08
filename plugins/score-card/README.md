@@ -28,10 +28,18 @@ The location of the JSON files may be configured in `app-config.yaml' like this:
 
 ```yaml
 scorecards:
-  jsonDataUrl: https://some.server/folder-with-data/
+  jsonDataUrl: https://raw.githubusercontent.com/Oriflame/backstage-plugins/main/plugins/score-card/sample-data/
 ```
 
 In the above location it expects data in a format see [scoring data](./sample-data).
+
+**Important**: loading from the url might be blocked by the Content-Security-Policy. In that case you would need to add the server address among `csp` settings like this:
+
+```yaml
+backend:
+  csp:
+    default-src: ["'self'", "raw.githubusercontent.com"]
+```
 
 ### Configuration
 
