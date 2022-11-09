@@ -44,7 +44,7 @@
     "@types/react-dom": "^17"
   },
   "dependencies": {
-    "@changesets/cli": "2.25.0"
+    "@changesets/cli": "2.25.2"
   },
   "devDependencies": {
     "@backstage/cli": "^0.20.0",
