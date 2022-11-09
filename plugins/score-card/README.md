@@ -28,10 +28,20 @@ The location of the JSON files may be configured in `app-config.yaml' like this:
 
 ```yaml
 scorecards:
-  jsonDataUrl: https://some.server/folder-with-data/
+  jsonDataUrl: https://raw.githubusercontent.com/Oriflame/backstage-plugins/main/plugins/score-card/sample-data/
 ```
 
 In the above location it expects data in a format see [scoring data](./sample-data).
+
+**Important**: loading from the url might be blocked by the Content-Security-Policy. In that case you would need to add the server address among `csp` settings like this:
+
+```yaml
+backend:
+  csp:
+    default-src: ["'self'", "raw.githubusercontent.com"]
+```
+
+Also the server providing the data needs to have correctly configured CORS policy, i.e. return HTTP header `Access-Control-Allow-Origin` that should list domain from where you serve your backstage instance. See e.g. [how to configure CORS for Azure Blob Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
 
 ### Configuration
 
@@ -42,10 +52,17 @@ All configuration options:
 
 ### How to use the plugin
 
-1. Add Score board to `packages/app/src/App.tsx`:
+1. Install the score-card Plugin:
+
+   ```bash
+   # From your Backstage root directory
+   yarn add --cwd packages/app @oriflame/backstage-plugin-score-card
+   ```
+
+2. Add Score board to `packages/app/src/App.tsx`:
 
    ```diff
-   +import { ScoreBoardPage } from '@backstage/plugin-score-card';
+   +import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 
    const routes = (
      <FlatRoutes>
@@ -54,7 +71,7 @@ All configuration options:
    );
    ```
 
-2. Add Link to menu `packages/app/src/components/Root/Root.tsx`:
+3. Add Link to menu `packages/app/src/components/Root/Root.tsx`:
 
    ```diff
    +import Score from '@material-ui/icons/Score';
@@ -76,10 +93,10 @@ All configuration options:
     );
    ```
 
-3. Add Score Card to `packages/app/src/components/catalog/EntityPage.tsx`:
+4. Add Score Card to `packages/app/src/components/catalog/EntityPage.tsx`:
 
    ```diff
-   +import { EntityScoreCardContent } from '@backstage/plugin-score-card';
+   +import { EntityScoreCardContent } from '@oriflame/backstage-plugin-score-card';
 
    const systemPage = (
       <EntityLayoutWrapper>
