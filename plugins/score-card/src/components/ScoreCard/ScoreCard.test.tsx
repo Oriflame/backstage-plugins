@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { act, render, within} from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { ScoreCard } from './ScoreCard';
 import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
