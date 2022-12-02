@@ -42,7 +42,7 @@ export function areaColumn(
           float: 'right',
           minWidth: '4rem',
         };
-        const areaGateLabel = `${area?.scorePercent}${area?.scoreSuffix ?? " %"}`;
+        const areaGateLabel = `${area?.scorePercent} %`;
         return (
           <span>
             <>

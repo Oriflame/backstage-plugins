@@ -33,7 +33,7 @@ export const scorePercentColumn: TableColumn<SystemScoreTableEntry> = {
       minWidth: '4rem',
     };
     return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
-      <Chip label={`${systemScoreEntry.scorePercent}${systemScoreEntry?.scoreSuffix ?? ' %'}`} style={chipStyle} />
+      <Chip label={`${systemScoreEntry.scorePercent} %`} style={chipStyle} />
     ) : null;
   },
 };

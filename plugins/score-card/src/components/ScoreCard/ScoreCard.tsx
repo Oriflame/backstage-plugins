@@ -107,7 +107,7 @@ export const ScoreCard = ({
     backgroundColor: scoreToColorConverter(data?.scoreSuccess),
   };
   if (data?.scorePercent || data?.scorePercent === 0) {
-    gateLabel = `Total score: ${data?.scorePercent}${data?.scoreSuffix ?? " %"}`;
+    gateLabel = `Total score: ${data?.scorePercent} %`;
   }
   const qualityBadge = !loading && <Chip label={gateLabel} style={gateStyle} />;
 
