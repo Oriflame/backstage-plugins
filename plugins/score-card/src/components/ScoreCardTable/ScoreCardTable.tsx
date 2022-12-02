@@ -132,7 +132,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
           };
           return typeof currentScoreEntry?.scorePercent !== 'undefined' ? (
             <Chip
-              label={`${currentScoreEntry?.scorePercent}${currentScoreEntry?.scoreSuffix ?? ' %'}`}
+              label={`${currentScoreEntry?.scorePercent} %`}
               style={chipStyle}
             />
           ) : null;
@@ -153,7 +153,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
         minWidth: '4rem',
       };
       return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
-        <Chip label={`${systemScoreEntry.scorePercent}${systemScoreEntry?.scoreSuffix ?? ' %'}`} style={chipStyle} />
+        <Chip label={`${systemScoreEntry.scorePercent} %`} style={chipStyle} />
       ) : null;
     },
   });
