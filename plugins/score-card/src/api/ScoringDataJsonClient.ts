@@ -53,9 +53,8 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       return undefined;
     }
     const systemName = entity.metadata.name;
-    const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}${systemName}.json`;
-    const result: SystemScore = await fetch(urlWithData).then(res => {
+    const scoreCardUrl = entity?.metadata?.annotations['score-card/url'] ?? `${this.getJsonDataUrl()}${systemName}.json`;
+    const result: SystemScore = await fetch(scoreCardUrl).then(res => {
       switch (res.status) {
         case 404:
           return null;
