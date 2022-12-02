@@ -21,7 +21,7 @@ export interface SystemScore {
   scorePercent: number;
   scoreSuffix?: string;
   scoreSuccess: ScoreSuccessEnum;
-  scoringReviewer: string | undefined | null;
+  scoringReviewer: string | CompoundEntityRef | undefined | null;
   scoringReviewDate: Date | string | undefined | null;
   areaScores: SystemScoreArea[];
 }
