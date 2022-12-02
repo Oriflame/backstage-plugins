@@ -19,6 +19,7 @@ export interface SystemScore {
   systemEntityName: string;
   generatedDateTimeUtc: Date | string;
   scorePercent: number;
+  scoreLabel?: string;
   scoreSuccess: ScoreSuccessEnum;
   scoringReviewer: string | CompoundEntityRef | undefined | null;
   scoringReviewDate: Date | string | undefined | null;
@@ -29,6 +30,7 @@ export interface SystemScoreArea {
   id: number;
   title: string;
   scorePercent: number;
+  scoreLabel?: string;
   scoreSuccess: ScoreSuccessEnum;
   scoreEntries: SystemScoreEntry[];
 }
@@ -38,6 +40,7 @@ export interface SystemScoreEntry {
   title: string;
   isOptional: boolean;
   scorePercent: number;
+  scoreLabel?: string;
   scoreSuccess: ScoreSuccessEnum;
   scoreHints: string | string[];
   details: string;

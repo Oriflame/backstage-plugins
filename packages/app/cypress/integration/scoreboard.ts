@@ -27,7 +27,7 @@ describe('score-card', () => {
 
       cy.contains('System scores overview').should('be.visible');
       cy.checkForErrors();
-      cy.get('span:contains("1-2 of 2")').should('be.visible'); // beware, there is also a hidden <P/> element
+      cy.get('span:contains("1-3 of 3")').should('be.visible'); // beware, there is also a hidden <P/> element
       cy.contains('audio-playback').should('be.visible');
       cy.contains('team-c').should('be.visible');
       cy.contains('non-valid-system').should('be.visible');
