@@ -32,8 +32,9 @@ export const scorePercentColumn: TableColumn<SystemScoreTableEntry> = {
       backgroundColor: scoreToColorConverter(systemScoreEntry?.scoreSuccess),
       minWidth: '4rem',
     };
+    const label = systemScoreEntry?.scoreLabel ?? `${systemScoreEntry.scorePercent} %`;
     return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
-      <Chip label={`${systemScoreEntry.scorePercent} %`} style={chipStyle} />
+      <Chip label={label} style={chipStyle} />
     ) : null;
   },
 };

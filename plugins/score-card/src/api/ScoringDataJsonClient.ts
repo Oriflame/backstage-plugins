@@ -19,6 +19,7 @@ import { SystemScore, SystemScoreExtended } from './types';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,
+  CompoundEntityRef,
   getCompoundEntityRef,
   parseEntityRef,
   RELATION_OWNED_BY,
@@ -122,9 +123,15 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     const owner = catalogEntity?.relations?.find(
       r => r.type === RELATION_OWNED_BY,
     )?.targetRef;
-    const reviewer = score.scoringReviewer
-      ? { name: score.scoringReviewer, kind: 'User', namespace: 'default' }
-      : undefined;
+
+    let reviewer = undefined;
+    if (score.scoringReviewer && !(score.scoringReviewer as CompoundEntityRef)?.name) {
+      reviewer = { name: score.scoringReviewer as string, kind: 'User', namespace: 'default' };
+    } else if ((score.scoringReviewer as CompoundEntityRef)?.name) {
+      const scoringReviewer = score.scoringReviewer as CompoundEntityRef
+      reviewer = { name: scoringReviewer.name, kind: scoringReviewer?.kind ?? "User", namespace: scoringReviewer?.namespace ?? 'default' };
+    }
+
     const reviewDate = score.scoringReviewDate
       ? new Date(score.scoringReviewDate)
       : undefined;

@@ -43,10 +43,11 @@ const useScoringAllDataLoader = () => {
 };
 
 type ScoreTableProps = {
+  title?: string;
   scores: SystemScoreExtended[];
 };
 
-export const ScoreTable = ({ scores }: ScoreTableProps) => {
+export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
   const columns: TableColumn<SystemScoreExtended>[] = [
     {
       title: 'Name',
@@ -129,9 +130,10 @@ export const ScoreTable = ({ scores }: ScoreTableProps) => {
             ),
             minWidth: '4rem',
           };
+          const label = currentScoreEntry?.scoreLabel ?? `${currentScoreEntry?.scorePercent} %`;
           return typeof currentScoreEntry?.scorePercent !== 'undefined' ? (
             <Chip
-              label={`${currentScoreEntry?.scorePercent} %`}
+              label={label}
               style={chipStyle}
             />
           ) : null;
@@ -151,8 +153,9 @@ export const ScoreTable = ({ scores }: ScoreTableProps) => {
         float: 'right',
         minWidth: '4rem',
       };
+      const label = systemScoreEntry?.scoreLabel ?? `${systemScoreEntry?.scorePercent} %`;
       return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
-        <Chip label={`${systemScoreEntry.scorePercent} %`} style={chipStyle} />
+        <Chip label={label} style={chipStyle} />
       ) : null;
     },
   });
@@ -178,7 +181,7 @@ export const ScoreTable = ({ scores }: ScoreTableProps) => {
   return (
     <div data-testid="score-board-table">
       <Table<SystemScoreExtended>
-        title="System scores overview"
+        title={title ?? "System scores overview"}
         options={{
           search: true,
           paging: true,
@@ -193,7 +196,10 @@ export const ScoreTable = ({ scores }: ScoreTableProps) => {
   );
 };
 
-export const ScoreCardTable = () => {
+type ScoreCardTableProps = {
+  title?: string;
+};
+export const ScoreCardTable = ({title}: ScoreCardTableProps) => {
   const { loading, error, value: data } = useScoringAllDataLoader();
 
   if (loading) {
@@ -202,5 +208,5 @@ export const ScoreCardTable = () => {
     return getWarningPanel(error);
   }
 
-  return <ScoreTable scores={data || []} />;
+  return <ScoreTable title={title} scores={data || []} />;
 };

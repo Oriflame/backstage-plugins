@@ -68,3 +68,67 @@ describe('ScoreBoardPage-EmptyData', () => {
     jest.useRealTimers();
   });
 });
+
+
+describe('ScoreCard-TestWithData', () => {
+    class MockClient implements ScoringDataApi {
+    getScore(
+      _entity?: Entity | undefined,
+    ): Promise<SystemScoreExtended | undefined> {
+      throw new Error('Method not implemented.');
+    }
+    getAllScores(): Promise<SystemScoreExtended[] | undefined> {
+      return new Promise<SystemScoreExtended[] | undefined>(
+        (resolve, _reject) => {
+          const sampleData = require('../../../sample-data/all.json');
+          resolve(sampleData);
+        },
+      );
+    }
+  }
+
+  const mockClient = new MockClient();
+
+  // TODO: find how to stop render the progress bar and display the ScoreCardTable
+  // it('should render title', async () => {
+  //   jest.useFakeTimers();
+
+  //   const errorApi = { post: () => {} };
+  //   const { container } = render(
+  //     <ThemeProvider theme={lightTheme}>
+  //       <TestApiProvider
+  //         apis={[
+  //           [errorApiRef, errorApi],
+  //           [scoringDataApiRef, mockClient],
+  //         ]}
+  //       >
+  //         <ScoreCardTable title="Custom title"/>
+  //       </TestApiProvider>
+  //     </ThemeProvider>,
+  //   );
+
+  //   expect(container).toHaveTextContent('Custom title');
+  // });
+
+  it('should render scoreLabel', async () => {
+    const errorApi = { post: () => {} };
+    const { getByText, findByTestId } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, errorApi],
+            [scoringDataApiRef, mockClient],
+          ]}
+        >
+          <ScoreCardTable />
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByTestId('score-board-table');
+
+    const podcastColumn = await getByText('podcast');
+    const podcastRow = podcastColumn.closest("tr");
+    expect(podcastRow).toHaveTextContent('AB+DFFC');
+  });
+});

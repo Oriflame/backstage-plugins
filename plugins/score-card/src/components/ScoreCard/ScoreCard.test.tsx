@@ -92,7 +92,7 @@ describe('ScoreCard-TestWithData', () => {
     ): Promise<SystemScoreExtended | undefined> {
       return new Promise<SystemScoreExtended | undefined>(
         (resolve, _reject) => {
-          const sampleData = require('../../../sample-data/audio-playback.json');
+          const sampleData = require('../../../sample-data/podcast.json');
           resolve(sampleData);
         },
       );
@@ -138,5 +138,28 @@ describe('ScoreCard-TestWithData', () => {
 
     await findByTestId('score-card');
     jest.useRealTimers();
+  });
+
+  it('should render the score label when provided', async () => {
+    const { findByText } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, sharedErrorApi],
+            [scoringDataApiRef, mockClient],
+            [configApiRef, sharedConfigApiMock],
+          ]}
+        >
+          <EntityProvider entity={entity}>
+            <ScoreCard />
+          </EntityProvider>
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByText('Total score: C');
+
+    const codeScore = await findByText('Code');
+    expect(codeScore.querySelector('div')).toHaveTextContent('A');
   });
 });
