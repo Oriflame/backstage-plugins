@@ -6,9 +6,19 @@ Welcome to the score-card plugin! Main idea behind it comes from a need to someh
 
 ### ScoreBoardPage
 
-Displays list of systems and their scores.
+Page that displays list of systems and their scores.
 
 ![Score board](./docs/.assets/score-board.png)
+
+### ScoreCardTable
+
+Table that displays list of systems and their scores.
+
+![Score card table](./docs/.assets/score-card-table.png)
+
+| Props   | type   | Description        | Default                |
+|---------|--------|--------------------|------------------------|
+| `title` | string | Title of the table | System scores overview |
 
 ### ScoreCard
 
