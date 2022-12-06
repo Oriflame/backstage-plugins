@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.6
+
+### Patch Changes
+
+- 3a2f7b5: Expose ScoreCardTable for usage outside ScoreBoardPage
+
 ## 0.5.5
 
 ### Patch Changes
