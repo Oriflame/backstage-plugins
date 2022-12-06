@@ -69,9 +69,8 @@ describe('ScoreBoardPage-EmptyData', () => {
   });
 });
 
-
 describe('ScoreCard-TestWithData', () => {
-    class MockClient implements ScoringDataApi {
+  class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
     ): Promise<SystemScoreExtended | undefined> {
@@ -90,6 +89,7 @@ describe('ScoreCard-TestWithData', () => {
   const mockClient = new MockClient();
 
   // TODO: find how to stop render the progress bar and display the ScoreCardTable
+  // eslint-disable-next-line jest/no-commented-out-tests
   // it('should render title', async () => {
   //   jest.useFakeTimers();
 
@@ -128,7 +128,7 @@ describe('ScoreCard-TestWithData', () => {
     await findByTestId('score-board-table');
 
     const podcastColumn = await getByText('podcast');
-    const podcastRow = podcastColumn.closest("tr");
+    const podcastRow = podcastColumn.closest('tr');
     expect(podcastRow).toHaveTextContent('AB+DFFC');
   });
 });

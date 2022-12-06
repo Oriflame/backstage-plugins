@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   build:
+    # TODO: template for build to DRY for CI and for publish workflows
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,9 +28,28 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
-      - run: yarn lint
-      - run: yarn tsc
-      - run: yarn test
+
+      - name: validate config
+        run: yarn backstage-cli config:check --lax
+
+      - name: lint
+        run: yarn backstage-cli repo lint
+
+      - name: type checking and declarations
+        run: yarn tsc:full
+
+      - name: build
+        run: yarn backstage-cli repo build --all
+        env:
+          CI: true
+
+      - name: verify type dependencies
+        run: yarn lint:type-deps
+
+      - name: test
+        run: |
+          yarn lerna -- run test -- --coverage --runInBand
+
       - name: Cypress e2e tests
         uses: cypress-io/github-action@v2
         with:
@@ -38,6 +58,3 @@ jobs:
           project: ./packages/app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: yarn build
-        env:
-          CI: true
