@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export {
-  scoreCardPlugin,
-  ScoreBoardPage,
-  ScoreCardTable,
-  EntityScoreCardContent,
-} from './plugin';
+import { scoreCardPlugin, ScoreCardTable, ScoreBoardPage, EntityScoreCardContent } from '.';
 
-/**
- * The TypeScript API for configuring System Scoring.
- */
-export * from './api';
+describe('score-card exports', () => {
+  it('should export plugin', () => {
+    expect(scoreCardPlugin).toBeDefined();
+  });
+
+  it('should export ScoreCardTable', () => {
+    expect(ScoreCardTable).toBeDefined();
+  });
+  it('should export ScoreBoardPage', () => {
+    expect(ScoreBoardPage).toBeDefined();
+  });
+  it('should export EntityScoreCardContent', () => {
+    expect(EntityScoreCardContent).toBeDefined();
+  });
+});
