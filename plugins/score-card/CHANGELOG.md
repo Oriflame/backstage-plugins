@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.5
+
+### Patch Changes
+
+- 12cb1f1: Improve extensibility by adding `scoreLabel`, to override `scorePercent` and adding a `title` prop to ScoreCardTable component
+
 ## 0.5.4
 
 ### Patch Changes
