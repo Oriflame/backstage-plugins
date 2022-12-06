@@ -69,9 +69,8 @@ describe('ScoreBoardPage-EmptyData', () => {
   });
 });
 
-
 describe('ScoreCard-TestWithData', () => {
-    class MockClient implements ScoringDataApi {
+  class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
     ): Promise<SystemScoreExtended | undefined> {
@@ -128,7 +127,7 @@ describe('ScoreCard-TestWithData', () => {
     await findByTestId('score-board-table');
 
     const podcastColumn = await getByText('podcast');
-    const podcastRow = podcastColumn.closest("tr");
+    const podcastRow = podcastColumn.closest('tr');
     expect(podcastRow).toHaveTextContent('AB+DFFC');
   });
 });
