@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.5.7
+
+### Patch Changes
+
+- 111a8c1: Fix ScoreCardTable export and update its documentation
+
 ## 0.5.6
 
 ### Patch Changes
