@@ -89,6 +89,7 @@ describe('ScoreCard-TestWithData', () => {
   const mockClient = new MockClient();
 
   // TODO: find how to stop render the progress bar and display the ScoreCardTable
+  // eslint-disable-next-line jest/no-commented-out-tests
   // it('should render title', async () => {
   //   jest.useFakeTimers();
 
