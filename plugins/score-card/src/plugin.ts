@@ -27,6 +27,8 @@ import { scoringDataApiRef } from './api';
 
 import { rootRouteRef } from './routes';
 
+export { ScoreCardTable } from './components/ScoreCardTable';
+
 export const scoreCardPlugin = createPlugin({
   id: 'score-card',
   routes: {

@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { scoreCardPlugin } from './plugin';
+import { scoreCardPlugin, ScoreCardTable } from './plugin';
 
 describe('score-card', () => {
   it('should export plugin', () => {
     expect(scoreCardPlugin).toBeDefined();
+  });
+
+  it('should export ScoreCardTable', () => {
+    expect(ScoreCardTable).toBeDefined();
   });
 });
