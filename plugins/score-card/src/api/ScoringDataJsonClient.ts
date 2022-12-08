@@ -15,7 +15,7 @@
  */
 import { ScoringDataApi } from './ScoringDataApi';
 import { ConfigApi, FetchApi } from '@backstage/core-plugin-api';
-import { SystemScore, SystemScoreExtended } from './types';
+import { EntityScore, EntityScoreExtended } from './types';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,
@@ -49,14 +49,14 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   public async getScore(
     entity?: Entity,
-  ): Promise<SystemScoreExtended | undefined> {
+  ): Promise<EntityScoreExtended | undefined> {
     if (!entity) {
       return undefined;
     }
     const systemName = entity.metadata.name;
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}${systemName}.json`;
-    const result: SystemScore = await fetch(urlWithData).then(res => {
+    const result: EntityScore = await fetch(urlWithData).then(res => {
       switch (res.status) {
         case 404:
           return null;
@@ -69,13 +69,13 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     if (!result) {
       return undefined;
     }
-    return this.extendSystemScore(result, undefined);
+    return this.extendEntityScore(result, undefined);
   }
 
-  public async getAllScores(): Promise<SystemScoreExtended[] | undefined> {
+  public async getAllScores(): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
-    const result: SystemScore[] | undefined = await fetch(urlWithData).then(
+    const result: EntityScore[] | undefined = await fetch(urlWithData).then(
       res => {
         switch (res.status) {
           case 404:
@@ -93,8 +93,8 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     });
     if (!result) return undefined;
     const systems = entities.items;
-    return result.map<SystemScoreExtended>(score => {
-      return this.extendSystemScore(score, systems);
+    return result.map<EntityScoreExtended>(score => {
+      return this.extendEntityScore(score, systems);
     });
   }
 
@@ -107,10 +107,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     );
   }
 
-  private extendSystemScore(
-    score: SystemScore,
+  private extendEntityScore(
+    score: EntityScore,
     systems: Entity[] | undefined,
-  ): SystemScoreExtended {
+  ): EntityScoreExtended {
     if (score === null) {
       throw new Error(`can not extend null system score.`);
     }
@@ -144,6 +144,8 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       reviewer: reviewer,
       reviewDate: reviewDate,
       ...score,
+      // For Backward compatibility, fallback on systemEntityName
+      entityRef: score.entityRef ?? { name: score.systemEntityName, kind: "system"},
     };
   }
 }

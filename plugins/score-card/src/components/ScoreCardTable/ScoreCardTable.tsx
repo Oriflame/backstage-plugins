@@ -21,8 +21,9 @@ import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { Chip } from '@material-ui/core';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import { scoringDataApiRef } from '../../api';
-import { SystemScoreExtended } from '../../api/types';
+import { EntityScoreExtended, SystemScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
+import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
 const useScoringAllDataLoader = () => {
   const errorApi = useApi(errorApiRef);
@@ -44,34 +45,46 @@ const useScoringAllDataLoader = () => {
 
 type ScoreTableProps = {
   title?: string;
-  scores: SystemScoreExtended[];
+  scores: EntityScoreExtended[] | SystemScoreExtended[];
 };
 
 export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
-  const columns: TableColumn<SystemScoreExtended>[] = [
+  const columns: TableColumn<EntityScoreExtended | SystemScoreExtended>[] = [
     {
       title: 'Name',
       field: 'systemEntityName',
-      render: systemScore =>
-        systemScore.catalogEntityName ? (
-          <Link
-            to={`/catalog/${systemScore.catalogEntityName.namespace}/${systemScore.catalogEntityName.kind}/${systemScore.catalogEntityName.name}/score`}
-            data-id={systemScore.systemEntityName}
-          >
-            {systemScore.systemEntityName}
-          </Link> // NOTE: we can't use EntityRefLink as it does not yet support navigating to "/score" (or other tab) yet
-        ) : (
-          <>{systemScore.systemEntityName}</>
-        ),
+      render: entityScore => {
+
+        if ((entityScore as SystemScoreExtended).catalogEntityName) {
+          return (<Link
+            to={`/catalog/${entityScore.catalogEntityName?.namespace}/${entityScore.catalogEntityName?.kind}/${entityScore.catalogEntityName?.name}/score`}
+            data-id={entityScore.systemEntityName}
+            >
+              {entityScore.systemEntityName}
+            </Link>) // NOTE: we can't use EntityRefLink as it does not yet support navigating to "/score" (or other tab) yet
+        }
+
+        if ((entityScore as EntityScoreExtended).entityRef) {
+          const ref = (entityScore as EntityScoreExtended).entityRef
+          return (<Link
+            to={`/catalog/${ref.namespace ?? DEFAULT_NAMESPACE}/${ref.kind}/${ref.name}/score`}
+            data-id={ref.name}
+            >
+              {ref.name}
+            </Link>)
+        }
+
+        return <>{entityScore.systemEntityName}</>
+      }
     },
     {
       title: 'Owner',
       field: 'owner.name',
-      render: systemScore =>
-        systemScore.owner ? (
+      render: entityScore =>
+      entityScore.owner ? (
           <>
-            <EntityRefLink entityRef={systemScore.owner}>
-              {systemScore.owner.name}
+            <EntityRefLink entityRef={entityScore.owner}>
+              {entityScore.owner.name}
             </EntityRefLink>
           </>
         ) : null,
@@ -79,11 +92,11 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
     {
       title: 'Reviewer',
       field: 'scoringReviewer',
-      render: systemScore =>
-        systemScore.reviewer ? (
+      render: entityScore =>
+        entityScore.reviewer ? (
           <>
-            <EntityRefLink entityRef={systemScore.reviewer}>
-              {systemScore.reviewer?.name}
+            <EntityRefLink entityRef={entityScore.reviewer}>
+              {entityScore.reviewer?.name}
             </EntityRefLink>
           </>
         ) : null,
@@ -91,9 +104,9 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
     {
       title: 'Date',
       field: 'scoringReviewDate',
-      render: systemScore =>
-        systemScore.reviewDate ? (
-          <>{systemScore.reviewDate.toLocaleDateString()}</>
+      render: entityScore =>
+        entityScore.reviewDate ? (
+          <>{entityScore.reviewDate.toLocaleDateString()}</>
         ) : null,
     },
   ];
@@ -119,9 +132,9 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
           if (!d2ScoreEntry || d2ScoreEntry < d1ScoreEntry) return 1;
           return 0;
         },
-        render: systemScoreEntry => {
-          const currentScoreEntry = systemScoreEntry?.areaScores
-            ? systemScoreEntry.areaScores.find(a => a.title === area.title)
+        render: entityScoreEntry => {
+          const currentScoreEntry = entityScoreEntry?.areaScores
+            ? entityScoreEntry.areaScores.find(a => a.title === area.title)
             : undefined;
           const chipStyle: React.CSSProperties = {
             margin: 0,
@@ -146,15 +159,15 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
     title: 'Total',
     align: 'right',
     field: 'scorePercent',
-    render: systemScoreEntry => {
+    render: entityScoreEntry => {
       const chipStyle: React.CSSProperties = {
         margin: 0,
-        backgroundColor: scoreToColorConverter(systemScoreEntry?.scoreSuccess),
+        backgroundColor: scoreToColorConverter(entityScoreEntry?.scoreSuccess),
         float: 'right',
         minWidth: '4rem',
       };
-      const label = systemScoreEntry?.scoreLabel ?? `${systemScoreEntry?.scorePercent} %`;
-      return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
+      const label = entityScoreEntry?.scoreLabel ?? `${entityScoreEntry?.scorePercent} %`;
+      return typeof entityScoreEntry.scorePercent !== 'undefined' ? (
         <Chip label={label} style={chipStyle} />
       ) : null;
     },
@@ -180,7 +193,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
 
   return (
     <div data-testid="score-board-table">
-      <Table<SystemScoreExtended>
+      <Table<EntityScoreExtended | SystemScoreExtended>
         title={title ?? "System scores overview"}
         options={{
           search: true,

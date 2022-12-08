@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { SystemScoreEntry } from '../../../api';
-import { SystemScoreExtended } from '../../../api/types';
+import { EntityScoreEntry } from '../../../api';
+import { EntityScoreExtended, SystemScoreExtended } from '../../../api/types';
 
 // this is an interface used for table entries. We need to enrich the original SystemScoreEntry with the "area" group, see bellow allEntries reduce
-export interface SystemScoreTableEntry extends SystemScoreEntry {
+export interface EntityScoreTableEntry extends EntityScoreEntry {
   area: string;
 }
 /*
@@ -30,7 +30,7 @@ export interface SystemScoreTableEntry extends SystemScoreEntry {
         id: 1,
         title: "documentation",
         ...
-        scoreEntries : [ 
+        scoreEntries : [
           {
             id: 222,
             title: "readme"
@@ -43,7 +43,7 @@ export interface SystemScoreTableEntry extends SystemScoreEntry {
         ]
       },
       ... other areas with other score entries
-    ] 
+    ]
   }
   and we want to have a flat array of score entries for table grouped by area, e.g.
   [
@@ -61,14 +61,14 @@ export interface SystemScoreTableEntry extends SystemScoreEntry {
     },
     ...
   ]
-  so we want to basically go through all areaScores and get all its entries to one big array with a new 
-  property "area" pointing back to the area so we can later on get the area score... 
+  so we want to basically go through all areaScores and get all its entries to one big array with a new
+  property "area" pointing back to the area so we can later on get the area score...
   */
 export function getScoreTableEntries(
-  value: SystemScoreExtended | null | undefined,
-): SystemScoreTableEntry[] {
+  value: EntityScoreExtended | SystemScoreExtended | null | undefined,
+): EntityScoreTableEntry[] {
   if (!value || value.areaScores.length <= 0) return [];
-  return value.areaScores.reduce<SystemScoreTableEntry[]>(
+  return value.areaScores.reduce<EntityScoreTableEntry[]>(
     (entries, area) =>
       entries.concat(
         area.scoreEntries.map(entry => {

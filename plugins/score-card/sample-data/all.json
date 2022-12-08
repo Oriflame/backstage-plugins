@@ -1,5 +1,47 @@
 [
   {
+    "entityRef": {
+      "kind": "api",
+      "name": "api.foo"
+    },
+    "scorePercent": 50,
+    "scoreLabel": "Yellow",
+    "scoringReviewDate": "2022-01-01T08:00:00Z",
+    "scoreSuccess": "almost-failure",
+    "areaScores": [
+      {
+        "title": "Extensibility",
+        "scorePercent": 50,
+        "scoreLabel": "Yellow",
+        "scoreSuccess": "almost-failure"
+      },
+      {
+        "title": "Code",
+        "scorePercent": 100,
+        "scoreLabel": "Green",
+        "scoreSuccess": "success"
+      },
+      {
+        "title": "Quality",
+        "scorePercent": 25,
+        "scoreLabel": "Red",
+        "scoreSuccess": "failure"
+      },
+      {
+        "title": "Documentation",
+        "scorePercent": 100,
+        "scoreLabel": "Green",
+        "scoreSuccess": "success"
+      },
+      {
+        "title": "Operations",
+        "scorePercent": 50,
+        "scoreLabel": "Yellow",
+        "scoreSuccess": "almost-failure"
+      }
+    ]
+  },
+  {
     "systemEntityName": "non-valid-system",
     "systemTier": "B",
     "SystemDataConfidentiality": "Public",

@@ -16,18 +16,18 @@
 
 import { MarkdownContent, TableColumn } from '@backstage/core-components';
 import React from 'react';
-import { SystemScoreTableEntry } from '../helpers/getScoreTableEntries';
+import { EntityScoreTableEntry } from '../helpers/getScoreTableEntries';
 
-export const detailsColumn: TableColumn<SystemScoreTableEntry> = {
+export const detailsColumn: TableColumn<EntityScoreTableEntry> = {
   title: 'Details',
   field: 'details',
   grouping: false,
-  render: systemScoreEntry => {
-    const scoreHints = (systemScoreEntry.scoreHints as string[])?.join?.(', ');
-    const hints = scoreHints ?? systemScoreEntry.scoreHints;
+  render: entityScoreEntry => {
+    const scoreHints = (entityScoreEntry.scoreHints as string[])?.join?.(', ');
+    const hints = scoreHints ?? entityScoreEntry.scoreHints;
     return (
       <div>
-        <MarkdownContent content={systemScoreEntry.details} />
+        <MarkdownContent content={entityScoreEntry.details} />
         {hints ? <em>hints: {hints}</em> : null}
       </div>
     );

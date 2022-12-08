@@ -15,8 +15,12 @@
  */
 import { CompoundEntityRef, Entity } from '@backstage/catalog-model';
 
+/**
+ * @deprecated Use EntityScore instead
+ */
 export interface SystemScore {
   systemEntityName: string;
+  entityName?: string | CompoundEntityRef;
   generatedDateTimeUtc: Date | string;
   scorePercent: number;
   scoreLabel?: string;
@@ -26,6 +30,9 @@ export interface SystemScore {
   areaScores: SystemScoreArea[];
 }
 
+/**
+ * @deprecated Use EntityScoreArea instead
+ */
 export interface SystemScoreArea {
   id: number;
   title: string;
@@ -35,6 +42,9 @@ export interface SystemScoreArea {
   scoreEntries: SystemScoreEntry[];
 }
 
+/**
+ * @deprecated Use EntityScoreEntry instead
+ */
 export interface SystemScoreEntry {
   id: number;
   title: string;
@@ -55,9 +65,57 @@ export enum ScoreSuccessEnum {
 }
 
 // TODO: decide what with this interface. It makes the API to be tight coupled with catalog API (the component is coupled anyway). Shall this be internal implementation?
+/**
+ * @deprecated Use EntityScoreArea instead
+ */
 export interface SystemScoreExtended extends SystemScore {
   catalogEntity: Entity | undefined;
   catalogEntityName: CompoundEntityRef | undefined;
+  owner: CompoundEntityRef | undefined;
+  reviewer: CompoundEntityRef | undefined;
+  reviewDate: Date | undefined;
+}
+
+
+export interface EntityScore {
+  /**
+   * @deprecated Use entityName instead
+   */
+  systemEntityName?: string;
+  entityRef: CompoundEntityRef;
+  generatedDateTimeUtc: Date | string;
+  scorePercent: number;
+  scoreLabel?: string;
+  scoreSuccess: ScoreSuccessEnum;
+  scoringReviewer: string | CompoundEntityRef | undefined | null;
+  scoringReviewDate: Date | string | undefined | null;
+  areaScores: EntityScoreArea[];
+}
+
+export interface EntityScoreArea {
+  id: number;
+  title: string;
+  scorePercent: number;
+  scoreLabel?: string;
+  scoreSuccess: ScoreSuccessEnum;
+  scoreEntries: EntityScoreEntry[];
+}
+
+export interface EntityScoreEntry {
+  id: number;
+  title: string;
+  isOptional: boolean;
+  scorePercent: number;
+  scoreLabel?: string;
+  scoreSuccess: ScoreSuccessEnum;
+  scoreHints: string | string[];
+  details: string;
+}
+
+export interface EntityScoreExtended extends EntityScore {
+  // TODO: might not need catalogEntity and catalogEntityName anymore
+  catalogEntity?: Entity | undefined;
+  catalogEntityName?: CompoundEntityRef | undefined;
   owner: CompoundEntityRef | undefined;
   reviewer: CompoundEntityRef | undefined;
   reviewDate: Date | undefined;

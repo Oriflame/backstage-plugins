@@ -94,6 +94,16 @@ const apiPage = (
         <Grid item md={6}>
           <EntityAboutCard />
         </Grid>
+        <Grid item md={6}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
       </Grid>
     </EntityLayout.Route>
   </EntityLayout>

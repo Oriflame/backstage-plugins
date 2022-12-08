@@ -34,7 +34,7 @@ import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import {
   getScoreTableEntries,
-  SystemScoreTableEntry,
+  EntityScoreTableEntry,
 } from './helpers/getScoreTableEntries';
 import { areaColumn } from './columns/areaColumn';
 import { detailsColumn } from './columns/detailsColumn';
@@ -113,7 +113,7 @@ export const ScoreCard = ({
   const qualityBadge = !loading && <Chip label={gateLabel} style={gateStyle} />;
 
   // let's define the main table columns
-  const columns: TableColumn<SystemScoreTableEntry>[] = [
+  const columns: TableColumn<EntityScoreTableEntry>[] = [
     areaColumn(data),
     titleColumn(wikiLinkTemplate),
     detailsColumn,
@@ -159,7 +159,7 @@ export const ScoreCard = ({
             style={{ height: '100%' }}
             spacing={0}
           >
-            <Table<SystemScoreTableEntry>
+            <Table<EntityScoreTableEntry>
               title="Score of each requirement"
               options={{
                 search: true,

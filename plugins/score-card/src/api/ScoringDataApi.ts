@@ -15,13 +15,13 @@
  */
 import { Entity } from '@backstage/catalog-model';
 import { createApiRef } from '@backstage/core-plugin-api';
-import { SystemScoreExtended } from './types';
+import { EntityScoreExtended, SystemScoreExtended } from './types';
 
 export const scoringDataApiRef = createApiRef<ScoringDataApi>({
   id: 'plugin.scoringdata.service',
 });
 
 export type ScoringDataApi = {
-  getScore(entity?: Entity): Promise<SystemScoreExtended | undefined>;
-  getAllScores(): Promise<SystemScoreExtended[] | undefined>;
+  getScore(entity?: Entity): Promise<EntityScoreExtended | SystemScoreExtended | undefined>;
+  getAllScores(): Promise<EntityScoreExtended[] | SystemScoreExtended[] | undefined>;
 };

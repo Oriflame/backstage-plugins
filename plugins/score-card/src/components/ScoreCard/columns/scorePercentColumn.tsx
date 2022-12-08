@@ -18,22 +18,22 @@ import { TableColumn } from '@backstage/core-components';
 import { Chip } from '@material-ui/core';
 import React from 'react';
 import { scoreToColorConverter } from '../../../helpers/scoreToColorConverter';
-import { SystemScoreTableEntry } from '../helpers/getScoreTableEntries';
+import { EntityScoreTableEntry } from '../helpers/getScoreTableEntries';
 
-export const scorePercentColumn: TableColumn<SystemScoreTableEntry> = {
+export const scorePercentColumn: TableColumn<EntityScoreTableEntry> = {
   title: <div style={{ minWidth: '3.5rem' }}>Score</div>,
   field: 'scorePercent',
   align: 'right',
   grouping: false,
   width: '1%',
-  render: systemScoreEntry => {
+  render: entityScoreEntry => {
     const chipStyle: React.CSSProperties = {
       margin: 0,
-      backgroundColor: scoreToColorConverter(systemScoreEntry?.scoreSuccess),
+      backgroundColor: scoreToColorConverter(entityScoreEntry?.scoreSuccess),
       minWidth: '4rem',
     };
-    const label = systemScoreEntry?.scoreLabel ?? `${systemScoreEntry.scorePercent} %`;
-    return typeof systemScoreEntry.scorePercent !== 'undefined' ? (
+    const label = entityScoreEntry?.scoreLabel ?? `${entityScoreEntry.scorePercent} %`;
+    return typeof entityScoreEntry.scorePercent !== 'undefined' ? (
       <Chip label={label} style={chipStyle} />
     ) : null;
   },
