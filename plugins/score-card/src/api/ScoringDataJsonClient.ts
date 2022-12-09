@@ -55,7 +55,11 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     }
     const systemName = entity.metadata.name;
     const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}${systemName}.json`;
+    let urlWithData = `${jsonDataUrl}${systemName}.json`;
+
+    if (this.shouldUseEntityRef()) {
+      urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase()
+    }
     const result: EntityScore = await fetch(urlWithData).then(res => {
       switch (res.status) {
         case 404:
@@ -87,12 +91,18 @@ export class ScoringDataJsonClient implements ScoringDataApi {
         }
       },
     );
-    const entities = await this.catalogApi.getEntities({
-      filter: { kind: ['System'] },
-      fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
-    });
     if (!result) return undefined;
-    const systems = entities.items;
+
+    let systems: Entity[] | undefined;
+    // For backward compatibility
+    if (!this.shouldUseEntityRef()) {
+      const entities = await this.catalogApi.getEntities({
+        filter: { kind: ['System'] },
+        fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
+      });
+      systems = entities.items;
+    }
+
     return result.map<EntityScoreExtended>(score => {
       return this.extendEntityScore(score, systems);
     });
@@ -104,6 +114,12 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     return (
       this.configApi.getOptionalString('scorecards.jsonDataUrl') ??
       'https://unknown-url-please-configure'
+    );
+  }
+
+  private shouldUseEntityRef() {
+    return (
+      this.configApi.getOptionalBoolean('scorecards.useEntityRef') ?? false
     );
   }
 

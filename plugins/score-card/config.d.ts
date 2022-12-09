@@ -29,5 +29,12 @@ export interface Config {
      * @visibility frontend
      */
      wikiLinkTemplate?: string;
+     /**
+      *
+      * When true, use entity ref in URL when fetching its file, ex: {jsonDataUrl}/{entityRef.namespace}/{entityRef.kind}/{entityRef.name}
+      * When false, use system name in URL when fetching its file, ex: {jsonDataUrl}/{systemEntityName}
+      * @visibility frontend
+      */
+      useEntityRef?: boolean;
   };
 }
