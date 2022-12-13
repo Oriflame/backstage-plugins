@@ -23,6 +23,7 @@ import { EntityScoreExtended } from '../../api/types';
 import { errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 describe('ScoreBoardPage-EmptyData', () => {
   class MockClient implements ScoringDataApi {
@@ -110,7 +111,6 @@ describe('ScoreCard-TestWithData', () => {
   //   expect(container).toHaveTextContent('Custom title');
   // });
 
-  // TODO: Find why this test fail when entityRef is set on all.json scores
   it('should render scoreLabel', async () => {
     const errorApi = { post: () => {} };
     const { getByText, findByTestId } = render(
@@ -121,7 +121,9 @@ describe('ScoreCard-TestWithData', () => {
             [scoringDataApiRef, mockClient],
           ]}
         >
-          <ScoreCardTable />
+          <Router>
+            <ScoreCardTable />
+          </Router>
         </TestApiProvider>
       </ThemeProvider>,
     );
@@ -130,6 +132,7 @@ describe('ScoreCard-TestWithData', () => {
 
     const podcastColumn = await getByText('podcast');
     const podcastRow = podcastColumn.closest('tr');
-    expect(podcastRow).toHaveTextContent('AB+DFFC');
+
+    expect(podcastRow).toHaveTextContent('podcastAB+DFFC');
   });
 });

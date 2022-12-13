@@ -10,31 +10,31 @@
     "scoreSuccess": "almost-failure",
     "areaScores": [
       {
-        "title": "Extensibility",
-        "scorePercent": 50,
-        "scoreLabel": "Yellow",
-        "scoreSuccess": "almost-failure"
-      },
-      {
         "title": "Code",
         "scorePercent": 100,
         "scoreLabel": "Green",
         "scoreSuccess": "success"
       },
       {
-        "title": "Quality",
+        "title": "Documentation",
         "scorePercent": 25,
         "scoreLabel": "Red",
         "scoreSuccess": "failure"
       },
       {
-        "title": "Documentation",
+        "title": "Operations",
         "scorePercent": 100,
         "scoreLabel": "Green",
         "scoreSuccess": "success"
       },
       {
-        "title": "Operations",
+        "title": "Quality",
+        "scorePercent": 50,
+        "scoreLabel": "Yellow",
+        "scoreSuccess": "almost-failure"
+      },
+      {
+        "title": "Security",
         "scorePercent": 50,
         "scoreLabel": "Yellow",
         "scoreSuccess": "almost-failure"

@@ -52,7 +52,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
   const columns: TableColumn<EntityScoreExtended>[] = [
     {
       title: 'Name',
-      field: 'entityName',
+      field: 'entityRef',
       render: entityScore => {
         if (!entityScore.entityRef?.name) {
           return <>Missing entityRef.name key</>
