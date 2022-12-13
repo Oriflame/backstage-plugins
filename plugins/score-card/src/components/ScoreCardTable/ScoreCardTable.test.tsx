@@ -133,6 +133,6 @@ describe('ScoreCard-TestWithData', () => {
     const podcastColumn = await getByText('podcast');
     const podcastRow = podcastColumn.closest('tr');
 
-    expect(podcastRow).toHaveTextContent('podcastAB+DFFC');
+    expect(podcastRow).toHaveTextContent('podcastsystemAB+DFFC');
   });
 });
