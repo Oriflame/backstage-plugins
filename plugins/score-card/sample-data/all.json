@@ -1,8 +1,6 @@
 [
   {
     "systemEntityName": "non-valid-system",
-    "systemTier": "B",
-    "SystemDataConfidentiality": "Public",
     "generatedDateTimeUtc": "2021-07-22 10:00",
     "scorePercent": 20,
     "scoreSuccess": "failure",
@@ -10,9 +8,6 @@
   },
   {
     "systemEntityName": "audio-playback",
-    "systemTier": "A",
-    "SystemDataConfidentiality": "Confidential",
-    "SystemDataSensitivity": ["PII", "Sensitive-PII"],
     "generatedDateTimeUtc": "2021-07-22 10:00",
     "scorePercent": 57,
     "scoringReviewer": "Guest",
@@ -318,9 +313,6 @@
   },
   {
     "systemEntityName": "podcast",
-    "systemTier": "A",
-    "SystemDataConfidentiality": "Confidential",
-    "SystemDataSensitivity": ["PII", "Sensitive-PII"],
     "generatedDateTimeUtc": "2021-07-22 10:00",
     "scorePercent": 57,
     "scoreLabel": "C",
