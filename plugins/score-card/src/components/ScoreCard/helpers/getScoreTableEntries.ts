@@ -15,7 +15,7 @@
  */
 
 import { EntityScoreEntry } from '../../../api';
-import { EntityScoreExtended, SystemScoreExtended } from '../../../api/types';
+import { EntityScoreExtended } from '../../../api/types';
 
 // this is an interface used for table entries. We need to enrich the original SystemScoreEntry with the "area" group, see bellow allEntries reduce
 export interface EntityScoreTableEntry extends EntityScoreEntry {
@@ -65,7 +65,7 @@ export interface EntityScoreTableEntry extends EntityScoreEntry {
   property "area" pointing back to the area so we can later on get the area score...
   */
 export function getScoreTableEntries(
-  value: EntityScoreExtended | SystemScoreExtended | null | undefined,
+  value: EntityScoreExtended | null | undefined,
 ): EntityScoreTableEntry[] {
   if (!value || value.areaScores.length <= 0) return [];
   return value.areaScores.reduce<EntityScoreTableEntry[]>(

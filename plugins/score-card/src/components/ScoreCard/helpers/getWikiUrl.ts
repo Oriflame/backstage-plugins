@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { SystemScoreEntry } from '../../../api/types';
+import { EntityScoreEntry } from '../../../api/types';
 
 export function getWikiUrl(
   wikiLinkTemplate: string,
-  entry: SystemScoreEntry | null | undefined,
+  entry: EntityScoreEntry | null | undefined,
 ): string {
   if (!entry) return wikiLinkTemplate.replace(/\{[^\}]+\}/g, '');
   return wikiLinkTemplate.replace(/\{[^\}]+\}/g, matched => {
     const keyName = matched.substring(1, matched.length - 1);
-    const value = entry[keyName as keyof SystemScoreEntry];
+    const value = entry[keyName as keyof EntityScoreEntry];
     return !value ? '' : value.toString();
   });
 }

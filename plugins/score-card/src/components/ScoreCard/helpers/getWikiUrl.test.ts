@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 import { getWikiUrl } from './getWikiUrl';
-import { ScoreSuccessEnum, SystemScoreEntry } from '../../../api/types';
+import { ScoreSuccessEnum, EntityScoreEntry } from '../../../api/types';
 
 describe('helper-getWikiUrl', () => {
-  const entry: SystemScoreEntry = {
+  const entry: EntityScoreEntry = {
     id: 123,
     title: 'some-score-title',
     isOptional: false,

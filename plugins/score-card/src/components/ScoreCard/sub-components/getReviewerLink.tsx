@@ -15,9 +15,9 @@
  */
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import React from 'react';
-import { EntityScoreExtended, SystemScoreExtended } from '../../../api/types';
+import { EntityScoreExtended } from '../../../api/types';
 
-export function getReviewerLink(value: EntityScoreExtended | SystemScoreExtended) {
+export function getReviewerLink(value: EntityScoreExtended) {
   return (
     <div style={{ textAlign: 'right', margin: '0.2rem' }}>
       {value.reviewer ? (

@@ -49,12 +49,6 @@ scorecards:
   jsonDataUrl: http://localhost:8090/plugins/score-card/sample-data/ #this is being served via http-server
   wikiLinkTemplate: https://link-to-wiki/{id}
 
-  # useEntityRef
-  # When true, use entity ref in URL when fetching its file, ex: {jsonDataUrl}/{entityRef.namespace}/{entityRef.kind}/{entityRef.name}
-  # When false, use system name in URL when fetching its file, ex: {jsonDataUrl}/{systemEntityName}
-  # default: false
-  useEntityRef: true
-
 catalog:
   rules:
     - allow: [Component, System, API, Group, User, Resource, Location, Template]

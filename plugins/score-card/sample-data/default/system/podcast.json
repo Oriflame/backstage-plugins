@@ -1,8 +1,8 @@
 {
-  "systemEntityName": "podcast",
-  "systemTier": "A",
-  "SystemDataConfidentiality": "Confidential",
-  "SystemDataSensitivity": ["PII", "Sensitive-PII"],
+  "entityRef": {
+    "kind": "system",
+    "name": "podcast"
+  },
   "generatedDateTimeUtc": "2021-07-22 10:00",
   "scorePercent": 57,
   "scoreLabel": "C",

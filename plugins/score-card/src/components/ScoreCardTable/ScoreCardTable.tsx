@@ -21,7 +21,7 @@ import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { Chip } from '@material-ui/core';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import { scoringDataApiRef } from '../../api';
-import { EntityScoreExtended, SystemScoreExtended } from '../../api/types';
+import { EntityScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
@@ -45,36 +45,25 @@ const useScoringAllDataLoader = () => {
 
 type ScoreTableProps = {
   title?: string;
-  scores: EntityScoreExtended[] | SystemScoreExtended[];
+  scores: EntityScoreExtended[];
 };
 
 export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
-  const columns: TableColumn<EntityScoreExtended | SystemScoreExtended>[] = [
+  const columns: TableColumn<EntityScoreExtended>[] = [
     {
       title: 'Name',
-      field: 'systemEntityName',
+      field: 'entityName',
       render: entityScore => {
-
-        if ((entityScore as SystemScoreExtended).catalogEntityName) {
-          return (<Link
-            to={`/catalog/${entityScore.catalogEntityName?.namespace}/${entityScore.catalogEntityName?.kind}/${entityScore.catalogEntityName?.name}/score`}
-            data-id={entityScore.systemEntityName}
-            >
-              {entityScore.systemEntityName}
-            </Link>) // NOTE: we can't use EntityRefLink as it does not yet support navigating to "/score" (or other tab) yet
+        if (!entityScore.entityRef?.name) {
+          return <>Missing entityRef.name key</>
         }
 
-        if ((entityScore as EntityScoreExtended).entityRef) {
-          const ref = (entityScore as EntityScoreExtended).entityRef
-          return (<Link
-            to={`/catalog/${ref.namespace ?? DEFAULT_NAMESPACE}/${ref.kind}/${ref.name}/score`}
-            data-id={ref.name}
-            >
-              {ref.name}
-            </Link>)
-        }
-
-        return <>{entityScore.systemEntityName}</>
+        return (<Link
+          to={`/catalog/${entityScore.entityRef.namespace ?? DEFAULT_NAMESPACE}/${entityScore.entityRef.kind}/${entityScore.entityRef.name}/score`}
+          data-id={entityScore.entityRef.name}
+          >
+            {entityScore.entityRef.name}
+          </Link>)
       }
     },
     {
@@ -193,7 +182,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
 
   return (
     <div data-testid="score-board-table">
-      <Table<EntityScoreExtended | SystemScoreExtended>
+      <Table<EntityScoreExtended>
         title={title ?? "System scores overview"}
         options={{
           search: true,

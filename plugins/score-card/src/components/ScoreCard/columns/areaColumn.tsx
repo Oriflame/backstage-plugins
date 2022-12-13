@@ -19,10 +19,10 @@ import { Chip, Link } from '@material-ui/core';
 import { scoreToColorConverter } from '../../../helpers/scoreToColorConverter';
 import { EntityScoreTableEntry } from '../helpers/getScoreTableEntries';
 import React from 'react';
-import { EntityScoreExtended, SystemScoreExtended } from '../../../api/types';
+import { EntityScoreExtended } from '../../../api/types';
 
 export function areaColumn(
-  value: EntityScoreExtended | SystemScoreExtended | null | undefined,
+  value: EntityScoreExtended | null | undefined,
 ): TableColumn<EntityScoreTableEntry> {
   return {
     title: 'Area',

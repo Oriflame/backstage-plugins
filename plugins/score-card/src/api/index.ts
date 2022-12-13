@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type { EntityScore, EntityScoreArea, EntityScoreEntry, SystemScore, SystemScoreArea, SystemScoreEntry } from './types';
+export type { EntityScore, EntityScoreArea, EntityScoreEntry } from './types';
 export { ScoreSuccessEnum } from './types';
 export { scoringDataApiRef } from './ScoringDataApi';
 export type { ScoringDataApi } from './ScoringDataApi';

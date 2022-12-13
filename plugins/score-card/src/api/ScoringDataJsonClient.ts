@@ -20,7 +20,6 @@ import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,
   CompoundEntityRef,
-  getCompoundEntityRef,
   parseEntityRef,
   RELATION_OWNED_BY,
 } from '@backstage/catalog-model';
@@ -53,13 +52,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     if (!entity) {
       return undefined;
     }
-    const systemName = entity.metadata.name;
-    const jsonDataUrl = this.getJsonDataUrl();
-    let urlWithData = `${jsonDataUrl}${systemName}.json`;
 
-    if (this.shouldUseEntityRef()) {
-      urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase()
-    }
+    const jsonDataUrl = this.getJsonDataUrl();
+    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
+
     const result: EntityScore = await fetch(urlWithData).then(res => {
       switch (res.status) {
         case 404:
@@ -93,18 +89,24 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     );
     if (!result) return undefined;
 
-    let systems: Entity[] | undefined;
-    // For backward compatibility
-    if (!this.shouldUseEntityRef()) {
-      const entities = await this.catalogApi.getEntities({
-        filter: { kind: ['System'] },
-        fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
-      });
-      systems = entities.items;
-    }
+    const entity_names: string[] = result.reduce((acc, a) => {
+      if (a.entityRef?.name) {
+        acc.push(a.entityRef.name);
+      }
+      return acc;
+    }, [] as string[]);
+
+    const response = await this.catalogApi.getEntities({
+      filter: {
+        'metadata.name': entity_names
+
+       },
+      fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
+    });
+    const entities: Entity[] = response.items;
 
     return result.map<EntityScoreExtended>(score => {
-      return this.extendEntityScore(score, systems);
+      return this.extendEntityScore(score, entities);
     });
   }
 
@@ -117,15 +119,9 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     );
   }
 
-  private shouldUseEntityRef() {
-    return (
-      this.configApi.getOptionalBoolean('scorecards.useEntityRef') ?? false
-    );
-  }
-
   private extendEntityScore(
     score: EntityScore,
-    systems: Entity[] | undefined,
+    entities: Entity[] | undefined,
   ): EntityScoreExtended {
     if (score === null) {
       throw new Error(`can not extend null system score.`);
@@ -133,9 +129,11 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     if (typeof score === 'undefined') {
       throw new Error(`can not extend undefined system score.`);
     }
-    const catalogEntity = systems
-      ? systems.find(system => system.metadata.name === score.systemEntityName)
+
+    const catalogEntity = entities
+      ? entities.find(entity => entity.metadata.name === score.entityRef?.name)
       : undefined;
+
     const owner = catalogEntity?.relations?.find(
       r => r.type === RELATION_OWNED_BY,
     )?.targetRef;
@@ -152,16 +150,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       ? new Date(score.scoringReviewDate)
       : undefined;
     return {
-      catalogEntity: catalogEntity,
-      catalogEntityName: catalogEntity
-        ? getCompoundEntityRef(catalogEntity)
-        : undefined,
       owner: owner ? parseEntityRef(owner) : undefined,
       reviewer: reviewer,
       reviewDate: reviewDate,
       ...score,
-      // For Backward compatibility, fallback on systemEntityName
-      entityRef: score.entityRef ?? { name: score.systemEntityName, kind: "system"},
     };
   }
 }
