@@ -92,7 +92,7 @@ describe('ScoreCard-TestWithData', () => {
     ): Promise<EntityScoreExtended | undefined> {
       return new Promise<EntityScoreExtended | undefined>(
         (resolve, _reject) => {
-          const sampleData = require('../../../sample-data/podcast.json');
+          const sampleData = require('../../../sample-data/default/system/podcast.json');
           resolve(sampleData);
         },
       );
