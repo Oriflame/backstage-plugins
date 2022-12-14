@@ -190,7 +190,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
   return (
     <div data-testid="score-board-table">
       <Table<EntityScoreExtended>
-        title={title ?? "System scores overview"}
+        title={title ?? "Entities scores overview"}
         options={{
           search: true,
           paging: true,
