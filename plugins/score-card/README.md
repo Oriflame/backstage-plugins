@@ -19,6 +19,7 @@ Table that displays list of entities and their scores.
 | Props   | type   | Description        | Default                  |
 |---------|--------|--------------------|--------------------------|
 | `title` | string | Title of the table | Entities scores overview |
+| `entityKinds` | [ScorableEntityKind[]](./src/api/types.ts) | List of entity kinds to display | undefined |
 
 ### ScoreCard
 
