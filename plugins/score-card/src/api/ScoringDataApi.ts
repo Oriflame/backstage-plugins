@@ -15,7 +15,7 @@
  */
 import { Entity } from '@backstage/catalog-model';
 import { createApiRef } from '@backstage/core-plugin-api';
-import { EntityScoreExtended } from './types';
+import { EntityScoreExtended, ScorableEntityKind } from './types';
 
 export const scoringDataApiRef = createApiRef<ScoringDataApi>({
   id: 'plugin.scoringdata.service',
@@ -23,5 +23,5 @@ export const scoringDataApiRef = createApiRef<ScoringDataApi>({
 
 export type ScoringDataApi = {
   getScore(entity?: Entity): Promise<EntityScoreExtended | undefined>;
-  getAllScores(): Promise<EntityScoreExtended[] | undefined>;
+  getAllScores(entityKinds?: ScorableEntityKind[]): Promise<EntityScoreExtended[] | undefined>;
 };

@@ -59,3 +59,11 @@ export interface EntityScoreExtended extends EntityScore {
   reviewer: CompoundEntityRef | undefined;
   reviewDate: Date | undefined;
 }
+
+
+export enum ScorableEntityKind {
+  API = "api",
+  Component = "component",
+  Domain = "domain",
+  System = "system",
+}
