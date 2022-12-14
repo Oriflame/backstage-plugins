@@ -45,7 +45,6 @@
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "react-router-dom": "^6.4.5",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
@@ -53,11 +52,11 @@
     "react-dom": "^16.13.1 || ^17.0.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.21.1",
-    "@backstage/plugin-catalog": "^1.6.1",
     "@backstage/catalog-client": "^1.1.2",
+    "@backstage/cli": "^0.21.1",
     "@backstage/core-app-api": "^1.2.0",
     "@backstage/dev-utils": "^1.0.8",
+    "@backstage/plugin-catalog": "^1.6.1",
     "@backstage/test-utils": "^1.2.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
@@ -65,9 +64,10 @@
     "@types/jest": "*",
     "@types/node": "*",
     "@types/react": "^16.13.1 || ^17.0.0",
-    "msw": "0.47.3",
     "cross-fetch": "3.1.5",
-    "http-server": "14.1.1"
+    "http-server": "14.1.1",
+    "msw": "0.47.3",
+    "react-router-dom": "^6.4.5"
   },
   "files": [
     "dist",
