@@ -13,29 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CompoundEntityRef, Entity } from '@backstage/catalog-model';
+import { CompoundEntityRef } from '@backstage/catalog-model';
 
-export interface SystemScore {
-  systemEntityName: string;
+export enum ScoreSuccessEnum {
+  Success = 'success',
+  AlmostSuccess = 'almost-success',
+  Partial = 'partial',
+  AlmostFailure = 'almost-failure',
+  Failure = 'failure',
+}
+
+export interface EntityScore {
+  entityRef: CompoundEntityRef;
   generatedDateTimeUtc: Date | string;
   scorePercent: number;
   scoreLabel?: string;
   scoreSuccess: ScoreSuccessEnum;
   scoringReviewer: string | CompoundEntityRef | undefined | null;
   scoringReviewDate: Date | string | undefined | null;
-  areaScores: SystemScoreArea[];
+  areaScores: EntityScoreArea[];
 }
 
-export interface SystemScoreArea {
+export interface EntityScoreArea {
   id: number;
   title: string;
   scorePercent: number;
   scoreLabel?: string;
   scoreSuccess: ScoreSuccessEnum;
-  scoreEntries: SystemScoreEntry[];
+  scoreEntries: EntityScoreEntry[];
 }
 
-export interface SystemScoreEntry {
+export interface EntityScoreEntry {
   id: number;
   title: string;
   isOptional: boolean;
@@ -46,18 +54,7 @@ export interface SystemScoreEntry {
   details: string;
 }
 
-export enum ScoreSuccessEnum {
-  Success = 'success',
-  AlmostSuccess = 'almost-success',
-  Partial = 'partial',
-  AlmostFailure = 'almost-failure',
-  Failure = 'failure',
-}
-
-// TODO: decide what with this interface. It makes the API to be tight coupled with catalog API (the component is coupled anyway). Shall this be internal implementation?
-export interface SystemScoreExtended extends SystemScore {
-  catalogEntity: Entity | undefined;
-  catalogEntityName: CompoundEntityRef | undefined;
+export interface EntityScoreExtended extends EntityScore {
   owner: CompoundEntityRef | undefined;
   reviewer: CompoundEntityRef | undefined;
   reviewDate: Date | undefined;

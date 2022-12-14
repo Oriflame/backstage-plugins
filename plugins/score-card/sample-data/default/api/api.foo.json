@@ -1,20 +1,37 @@
 {
-  "systemEntityName": "podcast",
-  "systemTier": "A",
-  "SystemDataConfidentiality": "Confidential",
-  "SystemDataSensitivity": ["PII", "Sensitive-PII"],
+  "entityRef": {
+    "kind": "api",
+    "name": "api.foo"
+  },
   "generatedDateTimeUtc": "2021-07-22 10:00",
   "scorePercent": 57,
-  "scoreLabel": "C",
-  "scoreSuccess": "partial",
+  "scoreLabel": "Yellow",
+  "scoreSuccess": "almost-failure",
   "scoringReviewer": "Guest",
   "scoringReviewDate": "2022-01-04T08:00:00Z",
   "areaScores": [
     {
+      "title": "Extensibility",
+      "scorePercent": 50,
+      "scoreLabel": "Yellow",
+      "scoreSuccess": "almost-failure",
+      "scoreEntries": [
+        {
+          "id": 2157,
+          "title": "GitFlow",
+          "scorePercent": 100,
+          "scoreLabel": "A",
+          "scoreSuccess": "success",
+          "scoreHints": "Gitflow: 100%",
+          "details": "..."
+        }
+      ]
+    },
+    {
       "id": 2199,
       "title": "Code",
       "scorePercent": 90,
-      "scoreLabel": "A",
+      "scoreLabel": "Green",
       "scoreSuccess": "success",
       "scoreEntries": [
         {
@@ -59,9 +76,9 @@
     {
       "id": 3937,
       "title": "Documentation",
-      "scorePercent": 75,
-      "scoreLabel": "B+",
-      "scoreSuccess": "almost-success",
+      "scorePercent": 25,
+      "scoreLabel": "Red",
+      "scoreSuccess": "failure",
       "scoreEntries": [
         {
           "id": 3938,
@@ -125,8 +142,8 @@
       "id": 2208,
       "title": "Operations",
       "scorePercent": 50,
-      "scoreLabel": "D",
-      "scoreSuccess": "partial",
+      "scoreLabel": "Yellow",
+      "scoreSuccess": "almost-failure",
       "scoreEntries": [
         {
           "id": 2210,
@@ -242,8 +259,8 @@
       "id": 4333,
       "title": "Quality",
       "scorePercent": 25,
-      "scoreLabel": "F",
-      "scoreSuccess": "almost-failure",
+      "scoreLabel": "Red",
+      "scoreSuccess": "failure",
       "scoreEntries": [
         {
           "id": 2187,
@@ -293,22 +310,6 @@
           "scorePercent": 0,
           "scoreSuccess": "unknown",
           "details": "..."
-        }
-      ]
-    },
-    {
-      "id": 4328,
-      "title": "Security",
-      "scorePercent": 10,
-      "scoreLabel": "F",
-      "scoreSuccess": "failure",
-      "scoreEntries": [
-        {
-          "id": 2158,
-          "title": "Https",
-          "scorePercent": 0,
-          "scoreSuccess": "failure",
-          "details": "At least one endpoint accessible without SSL protection"
         }
       ]
     }

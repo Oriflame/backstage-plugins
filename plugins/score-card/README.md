@@ -6,23 +6,23 @@ Welcome to the score-card plugin! Main idea behind it comes from a need to someh
 
 ### ScoreBoardPage
 
-Page that displays list of systems and their scores.
+Page that displays list of entities and their scores.
 
 ![Score board](./docs/.assets/score-board.png)
 
 ### ScoreCardTable
 
-Table that displays list of systems and their scores.
+Table that displays list of entities and their scores.
 
 ![Score card table](./docs/.assets/score-card-table.png)
 
-| Props   | type   | Description        | Default                |
-|---------|--------|--------------------|------------------------|
-| `title` | string | Title of the table | System scores overview |
+| Props   | type   | Description        | Default                  |
+|---------|--------|--------------------|--------------------------|
+| `title` | string | Title of the table | Entities scores overview |
 
 ### ScoreCard
 
-Displays detail for one system and it's scoring. You may use it in entity detail page in the catalog.
+Displays detail for one entity and its scoring. You may use it in entity detail page in the catalog.
 
 ![Score Card](./docs/.assets/score-card.png)
 
@@ -58,7 +58,7 @@ Also the server providing the data needs to have correctly configured CORS polic
 All configuration options:
 
 - `jsonDataUrl`[optional]: url for the JSON data client, see [ScoringDataJsonClient](#scoringdatajsonclient).
-- `wikiLinkTemplate`: the template for the link to the wiki. You may use any existing properties from the `SystemScoreEntry`, e.g. `"https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"`.
+- `wikiLinkTemplate`: the template for the link to the wiki. You may use any existing properties from the `EntityScoreEntry`, e.g. `"https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"`.
 
 ### How to use the plugin
 

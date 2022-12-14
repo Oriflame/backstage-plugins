@@ -17,13 +17,13 @@
 import { TableColumn } from '@backstage/core-components';
 import { Chip, Link } from '@material-ui/core';
 import { scoreToColorConverter } from '../../../helpers/scoreToColorConverter';
-import { SystemScoreTableEntry } from '../helpers/getScoreTableEntries';
+import { EntityScoreTableEntry } from '../helpers/getScoreTableEntries';
 import React from 'react';
-import { SystemScoreExtended } from '../../../api/types';
+import { EntityScoreExtended } from '../../../api/types';
 
 export function areaColumn(
-  value: SystemScoreExtended | null | undefined,
-): TableColumn<SystemScoreTableEntry> {
+  value: EntityScoreExtended | null | undefined,
+): TableColumn<EntityScoreTableEntry> {
   return {
     title: 'Area',
     field: 'area',

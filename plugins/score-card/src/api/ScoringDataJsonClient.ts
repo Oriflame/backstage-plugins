@@ -15,12 +15,11 @@
  */
 import { ScoringDataApi } from './ScoringDataApi';
 import { ConfigApi, FetchApi } from '@backstage/core-plugin-api';
-import { SystemScore, SystemScoreExtended } from './types';
+import { EntityScore, EntityScoreExtended } from './types';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,
   CompoundEntityRef,
-  getCompoundEntityRef,
   parseEntityRef,
   RELATION_OWNED_BY,
 } from '@backstage/catalog-model';
@@ -49,14 +48,15 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   public async getScore(
     entity?: Entity,
-  ): Promise<SystemScoreExtended | undefined> {
+  ): Promise<EntityScoreExtended | undefined> {
     if (!entity) {
       return undefined;
     }
-    const systemName = entity.metadata.name;
+
     const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}${systemName}.json`;
-    const result: SystemScore = await fetch(urlWithData).then(res => {
+    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
+
+    const result: EntityScore = await fetch(urlWithData).then(res => {
       switch (res.status) {
         case 404:
           return null;
@@ -69,13 +69,13 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     if (!result) {
       return undefined;
     }
-    return this.extendSystemScore(result, undefined);
+    return this.extendEntityScore(result, undefined);
   }
 
-  public async getAllScores(): Promise<SystemScoreExtended[] | undefined> {
+  public async getAllScores(): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
-    const result: SystemScore[] | undefined = await fetch(urlWithData).then(
+    const result: EntityScore[] | undefined = await fetch(urlWithData).then(
       res => {
         switch (res.status) {
           case 404:
@@ -87,14 +87,26 @@ export class ScoringDataJsonClient implements ScoringDataApi {
         }
       },
     );
-    const entities = await this.catalogApi.getEntities({
-      filter: { kind: ['System'] },
+    if (!result) return undefined;
+
+    const entity_names: string[] = result.reduce((acc, a) => {
+      if (a.entityRef?.name) {
+        acc.push(a.entityRef.name);
+      }
+      return acc;
+    }, [] as string[]);
+
+    const response = await this.catalogApi.getEntities({
+      filter: {
+        'metadata.name': entity_names
+
+       },
       fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
     });
-    if (!result) return undefined;
-    const systems = entities.items;
-    return result.map<SystemScoreExtended>(score => {
-      return this.extendSystemScore(score, systems);
+    const entities: Entity[] = response.items;
+
+    return result.map<EntityScoreExtended>(score => {
+      return this.extendEntityScore(score, entities);
     });
   }
 
@@ -107,19 +119,21 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     );
   }
 
-  private extendSystemScore(
-    score: SystemScore,
-    systems: Entity[] | undefined,
-  ): SystemScoreExtended {
+  private extendEntityScore(
+    score: EntityScore,
+    entities: Entity[] | undefined,
+  ): EntityScoreExtended {
     if (score === null) {
       throw new Error(`can not extend null system score.`);
     }
     if (typeof score === 'undefined') {
       throw new Error(`can not extend undefined system score.`);
     }
-    const catalogEntity = systems
-      ? systems.find(system => system.metadata.name === score.systemEntityName)
+
+    const catalogEntity = entities
+      ? entities.find(entity => entity.metadata.name === score.entityRef?.name)
       : undefined;
+
     const owner = catalogEntity?.relations?.find(
       r => r.type === RELATION_OWNED_BY,
     )?.targetRef;
@@ -136,10 +150,6 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       ? new Date(score.scoringReviewDate)
       : undefined;
     return {
-      catalogEntity: catalogEntity,
-      catalogEntityName: catalogEntity
-        ? getCompoundEntityRef(catalogEntity)
-        : undefined,
       owner: owner ? parseEntityRef(owner) : undefined,
       reviewer: reviewer,
       reviewDate: reviewDate,

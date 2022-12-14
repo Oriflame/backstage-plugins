@@ -1,8 +1,8 @@
 {
-  "systemEntityName": "audio-playback",
-  "systemTier": "A",
-  "SystemDataConfidentiality": "Confidential",
-  "SystemDataSensitivity": ["PII", "Sensitive-PII"],
+  "entityRef": {
+    "kind": "system",
+    "name": "audio-playback"
+  },
   "generatedDateTimeUtc": "2021-07-22 10:00",
   "scorePercent": 57,
   "scoreSuccess": "partial",

@@ -17,27 +17,27 @@
 import { TableColumn } from '@backstage/core-components';
 import { Link } from '@material-ui/core';
 import React from 'react';
-import { SystemScoreTableEntry } from '../helpers/getScoreTableEntries';
+import { EntityScoreTableEntry } from '../helpers/getScoreTableEntries';
 import { getWikiUrl } from '../helpers/getWikiUrl';
 
 export function titleColumn(
   wikiLinkTemplate: string,
-): TableColumn<SystemScoreTableEntry> {
+): TableColumn<EntityScoreTableEntry> {
   return {
     title: <div style={{ minWidth: '7rem' }}>Requirement</div>,
     field: 'title',
     grouping: false,
     width: '1%',
-    render: systemScoreEntry => (
+    render: entityScoreEntry => (
       <span>
         <Link
-          href={getWikiUrl(wikiLinkTemplate, systemScoreEntry)}
+          href={getWikiUrl(wikiLinkTemplate, entityScoreEntry)}
           target="_blank"
-          data-id={systemScoreEntry.id}
+          data-id={entityScoreEntry.id}
         >
-          {systemScoreEntry.title}
+          {entityScoreEntry.title}
         </Link>
-        {systemScoreEntry.isOptional ? ' (Optional)' : null}
+        {entityScoreEntry.isOptional ? ' (Optional)' : null}
       </span>
     ),
   };

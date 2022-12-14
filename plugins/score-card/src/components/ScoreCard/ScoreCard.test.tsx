@@ -19,7 +19,7 @@ import { ScoreCard } from './ScoreCard';
 import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
-import { SystemScoreExtended } from '../../api/types';
+import { EntityScoreExtended } from '../../api/types';
 import { configApiRef, errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
@@ -35,14 +35,14 @@ describe('ScoreCard-EmptyData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
-    ): Promise<SystemScoreExtended | undefined> {
-      return new Promise<SystemScoreExtended | undefined>(
+    ): Promise<EntityScoreExtended | undefined> {
+      return new Promise<EntityScoreExtended | undefined>(
         (resolve, _reject) => {
           resolve(undefined);
         },
       );
     }
-    getAllScores(): Promise<SystemScoreExtended[] | undefined> {
+    getAllScores(): Promise<EntityScoreExtended[] | undefined> {
       throw new Error('Method not implemented.');
     }
   }
@@ -89,15 +89,15 @@ describe('ScoreCard-TestWithData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
-    ): Promise<SystemScoreExtended | undefined> {
-      return new Promise<SystemScoreExtended | undefined>(
+    ): Promise<EntityScoreExtended | undefined> {
+      return new Promise<EntityScoreExtended | undefined>(
         (resolve, _reject) => {
-          const sampleData = require('../../../sample-data/podcast.json');
+          const sampleData = require('../../../sample-data/default/system/podcast.json');
           resolve(sampleData);
         },
       );
     }
-    getAllScores(): Promise<SystemScoreExtended[] | undefined> {
+    getAllScores(): Promise<EntityScoreExtended[] | undefined> {
       throw new Error('Method not implemented.');
     }
   }

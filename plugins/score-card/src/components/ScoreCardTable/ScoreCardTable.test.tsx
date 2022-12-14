@@ -19,20 +19,21 @@ import { ScoreCardTable } from './ScoreCardTable';
 import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
-import { SystemScoreExtended } from '../../api/types';
+import { EntityScoreExtended } from '../../api/types';
 import { errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 describe('ScoreBoardPage-EmptyData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
-    ): Promise<SystemScoreExtended | undefined> {
+    ): Promise<EntityScoreExtended | undefined> {
       throw new Error('Method not implemented.');
     }
-    getAllScores(): Promise<SystemScoreExtended[] | undefined> {
-      return new Promise<SystemScoreExtended[] | undefined>(
+    getAllScores(): Promise<EntityScoreExtended[] | undefined> {
+      return new Promise<EntityScoreExtended[] | undefined>(
         (resolve, _reject) => {
           resolve([]);
         },
@@ -73,11 +74,11 @@ describe('ScoreCard-TestWithData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
-    ): Promise<SystemScoreExtended | undefined> {
+    ): Promise<EntityScoreExtended | undefined> {
       throw new Error('Method not implemented.');
     }
-    getAllScores(): Promise<SystemScoreExtended[] | undefined> {
-      return new Promise<SystemScoreExtended[] | undefined>(
+    getAllScores(): Promise<EntityScoreExtended[] | undefined> {
+      return new Promise<EntityScoreExtended[] | undefined>(
         (resolve, _reject) => {
           const sampleData = require('../../../sample-data/all.json');
           resolve(sampleData);
@@ -120,7 +121,9 @@ describe('ScoreCard-TestWithData', () => {
             [scoringDataApiRef, mockClient],
           ]}
         >
-          <ScoreCardTable />
+          <Router>
+            <ScoreCardTable />
+          </Router>
         </TestApiProvider>
       </ThemeProvider>,
     );
@@ -129,6 +132,7 @@ describe('ScoreCard-TestWithData', () => {
 
     const podcastColumn = await getByText('podcast');
     const podcastRow = podcastColumn.closest('tr');
-    expect(podcastRow).toHaveTextContent('AB+DFFC');
+
+    expect(podcastRow).toHaveTextContent('podcastsystemAB+DFFC');
   });
 });
