@@ -1,5 +1,13 @@
 # backend
 
+## 1.0.16
+
+### Patch Changes
+
+- 398f28d: bump version for backstage core components to 1.8.3
+- Updated dependencies [398f28d]
+  - app@0.4.5
+
 ## 1.0.15
 
 ### Patch Changes

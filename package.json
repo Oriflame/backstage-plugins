@@ -6,7 +6,7 @@
     "OSWDVLPPlatform@oriflame.com",
     "GlobalITCOEdevelopmentTooling@Oriflame.com"
   ],
-  "version": "0.1.13",
+  "version": "0.1.14",
   "private": true,
   "engines": {
     "node": "14 || 16"
