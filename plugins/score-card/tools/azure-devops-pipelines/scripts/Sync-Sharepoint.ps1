@@ -52,6 +52,8 @@ param(
 $ErrorActionPreference = 'Stop';
 $ProgressPreference = 'SilentlyContinue';
 
+Write-Warning 'TODO: update to generate generic entities and not ( uncompatible!) "system" data.'
+
 Write-Host "Loading functions..." -ForegroundColor DarkGray;
 Get-ChildItem -Path "$PSScriptRoot/functions" | ForEach-Object { . $_.FullName }
 

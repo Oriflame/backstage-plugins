@@ -17,7 +17,7 @@
 import { EntityScoreEntry } from '../../../api';
 import { EntityScoreExtended } from '../../../api/types';
 
-// this is an interface used for table entries. We need to enrich the original SystemScoreEntry with the "area" group, see bellow allEntries reduce
+// this is an interface used for table entries. We need to enrich the original EntityScoreEntry with the "area" group, see bellow allEntries reduce
 export interface EntityScoreTableEntry extends EntityScoreEntry {
   area: string;
 }

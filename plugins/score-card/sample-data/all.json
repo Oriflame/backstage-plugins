@@ -2,7 +2,7 @@
   {
     "entityRef": {
       "kind": "api",
-      "name": "api.foo"
+      "name": "hello-world"
     },
     "scorePercent": 50,
     "scoreLabel": "Yellow",

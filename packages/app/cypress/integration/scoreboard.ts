@@ -25,9 +25,9 @@ describe('score-card', () => {
       cy.visit('/score-board');
       cy.screenshot({ capture: 'viewport' });
 
-      cy.contains('System scores overview').should('be.visible');
+      cy.contains('Entities scores overview').should('be.visible');
       cy.checkForErrors();
-      cy.get('span:contains("1-3 of 3")').should('be.visible'); // beware, there is also a hidden <P/> element
+      cy.get('span:contains("1-4 of 4")').should('be.visible'); // beware, there is also a hidden <P/> element
       cy.contains('audio-playback').should('be.visible');
       cy.contains('team-c').should('be.visible');
       cy.contains('non-valid-system').should('be.visible');
@@ -47,7 +47,7 @@ describe('score-card', () => {
 
       cy.url().should(
         'include',
-        '/catalog/default/System/audio-playback/score',
+        '/catalog/default/system/audio-playback/score',
       );
       cy.contains('Scoring').should('be.visible');
       cy.contains('Total score: 57 %').should('be.visible');

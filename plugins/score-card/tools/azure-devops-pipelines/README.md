@@ -1,5 +1,7 @@
 # System Scores and Sharepoint integration
 
+!TODO: update to generate generic entities and not ( uncompatible!) "system" data.
+
 What does it do:
 
 1. Gets fresh item data from the list

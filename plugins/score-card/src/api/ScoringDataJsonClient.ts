@@ -124,10 +124,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     entities: Entity[] | undefined,
   ): EntityScoreExtended {
     if (score === null) {
-      throw new Error(`can not extend null system score.`);
+      throw new Error(`can not extend null entity score.`);
     }
     if (typeof score === 'undefined') {
-      throw new Error(`can not extend undefined system score.`);
+      throw new Error(`can not extend undefined entity score.`);
     }
 
     const catalogEntity = entities

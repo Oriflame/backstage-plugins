@@ -1,7 +1,7 @@
 {
   "entityRef": {
     "kind": "api",
-    "name": "api.foo"
+    "name": "hello-world"
   },
   "generatedDateTimeUtc": "2021-07-22 10:00",
   "scorePercent": 57,

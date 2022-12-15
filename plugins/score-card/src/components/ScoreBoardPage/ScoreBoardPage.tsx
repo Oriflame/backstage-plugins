@@ -27,14 +27,14 @@ import { ScoreCardTable } from '../ScoreCardTable';
 
 export const ScoreBoardPage = () => (
   <Page themeId="tool">
-    <Header title="Score board" subtitle="Overview of system scores">
+    <Header title="Score board" subtitle="Overview of entity scores">
       <HeaderLabel label="Maintainer" value="Oriflame" />
       <HeaderLabel label="Status" value="Alpha" />
     </Header>
     <Content>
       <ContentHeader title="">
         <SupportButton>
-          In this table you may see overview of system scores.
+          In this table you may see overview of entity scores.
         </SupportButton>
       </ContentHeader>
       <Grid container spacing={3} direction="column">
