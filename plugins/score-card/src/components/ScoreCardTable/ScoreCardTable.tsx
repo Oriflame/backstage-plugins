@@ -169,13 +169,13 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
     },
   });
 
-  // in case we have less then 10 systems let's show at least 10 rows
+  // in case we have less then 10 entities let's show at least 10 rows
   const minDefaultPageSizeOption = scores.length >= 10 ? scores.length : 10;
-  // so in case we have less then 100 systems we want to see them all in one page after load
+  // so in case we have less then 100 entities we want to see them all in one page after load
   const maxDefaultPageSizeOption =
     scores.length < 100 ? minDefaultPageSizeOption : 100;
   // so now we are in a situation, when
-  // count(systems) | minDefaultPageSizeOption | maxDefaultPageSizeOption | defaultPageSizeOption
+  // count(entities) | minDefaultPageSizeOption | maxDefaultPageSizeOption | defaultPageSizeOption
   //   0 |  10 |  10 |  10
   //   5 |  10 |  10 |  10
   //  10 |  10 |  10 |  10
