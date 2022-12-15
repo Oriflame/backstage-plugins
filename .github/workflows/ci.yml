@@ -26,11 +26,11 @@ jobs:
         # "pwn request". See https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target )
         if: github.event_name != 'pull_request_target'
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: '0'
 
       - name: Checkout PR
         uses: actions/checkout@v2
+        if: github.event_name == 'pull_request_target'
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"
           fetch-depth: '0'
