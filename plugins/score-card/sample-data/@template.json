@@ -1,8 +1,8 @@
 {
-  "systemEntityName": "backstage-system-entity-name",
-  "systemTier": "A|B|C",
-  "SystemDataConfidentiality": "Confidential|Internal|Public",
-  "SystemDataSensitivity": "PII,Sensitive-PII,PCI",
+  "entityRef": {
+    "kind": "system",
+    "name": "system-name"
+  },
   "generatedDateTimeUtc": "2021-07-22 10:00",
   "scorePercent": 0,
   "scoreSuccess": "unknown",
