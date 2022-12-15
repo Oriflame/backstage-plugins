@@ -47,7 +47,7 @@ describe('score-card', () => {
 
       cy.url().should(
         'include',
-        '/catalog/default/System/audio-playback/score',
+        '/catalog/default/system/audio-playback/score',
       );
       cy.contains('Scoring').should('be.visible');
       cy.contains('Total score: 57 %').should('be.visible');
