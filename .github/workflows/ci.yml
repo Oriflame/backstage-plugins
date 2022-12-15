@@ -20,9 +20,21 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout non PR
+        uses: actions/checkout@v3
+        # Do not trigger a checkout when opening PRs from a fork (helps avoid
+        # "pwn request". See https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target )
+        if: github.event_name != 'pull_request_target'
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: '0'
+
+      - name: Checkout PR
+        uses: actions/checkout@v2
+        with:
+          ref: "refs/pull/${{ github.event.number }}/merge"
+          fetch-depth: '0'
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
