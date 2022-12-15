@@ -21,16 +21,16 @@ import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { Chip } from '@material-ui/core';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import { scoringDataApiRef } from '../../api';
-import { EntityScoreExtended, ScorableEntityKind } from '../../api/types';
+import { EntityScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
-const useScoringAllDataLoader = (entityKinds?: ScorableEntityKind[]) => {
+const useScoringAllDataLoader = (entityKindFilter?: string[]) => {
   const errorApi = useApi(errorApiRef);
   const scorigDataApi = useApi(scoringDataApiRef);
 
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getAllScores(entityKinds),
+    async () => scorigDataApi.getAllScores(entityKindFilter),
     [scorigDataApi],
   );
 
@@ -207,10 +207,10 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
 
 type ScoreCardTableProps = {
   title?: string;
-  entityKinds?: ScorableEntityKind[];
+  entityKindFilter?: string[];
 };
-export const ScoreCardTable = ({title, entityKinds}: ScoreCardTableProps) => {
-  const { loading, error, value: data } = useScoringAllDataLoader(entityKinds);
+export const ScoreCardTable = ({title, entityKindFilter}: ScoreCardTableProps) => {
+  const { loading, error, value: data } = useScoringAllDataLoader(entityKindFilter);
 
   if (loading) {
     return <Progress />;

@@ -15,7 +15,7 @@
  */
 import { ScoringDataApi } from './ScoringDataApi';
 import { ConfigApi, FetchApi } from '@backstage/core-plugin-api';
-import { EntityScore, EntityScoreExtended, ScorableEntityKind } from './types';
+import { EntityScore, EntityScoreExtended } from './types';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import {
   Entity,
@@ -72,7 +72,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     return this.extendEntityScore(result, undefined);
   }
 
-  public async getAllScores(entityKinds?: ScorableEntityKind[]): Promise<EntityScoreExtended[] | undefined> {
+  public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
     let result: EntityScore[] | undefined = await fetch(urlWithData).then(
@@ -90,8 +90,8 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     if (!result) return undefined;
 
     // Filter entities by kind
-    if (entityKinds) {
-      result = result.filter(entity => entityKinds.includes(entity.entityRef?.kind.toLowerCase() as ScorableEntityKind));
+    if (entityKindFilter && entityKindFilter.length) {
+      result = result.filter(entity => entityKindFilter.map(f => f.toLocaleLowerCase()).includes(entity.entityRef?.kind.toLowerCase() as string));
     }
 
     const entity_names: string[] = result.reduce((acc, a) => {

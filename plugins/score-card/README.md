@@ -16,10 +16,10 @@ Table that displays list of entities and their scores.
 
 ![Score card table](./docs/.assets/score-card-table.png)
 
-| Props         | type                                       | Description             | Default                  |
-|---------------|--------------------------------------------|-------------------------|--------------------------|
-| `title`       | string                                     | Title of the table      | Entities scores overview |
-| `entityKinds` | [ScorableEntityKind[]](./src/api/types.ts) | Filter entities by kind | undefined                |
+| Props              | type                           | Description             | Default                  |
+|--------------------|--------------------------------|-------------------------|--------------------------|
+| `title`            | string                         | Title of the table      | Entities scores overview |
+| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                |
 
 ### ScoreCard
 
