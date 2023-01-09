@@ -1,5 +1,14 @@
 # app
 
+## 0.4.5
+
+### Patch Changes
+
+- 398f28d: bump version for backstage core components to 1.8.3
+- Updated dependencies [ec3991d]
+- Updated dependencies [398f28d]
+  - @oriflame/backstage-plugin-score-card@0.6.0
+
 ## 0.4.4
 
 ### Patch Changes
