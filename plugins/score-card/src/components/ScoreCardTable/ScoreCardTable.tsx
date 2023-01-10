@@ -25,12 +25,12 @@ import { EntityScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
-const useScoringAllDataLoader = () => {
+const useScoringAllDataLoader = (entityKindFilter?: string[]) => {
   const errorApi = useApi(errorApiRef);
   const scorigDataApi = useApi(scoringDataApiRef);
 
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getAllScores(),
+    async () => scorigDataApi.getAllScores(entityKindFilter),
     [scorigDataApi],
   );
 
@@ -207,9 +207,10 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
 
 type ScoreCardTableProps = {
   title?: string;
+  entityKindFilter?: string[];
 };
-export const ScoreCardTable = ({title}: ScoreCardTableProps) => {
-  const { loading, error, value: data } = useScoringAllDataLoader();
+export const ScoreCardTable = ({title, entityKindFilter}: ScoreCardTableProps) => {
+  const { loading, error, value: data } = useScoringAllDataLoader(entityKindFilter);
 
   if (loading) {
     return <Progress />;
@@ -217,5 +218,5 @@ export const ScoreCardTable = ({title}: ScoreCardTableProps) => {
     return getWarningPanel(error);
   }
 
-  return <ScoreTable title={title} scores={data || []} />;
+  return <ScoreTable title={title}  scores={data || []} />;
 };

@@ -72,10 +72,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     return this.extendEntityScore(result, undefined);
   }
 
-  public async getAllScores(): Promise<EntityScoreExtended[] | undefined> {
+  public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
-    const result: EntityScore[] | undefined = await fetch(urlWithData).then(
+    let result: EntityScore[] | undefined = await fetch(urlWithData).then(
       res => {
         switch (res.status) {
           case 404:
@@ -88,6 +88,11 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       },
     );
     if (!result) return undefined;
+
+    // Filter entities by kind
+    if (entityKindFilter && entityKindFilter.length) {
+      result = result.filter(entity => entityKindFilter.map(f => f.toLocaleLowerCase()).includes(entity.entityRef?.kind.toLowerCase() as string));
+    }
 
     const entity_names: string[] = result.reduce((acc, a) => {
       if (a.entityRef?.name) {
