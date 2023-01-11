@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.6.1
+
+### Patch Changes
+
+- d434c7d: Add property to filter scores by entity kind.
+
 ## 0.6.0
 
 ### Minor Changes
