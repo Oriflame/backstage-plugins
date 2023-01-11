@@ -1180,7 +1180,7 @@
     winston "^3.2.1"
     zod "^3.9.5"
 
-"@backstage/catalog-client@^1.1.2":
+"@backstage/catalog-client@1.1.2", "@backstage/catalog-client@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@backstage/catalog-client/-/catalog-client-1.1.2.tgz#79a197e05e43944e3f0a0957ac423964dc6ba810"
   integrity sha512-df7CllJYw8bWhCbKXJmqKYJ6jpkij/QJBqKX78xSaGQjMjpu3AjOV92fu3j6Vnp19/V8bG1FAULwHjNCIqfhOg==
@@ -1207,7 +1207,7 @@
   resolved "https://registry.yarnpkg.com/@backstage/cli-common/-/cli-common-0.1.10.tgz#3b4ea32fe7adfd8efc8d5c760b20cf08c046cd6a"
   integrity sha512-5Nt88V32yciUlgr/XCWu2n9oSRD2XRBtkzGDDq4YTzXMJNty283DVi2c7xgeDPF2DN0d6fiENQAipp3oEulXTg==
 
-"@backstage/cli@^0.21.1":
+"@backstage/cli@0.21.1", "@backstage/cli@^0.21.1":
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/@backstage/cli/-/cli-0.21.1.tgz#e2dc8cf3007ec1c8a2bbcbcacc17b37282e6a231"
   integrity sha512-GMe7NJJ/qoTXIj4BZJkgTYDUn4PEcHjVqrkGXNQXMc1cbm1rz5uyuqBi7xlzjFdwdbUlx9msjgjGeH3n/cyDMw==
@@ -1339,7 +1339,7 @@
     "@backstage/types" "^1.0.1"
     lodash "^4.17.21"
 
-"@backstage/core-app-api@^1.2.0":
+"@backstage/core-app-api@1.2.0", "@backstage/core-app-api@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@backstage/core-app-api/-/core-app-api-1.2.0.tgz#60e2dde4ff78aad88ac2f75ddad3b3055f23e234"
   integrity sha512-Wp7HScJs8Qw/6DusKscJ+jfmBC66Uxi2r+h8nPfW3wVsgNKDy0RIue4gVD3RCmUHE8OnYO+dYlZ+b195SdnWnw==
@@ -1409,7 +1409,7 @@
     prop-types "^15.7.2"
     zen-observable "^0.8.15"
 
-"@backstage/dev-utils@^1.0.8":
+"@backstage/dev-utils@1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@backstage/dev-utils/-/dev-utils-1.0.8.tgz#79cbc80fe3f95d6398399c7f3022093f1bd9db04"
   integrity sha512-n+uMAyP1GesFTC7LO6MVd90aiiXqvJ8N3ZQd9A2uS2XG6b3yglGgM9Hi784NH0wRrhJFBk65owJFax5UptyXmQ==
@@ -1710,7 +1710,7 @@
     yaml "^2.0.0"
     zen-observable "^0.8.15"
 
-"@backstage/plugin-catalog@^1.6.1":
+"@backstage/plugin-catalog@1.6.1", "@backstage/plugin-catalog@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-catalog/-/plugin-catalog-1.6.1.tgz#cae33aa26c1ecd666d10b9a0403246befa7abbe6"
   integrity sha512-jHFz7enAGB4QKsfx+Mf88FA9K4IUJh+qm+40tMsxrr9AMdQd0St/WLTIc6c1wgCRLg7snXEmoLtQhYCtUL1dTQ==
@@ -2045,7 +2045,7 @@
   dependencies:
     cross-fetch "^3.1.5"
 
-"@backstage/test-utils@^1.2.2":
+"@backstage/test-utils@1.2.2", "@backstage/test-utils@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@backstage/test-utils/-/test-utils-1.2.2.tgz#fb03ecf57b6b53249997e769039fca1e6ecafed1"
   integrity sha512-qZS6okhm/+xdqU3/EfPIxWeN5uAfAma+Lpd1VQhk51nOwqtz2UsIGsTx5NDBjykygZ+wGvnkiTQwLMoHV2hYQg==
@@ -5246,7 +5246,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*", "@types/jest@^29.0.0":
+"@types/jest@*", "@types/jest@29.2.2", "@types/jest@^29.0.0":
   version "29.2.2"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.2.2.tgz#874e7dc6702fa6a3fe6107792aa98636dcc480b4"
   integrity sha512-og1wAmdxKoS71K2ZwSVqWPX6OVn3ihZ6ZT2qvZvZQm90lJVDyXIjYcu4Khx2CNIeaFv12rOU/YObOsI3VOkzog==
@@ -5374,7 +5374,7 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
-"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
+"@types/node@*", "@types/node@18.11.9", "@types/node@>=12.12.47", "@types/node@>=13.7.0":
   version "18.11.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
@@ -5452,7 +5452,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+"@types/react-dom@17.0.18", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
   version "17.0.18"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.18.tgz#8f7af38f5d9b42f79162eea7492e5a1caff70dc2"
   integrity sha512-rLVtIfbwyur2iFKykP2w0pl/1unw26b5td16d5xMgp7/yjTHomkyxPYChFoCr/FtEX1lN9wY6lFj1qvKdS5kDw==
