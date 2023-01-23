@@ -57,7 +57,7 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
 
-    <Route path="/score-board" element={<ScoreBoardPage />} />
+    <Route path="/score-board" element={<ScoreBoardPage title='Custom page title' subTitle='Custom sub title' tableTitle='Custom table title' />} />
   </FlatRoutes>
 );
 

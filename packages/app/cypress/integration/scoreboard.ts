@@ -25,7 +25,9 @@ describe('score-card', () => {
       cy.visit('/score-board');
       cy.screenshot({ capture: 'viewport' });
 
-      cy.contains('Entities scores overview').should('be.visible');
+      cy.contains('Custom page title').should('be.visible');
+      cy.contains('Custom sub title').should('be.visible');
+      cy.contains('Custom table title').should('be.visible');
       cy.checkForErrors();
       cy.get('span:contains("1-4 of 4")').should('be.visible'); // beware, there is also a hidden <P/> element
       cy.contains('audio-playback').should('be.visible');
