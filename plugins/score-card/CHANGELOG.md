@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.6.2
+
+### Patch Changes
+
+- bbcae3e: Propagate title, subtitle and ScoreCardTableProps to ScoreBoardPage
+
 ## 0.6.1
 
 ### Patch Changes
