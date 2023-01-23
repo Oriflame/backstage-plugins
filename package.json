@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@backstage/cli": "^0.21.1",
-    "@spotify/prettier-config": "14.1.0",
+    "@spotify/prettier-config": "14.1.4",
     "@types/webpack": "5.28.0",
     "concurrently": "7.5.0",
     "eslint-plugin-notice": "0.9.10",
