@@ -25,7 +25,15 @@ import {
 } from '@backstage/core-components';
 import { ScoreCardTable } from '../ScoreCardTable';
 
-export const ScoreBoardPage = () => (
+type ScoreBoardPageProps = {
+  title?: string;
+  entityKindFilter?: string[];
+};
+
+export const ScoreBoardPage = ({
+  title,
+  entityKindFilter,
+}: ScoreBoardPageProps) => (
   <Page themeId="tool">
     <Header title="Score board" subtitle="Overview of entity scores">
       <HeaderLabel label="Maintainer" value="Oriflame" />
@@ -39,7 +47,7 @@ export const ScoreBoardPage = () => (
       </ContentHeader>
       <Grid container spacing={3} direction="column">
         <Grid item>
-          <ScoreCardTable />
+          <ScoreCardTable title={title} entityKindFilter={entityKindFilter} />
         </Grid>
       </Grid>
     </Content>
