@@ -70,3 +70,10 @@ jobs:
           project: ./packages/app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload e2e tests result
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-output
+          path: packages/app/cypress-out
+        if: always()
