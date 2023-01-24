@@ -28,7 +28,7 @@ describe('score-card', () => {
       cy.contains('Custom table title').should('be.visible');
       cy.get('span:contains("1-4 of 4")').should('be.visible'); // beware, there is also a hidden <P/> element
       cy.contains('audio-playback').should('be.visible');
-      cy.contains('team-b').should('be.visible');
+      cy.contains('team-c').should('be.visible');
       cy.contains('non-valid-system').should('be.visible');
       cy.contains('Name').should('be.visible');
       cy.contains('Date').should('be.visible');
