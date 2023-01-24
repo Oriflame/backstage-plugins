@@ -1,7 +1,8 @@
 name: Check bump versions
 on:
   schedule:
-    - cron: '0 6 * * 5'
+    - cron: '0 6 * * 5' # At 06:00 on Friday
+  workflow_dispatch:
 
 jobs:
   create-pull-request:
@@ -24,14 +25,14 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.WORKFLOW_GITHUB_TOKEN  }}
-          commit-message: Update dependencies
+          token: ${{ secrets.GITHUB_TOKEN  }}
+          commit-message: Update backstage core dependencies
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: update-dependencies-${{ steps.current-time.outputs.formattedTime }}
+          branch: update-backstage-core-deps-${{ steps.current-time.outputs.formattedTime }}
           delete-branch: true
-          title: 'Update Dependencies - plugins'
+          title: 'Update Backstage core dependencies - plugins'
           base: main
           body: |
             Update backstage dependencies
