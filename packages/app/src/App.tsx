@@ -28,7 +28,7 @@ import { entityPage } from './components/catalog/EntityPage';
 import { Root } from './components/Root';
 
 import { AlertDisplay, OAuthRequestDialog } from '@backstage/core-components';
-import { FlatRoutes } from '@backstage/core-app-api';
+import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { createApp } from '@backstage/app-defaults';
 import { ScoreBoardPage } from '@oriflame/backstage-plugin-score-card';
 
@@ -40,9 +40,6 @@ const app = createApp({
     });
   },
 });
-
-const AppProvider = app.getProvider();
-const AppRouter = app.getRouter();
 
 const routes = (
   <FlatRoutes>
