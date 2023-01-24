@@ -73,13 +73,9 @@ describe('score-card', () => {
       cy.contains('hints: Gitflow: 100%').should('be.visible');
       cy.get('a[data-id="2157"]')
         .should('be.visible')
-        .should(
-          'have.attr',
-          'href',
-          'https://link-to-wiki/2157',
-        );
+        .should('have.attr', 'href', 'https://link-to-wiki/2157');
+      cy.checkForErrors();
+      cy.screenshot({ capture: 'viewport' });
     });
-    cy.checkForErrors();
-    cy.screenshot({ capture: 'viewport' });
-});
+  });
 });
