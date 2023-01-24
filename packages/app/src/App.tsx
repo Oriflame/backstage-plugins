@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import React from 'react';
 import { Navigate, Route } from 'react-router';
 import {
@@ -57,18 +56,25 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
 
-    <Route path="/score-board" element={<ScoreBoardPage title='Custom page title' subTitle='Custom sub title' tableTitle='Custom table title' />} />
+    <Route
+      path="/score-board"
+      element={
+        <ScoreBoardPage
+          title="Custom page title"
+          subTitle="Custom sub title"
+          tableTitle="Custom table title"
+        />
+      }
+    />
   </FlatRoutes>
 );
 
-const App = () => (
-  <AppProvider>
+export default app.createRoot(
+  <>
     <AlertDisplay />
     <OAuthRequestDialog />
     <AppRouter>
       <Root>{routes}</Root>
     </AppRouter>
-  </AppProvider>
+  </>,
 );
-
-export default App;
