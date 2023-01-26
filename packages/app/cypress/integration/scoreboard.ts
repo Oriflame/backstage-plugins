@@ -23,12 +23,9 @@ describe('score-card', () => {
       cy.loginAsGuest();
 
       cy.visit('/score-board');
-      cy.screenshot({ capture: 'viewport' });
-
       cy.contains('Custom page title').should('be.visible');
       cy.contains('Custom sub title').should('be.visible');
       cy.contains('Custom table title').should('be.visible');
-      cy.checkForErrors();
       cy.get('span:contains("1-4 of 4")').should('be.visible'); // beware, there is also a hidden <P/> element
       cy.contains('audio-playback').should('be.visible');
       cy.contains('team-c').should('be.visible');
@@ -43,10 +40,12 @@ describe('score-card', () => {
       cy.contains('Total').should('be.visible');
       cy.contains('50 %').should('be.visible');
       cy.contains('75 %').should('be.visible');
-      cy.log('navigating to score card detail for audio-playback');
-      cy.get('a[data-id="audio-playback"]').should('be.visible').click();
+      cy.checkForErrors();
       cy.screenshot({ capture: 'viewport' });
 
+      cy.log('navigating to score card detail for audio-playback');
+
+      cy.get('a[data-id="audio-playback"]').should('be.visible').click();
       cy.url().should(
         'include',
         '/catalog/default/system/audio-playback/score',
@@ -64,23 +63,19 @@ describe('score-card', () => {
       cy.contains('Security');
       cy.contains('10 %').should('be.visible');
       cy.checkForErrors();
+      cy.screenshot({ capture: 'viewport' });
 
       cy.log(
         'Clicking on button [>] that is first child of the element (td) with value=Code',
       );
       cy.get('[value="Code"] > button:first-child').click();
-      cy.checkForErrors();
-      cy.screenshot({ capture: 'viewport' });
-
       cy.log('Clicking on link for Code');
       cy.contains('hints: Gitflow: 100%').should('be.visible');
       cy.get('a[data-id="2157"]')
         .should('be.visible')
-        .should(
-          'have.attr',
-          'href',
-          'https://link-to-wiki/2157',
-        );
+        .should('have.attr', 'href', 'https://link-to-wiki/2157');
+      cy.checkForErrors();
+      cy.screenshot({ capture: 'viewport' });
     });
   });
 });
