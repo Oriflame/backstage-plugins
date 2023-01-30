@@ -1,5 +1,13 @@
 # app
 
+## 0.4.6
+
+### Patch Changes
+
+- e8c6214: Bumped backstage core libs from 1.8.3 to 1.10.1
+- Updated dependencies [e8c6214]
+  - @oriflame/backstage-plugin-score-card@0.6.3
+
 ## 0.4.5
 
 ### Patch Changes
