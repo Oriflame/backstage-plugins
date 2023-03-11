@@ -17,74 +17,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    outputs:
-      needs_release: ${{ steps.release_check.outputs.needs_release }}
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
-    env:
-      CI: true
-      NODE_OPTIONS: --max-old-space-size=4096
-
-    steps:
-      - name: Check of github.event.before
-        if: ${{ !github.event.inputs.create_release && !github.event.inputs.publish_packages }}
-        run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
-
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          registry-url: https://registry.npmjs.org/ # Needed for auth
-
-      - name: yarn install --frozen-lockfile
-        uses: backstage/actions/yarn-install@v0.5.13
-        with:
-          cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
-
-      - name: Fetch previous commit for release check
-        if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
-        run: git fetch origin '${{ github.event.before }}'
-
-      - name: Check if release
-        id: release_check
-        if: ${{ github.event.before != '0000000000000000000000000000000000000000' }}
-        run: node scripts/check-if-release.js
-        env:
-          COMMIT_SHA_BEFORE: '${{ github.event.before }}'
-
-      - name: validate config
-        run: yarn backstage-cli config:check --lax
-
-      - name: lint
-        run: yarn backstage-cli repo lint
-
-      - name: type checking and declarations
-        run: yarn tsc:full
-
-      - name: build
-        run: yarn backstage-cli repo build --all
-
-      - name: verify type dependencies
-        run: yarn lint:type-deps
-
-      - name: test
-        run: |
-          yarn lerna -- run test -- --coverage --runInBand
 
   # A separate release build that is only run for commits that are the result of merging the "Version Packages" PR
   # We can't re-use the output from the above step, but we'll have a guaranteed node_modules cache and
   # only run the build steps that are necessary for publishing
   release:
-    needs: build
 
     if: needs.build.outputs.needs_release == 'true' || github.event.inputs.create_release || github.event.inputs.publish_packages
 
@@ -101,6 +38,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - name: Prepare .npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
