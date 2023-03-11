@@ -42,6 +42,8 @@ jobs:
       - name: Prepare .npmrc
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          git add .npmrc # prevents [lerna ERR! EUNCOMMIT  M .npmrc] during publish
+          git commit
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
