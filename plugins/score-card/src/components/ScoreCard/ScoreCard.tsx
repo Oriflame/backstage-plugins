@@ -79,7 +79,7 @@ const useScoringDataLoader = () => {
 
   const wikiLinkTemplate =
     config.getOptionalString('scorecards.wikiLinkTemplate') ??
-    'https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}';
+    '';
 
   return { loading, value, wikiLinkTemplate, error };
 };
