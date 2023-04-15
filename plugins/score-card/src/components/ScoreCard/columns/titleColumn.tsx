@@ -28,17 +28,23 @@ export function titleColumn(
     field: 'title',
     grouping: false,
     width: '1%',
-    render: entityScoreEntry => (
-      <span>
-        <Link
-          href={getWikiUrl(wikiLinkTemplate, entityScoreEntry)}
-          target="_blank"
-          data-id={entityScoreEntry.id}
-        >
-          {entityScoreEntry.title}
-        </Link>
-        {entityScoreEntry.isOptional ? ' (Optional)' : null}
-      </span>
-    ),
+    render: entityScoreEntry => {
+      const wikiUrl = getWikiUrl(wikiLinkTemplate, entityScoreEntry);
+      return (<span>
+          {wikiUrl ? (
+          <Link
+            href={wikiUrl}
+            target="_blank"
+            data-id={entityScoreEntry.id}
+            >
+            {entityScoreEntry.title}
+          </Link>
+        ) : (
+          <>{entityScoreEntry.title}</>
+        )}
+          {entityScoreEntry.isOptional ? ' (Optional)' : null}
+        </span>
+      )
+    },
   };
 }
