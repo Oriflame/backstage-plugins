@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.7.0
+
+### Minor Changes
+
+- bd30933: wikiLinkTemplate is now optionnal
+
 ## 0.6.3
 
 ### Patch Changes
