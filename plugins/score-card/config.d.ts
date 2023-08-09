@@ -25,6 +25,11 @@ export interface Config {
      */
     jsonDataUrl?: string;
     /**
+     * Json file name of all entities
+     * @visibility frontend
+     */
+    jsonNameOfAllEntities?: string;
+    /**
      * The template for the link to the wiki, e.g. "https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"
      * @visibility frontend
      */
