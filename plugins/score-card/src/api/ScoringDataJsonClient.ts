@@ -74,7 +74,8 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}all.json`;
+    const jsonName = this.getsJsonNameOfAllEntities();
+    const urlWithData = `${jsonDataUrl}${jsonName}`;
     let result: EntityScore[] | undefined = await fetch(urlWithData).then(
       res => {
         switch (res.status) {
@@ -105,7 +106,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       filter: {
         'metadata.name': entity_names
 
-       },
+      },
       fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
     });
     const entities: Entity[] = response.items;
@@ -121,6 +122,13 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     return (
       this.configApi.getOptionalString('scorecards.jsonDataUrl') ??
       'https://unknown-url-please-configure'
+    );
+  }
+
+  private getsJsonNameOfAllEntities() {
+    return (
+      this.configApi.getOptionalString('scorecards.jsonNameOfAllEntities') ??
+      'all.json'
     );
   }
 
