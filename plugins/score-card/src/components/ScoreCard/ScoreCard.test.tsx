@@ -20,7 +20,11 @@ import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
 import { EntityScoreExtended } from '../../api/types';
-import { configApiRef, errorApiRef } from '@backstage/core-plugin-api';
+import {
+  configApiRef,
+  errorApiRef,
+  githubAuthApiRef,
+} from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
@@ -30,6 +34,13 @@ const sharedConfigApiMock = new ConfigReader({
   scorecards: { wikiLinkTemplate: 'https://mocked-wiki-url/{id}/{title}' },
 });
 const sharedErrorApi = { post: () => {} };
+
+// added auth object...
+const mockAuth = {
+  getAccessToken: jest.fn(),
+};
+
+const sharedGithubAuthApi = mockAuth; // Mocked GithubAuth API
 
 describe('ScoreCard-EmptyData', () => {
   class MockClient implements ScoringDataApi {
@@ -66,6 +77,7 @@ describe('ScoreCard-EmptyData', () => {
             [errorApiRef, sharedErrorApi],
             [scoringDataApiRef, mockClient],
             [configApiRef, sharedConfigApiMock],
+            [githubAuthApiRef, sharedGithubAuthApi],
           ]}
         >
           <EntityProvider entity={entity}>
@@ -122,6 +134,7 @@ describe('ScoreCard-TestWithData', () => {
             [errorApiRef, sharedErrorApi],
             [scoringDataApiRef, mockClient],
             [configApiRef, sharedConfigApiMock],
+            [githubAuthApiRef, mockAuth],
           ]}
         >
           <EntityProvider entity={entity}>
@@ -148,6 +161,7 @@ describe('ScoreCard-TestWithData', () => {
             [errorApiRef, sharedErrorApi],
             [scoringDataApiRef, mockClient],
             [configApiRef, sharedConfigApiMock],
+            [githubAuthApiRef, sharedGithubAuthApi],
           ]}
         >
           <EntityProvider entity={entity}>

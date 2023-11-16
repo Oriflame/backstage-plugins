@@ -16,10 +16,10 @@ Table that displays list of entities and their scores.
 
 ![Score card table](./docs/.assets/score-card-table.png)
 
-| Props              | type                           | Description             | Default                  |
-|--------------------|--------------------------------|-------------------------|--------------------------|
-| `title`            | string                         | Title of the table      | Entities scores overview |
-| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                |
+| Props              | type                           | Description             | Default                   |
+| ------------------ | ------------------------------ | ----------------------- | ------------------------- |
+| `title`            | string                         | Title of the table      | Entities scores overview  |
+| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                 |
 
 ### ScoreCard
 
@@ -32,6 +32,10 @@ You may drill down to the details of each score together with explanation why it
 ![Score Card Detail](./docs/.assets/score-card-detail.png)
 
 ### ScoringDataJsonClient
+
+There are two approaches in configuring JSON file location
+
+#### Configuring through app-config.yaml
 
 Implementation of `ScoringDataApi` that the above components are using to load data. This client simply reads it from a JSON files located e.g. on a blob storage account.
 
@@ -49,10 +53,23 @@ In the above location it expects data in a format see [scoring data](./sample-da
 ```yaml
 backend:
   csp:
-    default-src: ["'self'", "raw.githubusercontent.com"]
+    default-src: ["'self'", 'raw.githubusercontent.com']
 ```
 
 Also the server providing the data needs to have correctly configured CORS policy, i.e. return HTTP header `Access-Control-Allow-Origin` that should list domain from where you serve your backstage instance. See e.g. [how to configure CORS for Azure Blob Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
+
+#### Configuring through catalog-info.yaml annotations
+
+The JSON file can also be dynamically passed through the annotations field of `catalog-info.yaml`. To achieve this, configuration of `scorecard/jsonDataUrl` alongside `github.com/project-slug` annotations is required within the `catalog-info.yaml` file, demonstrated below:
+
+```yaml
+metadata:
+  annotations:
+    github.com/project-slug: org/project-alpha
+    scorecard/jsonDataUrl: 'score.json'
+```
+
+**Important note**: The `score.json` file, referenced in the example above, needs to be placed at the root level of the repository. Octokit APIs utilize `github.com/project-slug` to obtain details of the Organization and Repository name, enabling the request to read the content of `score.json`.
 
 ### Configuration
 
@@ -126,6 +143,29 @@ All configuration options:
       </EntityLayoutWrapper>
    );
    ```
+
+5. Add Score Card Table to `packages/app/src/components/catalog/EntityPage.tsx` if you would like to view multiple component scores in tabular format:
+
+```diff
++import { ScoreCardTable } from '@oriflame/backstage-plugin-score-card';
+
+const systemPage = (
+   <EntityLayoutWrapper>
+     <EntityLayout.Route path="/" title="Overview">
+       ...
+     </EntityLayout.Route>
++
++    <EntityLayout.Route path="/score" title="Score">
++      <Grid container spacing={3} alignItems="stretch">
++        <Grid item xs={12}>
++          <ScoreCardTable />
++        </Grid>
++      </Grid>
++    </EntityLayout.Route>
++
+   </EntityLayoutWrapper>
+);
+```
 
 ## Scoring process
 

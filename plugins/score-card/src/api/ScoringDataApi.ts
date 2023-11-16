@@ -22,6 +22,13 @@ export const scoringDataApiRef = createApiRef<ScoringDataApi>({
 });
 
 export type ScoringDataApi = {
-  getScore(entity?: Entity): Promise<EntityScoreExtended | undefined>;
-  getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined>;
+  getScore(
+    entity?: Entity,
+    auth?: any,
+  ): Promise<EntityScoreExtended | undefined>;
+  getAllScores(
+    entity: Entity,
+    entityKindFilter?: string[],
+    auth?: any,
+  ): Promise<EntityScoreExtended[] | undefined>;
 };
