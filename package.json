@@ -9,7 +9,7 @@
   "version": "0.1.18",
   "private": true,
   "engines": {
-    "node": "14 || 16"
+    "node": "14 || 16 || 18"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\" \"http-server -p 8090 --cors 2>&1\"",
