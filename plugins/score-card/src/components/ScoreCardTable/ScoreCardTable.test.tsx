@@ -19,17 +19,12 @@ import { ScoreCardTable, ScoreTable } from './ScoreCardTable';
 import { TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
-import { EntityScoreExtended, ScoreSuccessEnum } from '../../api/types';
-import {
-  configApiRef,
-  errorApiRef,
-  githubAuthApiRef,
-} from '@backstage/core-plugin-api';
+import { EntityScoreExtended } from '../../api/types';
+import { errorApiRef, githubAuthApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
-import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
-import { ConfigReader } from '@backstage/config';
 
 // entity Object
 const entity = {
@@ -85,9 +80,7 @@ const entity = {
 const mockAuth = {
   getAccessToken: jest.fn(),
 };
-const sharedConfigApiMock = new ConfigReader({
-  scorecards: { wikiLinkTemplate: 'https://mocked-wiki-url/{id}/{title}' },
-});
+
 const authObj: any = {
   sessionManager: {
     connector: {

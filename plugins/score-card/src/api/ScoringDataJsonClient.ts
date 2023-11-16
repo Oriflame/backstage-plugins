@@ -198,7 +198,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     });
     const entities: Entity[] = response.items;
 
-    return result.map<EntityScoreExtended>((score: EntityScore) => {
+    return result.map<EntityScoreExtended>(score => {
       return this.extendEntityScore(score, entities);
     });
   }

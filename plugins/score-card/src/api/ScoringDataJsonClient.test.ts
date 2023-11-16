@@ -289,10 +289,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
         scoringReviewer: 'Reviewer 2',
       },
     ];
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     const entities = await api.getAllScores(items[0], undefined, mockAuth);
@@ -309,10 +310,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
     const mockConfig = new MockConfigApi({
       app: { baseUrl: 'https://example.com' },
     });
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     mockOctokit.request.mockResolvedValue({
@@ -334,10 +336,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
     const mockConfig = new MockConfigApi({
       app: { baseUrl: 'https://example.com' },
     });
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     mockOctokit.request.mockResolvedValue({
@@ -376,10 +379,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
         },
       },
     ];
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     const entities = await api.getAllScores(items[0], ['api'], mockAuth);
@@ -414,9 +418,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
         namespace: 'default',
       },
     };
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     const entities = await api.getScore(items[0], mockAuth);
@@ -434,10 +440,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
     const mockConfig = new MockConfigApi({
       app: { baseUrl: 'https://example.com' },
     });
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     mockOctokit.request.mockResolvedValue({
@@ -459,10 +466,11 @@ describe('ScoringDataJsonClient-getAllScores-annotation way', () => {
     const mockConfig = new MockConfigApi({
       app: { baseUrl: 'https://example.com' },
     });
-
+    const mockFetch = new MockFetchApi();
     const api = new ScoringDataJsonClient({
       configApi: mockConfig,
       catalogApi: catalogApi,
+      fetchApi: mockFetch,
     });
 
     mockOctokit.request.mockResolvedValue({
