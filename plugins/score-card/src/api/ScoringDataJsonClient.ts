@@ -62,7 +62,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     jsonDataUrl: string,
     projectSlug: string,
     auth?: any,
-  ): Promise<T | undefined> {
+  ): Promise<T> {
     const token = await auth.getAccessToken(['repo']);
 
     const octokit = new Octokit({ auth: token });
@@ -148,7 +148,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     );
     const projectSlug = getAnnotationValue(entity, 'github.com/project-slug');
 
-    let result = undefined;
+    let result: EntityScore[];
     if (jsonFromAnnotation !== undefined && projectSlug !== undefined) {
       result = await this.getResult<EntityScore[]>(
         jsonFromAnnotation,
