@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.7.1
+
+### Patch Changes
+
+- 7b37b37: Added a configuration option to fetch all entities from the catalog to avoid "414 Request-URI Too Large" error (fix #184)
+
 ## 0.7.0
 
 ### Minor Changes
