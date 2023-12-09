@@ -59,6 +59,7 @@ Also the server providing the data needs to have correctly configured CORS polic
 All configuration options:
 
 - `jsonDataUrl`[optional]: url for the JSON data client, see [ScoringDataJsonClient](#scoringdatajsonclient).
+- `fetchAllEntities`[optional]: if set to `true`, will fetch all the entities from the catalog and filter them afterwards. By default the entities are loaded from the catalog using a filter by name, which may result in `414 Request-URI Too Large`.
 - `wikiLinkTemplate`[optional]: the template for the link to the wiki. You may use any existing properties from the `EntityScoreEntry`, e.g. `"https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"` or `"{scoreUrl}"`.
 
 ### How to use the plugin

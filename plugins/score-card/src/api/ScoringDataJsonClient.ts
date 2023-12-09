@@ -94,21 +94,23 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       result = result.filter(entity => entityKindFilter.map(f => f.toLocaleLowerCase()).includes(entity.entityRef?.kind.toLowerCase() as string));
     }
 
-    const entity_names: string[] = result.reduce((acc, a) => {
+    const entity_names: Set<string> = result.reduce((acc, a) => {
       if (a.entityRef?.name) {
-        acc.push(a.entityRef.name);
+        acc.add(a.entityRef.name);
       }
       return acc;
-    }, [] as string[]);
-
+    }, new Set<string>);
+    
+    const fetchAllEntities = this.configApi.getOptionalBoolean('scorecards.fetchAllEntities') ?? false
     const response = await this.catalogApi.getEntities({
-      filter: {
-        'metadata.name': entity_names
-
+      filter: fetchAllEntities ? undefined:  {
+        'metadata.name': Array.from(entity_names)
        },
       fields: ['kind', 'metadata.name', 'spec.owner', 'relations'],
     });
-    const entities: Entity[] = response.items;
+    const entities: Entity[] = fetchAllEntities
+      ? response.items.filter(i => entity_names.has(i.metadata.name))
+      : response.items;
 
     return result.map<EntityScoreExtended>(score => {
       return this.extendEntityScore(score, entities);

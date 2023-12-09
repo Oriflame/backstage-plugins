@@ -73,6 +73,21 @@ const getEntitiesMock = (
   } as GetEntitiesResponse);
 };
 
+const getAllEntitiesMock = (
+  request?: GetEntitiesRequest,
+): Promise<GetEntitiesResponse> => {
+  if (request?.filter && (request?.filter as Record<string, string[]>)["metadata.name"]) {
+    throw new Error("filter is not allowed")
+  }
+  const filterKinds =
+    Array.isArray(request?.filter) && Array.isArray(request?.filter[0].kind)
+      ? request?.filter[0].kind ?? []
+      : [];
+  return Promise.resolve({
+    items: filterKinds.length? items.filter(item => filterKinds.find(k => k === item.kind)) : items,
+  } as GetEntitiesResponse);
+};
+
 describe('ScoringDataJsonClient-getAllScores', () => {
   beforeEach(() => {
     jest.spyOn(global, "fetch").mockImplementation(
@@ -122,6 +137,53 @@ describe('ScoringDataJsonClient-getAllScores', () => {
 
     const mockConfig = new MockConfigApi({
       app: { baseUrl: 'https://example.com' },
+    });
+    const mockFetch = new MockFetchApi();
+
+    const expected = [
+      {
+        "areaScores": [],
+        "entityRef": {"kind": "api", "name": "Api 1"},
+        "owner": {"kind": "group", "name": "team1", "namespace": "default"},
+        "reviewDate": new Date('2022-01-01T08:00:00.000Z'),
+        "reviewer": {"kind": "User", "name": "Reviewer 1", "namespace": "default"},
+        "scorePercent": 75,
+        "scoringReviewDate": "2022-01-01T08:00:00Z",
+        "scoringReviewer": "Reviewer 1"
+      },
+      {
+        "areaScores": [],
+        "entityRef": {"kind": "system", "name": "System 1"},
+        "owner": {"kind": "group", "name": "team2", "namespace": "default"},
+        "reviewDate": new Date('2022-01-01T08:00:00.000Z'),
+        "reviewer": {"kind": "User", "name": "Reviewer 2", "namespace": "default"},
+        "scorePercent": 80,
+        "scoringReviewDate": "2022-01-01T08:00:00Z",
+        "scoringReviewer": "Reviewer 2"
+      }
+    ];
+
+    const api = new ScoringDataJsonClient({
+      configApi: mockConfig,
+      fetchApi: mockFetch,
+      catalogApi: catalogApi
+    });
+
+    const entities = await api.getAllScores();
+    expect(entities).toEqual(expected);
+  });
+
+  it('should get all scores and fetch all entities', async () => {
+
+    const catalogApi: jest.Mocked<CatalogApi> = {
+      getEntities: jest.fn(),
+    } as any;
+
+    catalogApi.getEntities.mockImplementation(getAllEntitiesMock);
+
+    const mockConfig = new MockConfigApi({
+      app: { baseUrl: 'https://example.com' },
+      scorecards: { fetchAllEntities: true}
     });
     const mockFetch = new MockFetchApi();
 
