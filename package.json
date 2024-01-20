@@ -6,10 +6,10 @@
     "OSWDVLPPlatform@oriflame.com",
     "GlobalITCOEdevelopmentTooling@Oriflame.com"
   ],
-  "version": "0.1.19",
+"version": "0.2.0",
   "private": true,
   "engines": {
-    "node": "14 || 16"
+    "node": "18 || 20"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\" \"http-server -p 8090 --cors 2>&1\"",
@@ -40,8 +40,8 @@
     ]
   },
   "resolutions": {
-    "@types/react": "^17",
-    "@types/react-dom": "^17",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "dockerode": "3.3.4",
     "@types/dockerode": "3.3.9"
   },
@@ -49,17 +49,18 @@
     "@changesets/cli": "2.25.2"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.22.1",
+    "@backstage/cli": "^0.25.1",
+    "@backstage/e2e-test-utils": "^0.1.0",
     "@spotify/prettier-config": "14.1.4",
     "@types/webpack": "5.28.0",
     "concurrently": "7.5.0",
     "eslint-plugin-notice": "0.9.10",
-    "lerna": "5.6.2",
+    "lerna": "^7.3.0",
     "prettier": "2.7.1",
-    "typescript": "4.8.4",
-    "@types/react": "17.0.52",
+    "typescript": "~5.2.0",
+    "@types/react": "^18",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "@types/react-dom": "^18"
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
