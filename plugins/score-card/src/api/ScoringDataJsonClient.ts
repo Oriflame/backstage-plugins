@@ -22,6 +22,7 @@ import {
   CompoundEntityRef,
   parseEntityRef,
   RELATION_OWNED_BY,
+  DEFAULT_NAMESPACE,
 } from '@backstage/catalog-model';
 
 /**
@@ -54,7 +55,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     }
 
     const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
+    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace ?? DEFAULT_NAMESPACE}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
 
     const result: EntityScore = await fetch(urlWithData).then(res => {
       switch (res.status) {
@@ -150,7 +151,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       reviewer = { name: score.scoringReviewer as string, kind: 'User', namespace: 'default' };
     } else if ((score.scoringReviewer as CompoundEntityRef)?.name) {
       const scoringReviewer = score.scoringReviewer as CompoundEntityRef
-      reviewer = { name: scoringReviewer.name, kind: scoringReviewer?.kind ?? "User", namespace: scoringReviewer?.namespace ?? 'default' };
+      reviewer = { name: scoringReviewer.name, kind: scoringReviewer?.kind ?? "User", namespace: scoringReviewer?.namespace ?? DEFAULT_NAMESPACE };
     }
 
     const reviewDate = score.scoringReviewDate
