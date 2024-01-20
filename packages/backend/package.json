@@ -32,13 +32,13 @@
     "@backstage/plugin-scaffolder-backend": "^1.20.0",
     "@gitbeaker/node": "35.7.0",
     "@octokit/rest": "18.12.0",
-    "better-sqlite3": "7.6.2",
-    "@types/luxon": "3.1.0",
+    "better-sqlite3": "9.0.0",
     "luxon": "3.2.1",
     "app": "^0.5.0",
     "dockerode": "3.3.4",
     "express": "4.18.2",
     "express-promise-router": "4.1.1",
+    "node-gyp": "^9.0.0",
     "knex": "2.4.1",
     "winston": "3.8.2",
     "serialize-error": "8.1.0"
@@ -47,7 +47,8 @@
     "@backstage/cli": "^0.25.1",
     "@types/dockerode": "3.3.9",
     "@types/express": "4.17.15",
-    "@types/express-serve-static-core": "4.17.32"
+    "@types/express-serve-static-core": "4.17.32",
+    "@types/luxon": "3.1.0"
   },
   "files": [
     "dist"
