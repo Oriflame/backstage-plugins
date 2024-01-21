@@ -23,6 +23,7 @@ import {
   parseEntityRef,
   RELATION_OWNED_BY,
   DEFAULT_NAMESPACE,
+  stringifyEntityRef,
 } from '@backstage/catalog-model';
 
 /**
@@ -171,6 +172,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       ? new Date(score.scoringReviewDate)
       : undefined;
     return {
+      id: stringifyEntityRef(score.entityRef),
       owner: owner ? parseEntityRef(owner) : undefined,
       reviewer: reviewer,
       reviewDate: reviewDate,
