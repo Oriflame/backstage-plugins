@@ -1,5 +1,16 @@
 # app
 
+## 0.5.0
+
+### Minor Changes
+
+- 32cc2fb: Upgraded to Backstage core 1.22.1, support for React v18, Node 20, Cypress e2e test migrated to [Playwright](https://playwright.dev/) and more.
+
+### Patch Changes
+
+- Updated dependencies [32cc2fb]
+  - @oriflame/backstage-plugin-score-card@0.8.0
+
 ## 0.4.7
 
 ### Patch Changes
