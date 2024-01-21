@@ -1,5 +1,11 @@
 # backend
 
+## 1.1.0
+
+### Minor Changes
+
+- 32cc2fb: Upgraded to Backstage core 1.22.1
+
 ## 1.0.17
 
 ### Patch Changes
