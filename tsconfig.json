@@ -4,10 +4,7 @@
     "packages/**/src",
     "plugins/**/src",
     "plugins/**/dev",
-    "plugins/**/migrations",
-    "packages/app/cypress/types.d.ts",
-    "packages/app/cypress/integration/*",
-    "packages/app/cypress/plugins/*"
+    "plugins/**/migrations"
   ],
   "exclude": ["node_modules"],
   "compilerOptions": {
