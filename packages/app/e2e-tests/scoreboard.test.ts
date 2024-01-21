@@ -20,8 +20,8 @@ failOnBrowserErrors();
 
 test('Score board: displays the score board based on sample data', async ({ page }) => {
   // cy.loginAsGuest();
-  page.on('load', page => {
-    page.evaluate(() => window.localStorage.setItem('@backstage/core:SignInPage:provider', 'guest'))
+  page.on('load', p => {
+    p.evaluate(() => window.localStorage.setItem('@backstage/core:SignInPage:provider', 'guest'))
   });
   // cy.visit('/score-board', {
   await page.goto('/score-board');

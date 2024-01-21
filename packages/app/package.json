@@ -49,6 +49,7 @@
     "react-use": "17.4.0"
   },
   "devDependencies": {
+    "@backstage/e2e-test-utils": "^0.1.0",
     "@backstage/test-utils": "^1.4.7",
     "@playwright/test": "^1.41.1",
     "@testing-library/dom": "^9.0.0",
