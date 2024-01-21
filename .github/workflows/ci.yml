@@ -21,7 +21,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout non PR
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
         # Do not trigger a checkout when opening PRs from a fork (helps avoid
         # "pwn request". See https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target )
         if: github.event_name != 'pull_request_target'
@@ -29,14 +29,14 @@ jobs:
           fetch-depth: '0'
 
       - name: Checkout PR
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
         if: github.event_name == 'pull_request_target'
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"
           fetch-depth: '0'
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --frozen-lockfile
