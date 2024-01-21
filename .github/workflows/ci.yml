@@ -63,7 +63,7 @@ jobs:
           yarn backstage-cli repo test --maxWorkers=3 --workerIdleMemoryLimit=1300M
 
       - name: Cypress e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           start: yarn dev
           wait-on: 'http://localhost:3000, http://localhost:7007/healthcheck'
