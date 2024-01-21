@@ -57,14 +57,14 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}${entity.metadata.namespace ?? DEFAULT_NAMESPACE}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
 
-    console.log(`ScoringDataJsonClient: fetching score from: ${urlWithData}`);
+    this.logConsole(`ScoringDataJsonClient: fetching score from: ${urlWithData}`);
     const result: EntityScore | undefined = await fetch(urlWithData).then(async res => {
       switch (res.status) {
         case 404:
           return undefined;
         case 200:
           return await res.json().then(json => {
-            console.log(`result: ${JSON.stringify(json)}`);
+            this.logConsole(`result: ${JSON.stringify(json)}`);
             return json as EntityScore;
           });
         default:
@@ -80,7 +80,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
-    console.log(`ScoringDataJsonClient: fetching all scored from ${urlWithData}`);
+    this.logConsole(`ScoringDataJsonClient: fetching all scored from ${urlWithData}`);
     let result: EntityScore[] | undefined = await fetch(urlWithData).then(
       async res => {
         switch (res.status) {
@@ -88,7 +88,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
             return undefined;
           case 200:
             return await res.json().then(json => {
-              console.log(`result: ${JSON.stringify(json)}`);
+              this.logConsole(`result: ${JSON.stringify(json)}`);
               return json as EntityScore[];
             });
           default:
@@ -127,6 +127,11 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   }
 
   // ---- HELPER METHODS ---- //
+
+  private logConsole(msg: string) {
+    // eslint-disable-next-line no-console
+    console.log(msg);
+  }
 
   private getJsonDataUrl() {
     return (

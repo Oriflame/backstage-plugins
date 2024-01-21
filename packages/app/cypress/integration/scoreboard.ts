@@ -22,7 +22,14 @@ describe('score-card', () => {
     it('displays the score board based on sample data', () => {
       cy.loginAsGuest();
 
-      cy.visit('/score-board');
+      cy.visit('/score-board', {
+        onBeforeLoad(win) {
+          cy.stub(win.console, `log`).callsFake(msg => {
+            // log to Terminal
+            cy.log(msg);
+          });
+        }
+      });
       cy.contains('Custom page title').should('be.visible');
       cy.contains('Custom sub title').should('be.visible');
       cy.contains('Custom table title').should('be.visible');
