@@ -26,7 +26,7 @@ describe('score-card', () => {
         onBeforeLoad(win) {
           cy.stub(win.console, `log`).callsFake(msg => {
             // log to Terminal
-            cy.log(msg);
+            cy.task("log", msg);
           });
         }
       });
