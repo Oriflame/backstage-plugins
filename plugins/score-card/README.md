@@ -188,7 +188,7 @@ To run unit tests simply execute `yarn test score-card`;
 
 ## Integration testing
 
-This is being done as part of the backstage integration tests. See `/cypress/src/integration/score-card`.
+This is being done as part of the backstage integration tests. See `/packages/app/e2e-tests`.
 
 ## Getting started
 
