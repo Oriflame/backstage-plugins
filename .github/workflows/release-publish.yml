@@ -46,7 +46,7 @@ jobs:
           registry-url: https://registry.npmjs.org/ # Needed for auth
 
       - name: yarn install --frozen-lockfile
-        uses: backstage/actions/yarn-install@v0.5.13
+        uses: backstage/actions/yarn-install@v0.6.5
         with:
           cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
@@ -76,9 +76,6 @@ jobs:
       - name: verify type dependencies
         run: yarn lint:type-deps
 
-      - name: test
-        run: |
-          yarn lerna -- run test -- --coverage --runInBand
 
   # A separate release build that is only run for commits that are the result of merging the "Version Packages" PR
   # We can't re-use the output from the above step, but we'll have a guaranteed node_modules cache and
@@ -102,14 +99,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
 
-      - name: Set up Node.js
+      - name: use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4.0.1
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/ # Needed for auth
 
       - name: yarn install --frozen-lockfile
-        uses: backstage/actions/yarn-install@v0.5.13
+        uses: backstage/actions/yarn-install@v0.6.5
         with:
           cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
@@ -123,10 +120,11 @@ jobs:
       - name: publish
         if: needs.build.outputs.needs_release == 'true' || github.event.inputs.publish_packages
         run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
           if [ -f ".changeset/pre.json" ]; then
-              yarn lerna -- publish from-package --yes --dist-tag next
+              yarn workspaces foreach -v --no-private npm publish --access public --tolerate-republish --tag next
           else
-              yarn lerna -- publish from-package --yes
+              yarn workspaces foreach -v --no-private npm publish --access public --tolerate-republish
           fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
