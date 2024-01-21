@@ -55,6 +55,7 @@ export interface EntityScoreEntry {
 }
 
 export interface EntityScoreExtended extends EntityScore {
+  id: string;
   owner: CompoundEntityRef | undefined;
   reviewer: CompoundEntityRef | undefined;
   reviewDate: Date | undefined;

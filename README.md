@@ -6,6 +6,8 @@ Oriflame Backstage plugins.
 
 You may find our plugins in the `./plugins` folder. You may start each plugin in isolated mode (navigate to the plugin folder and run `yarn dev` or `yarn start:dev`, see respective README). You may start also the simple backstage host with the plugins integrated via `yarn dev` (in root folder). You may run `yarn test` to run jest tests. For more information see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+List of prerequisites are [same as for the backstage](https://backstage.io/docs/getting-started/#prerequisites). Please use Node.js version `20.x`.
+
 ## List of plugins
 
 Name | Version | Description

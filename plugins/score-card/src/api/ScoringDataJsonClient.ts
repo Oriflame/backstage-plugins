@@ -22,6 +22,8 @@ import {
   CompoundEntityRef,
   parseEntityRef,
   RELATION_OWNED_BY,
+  DEFAULT_NAMESPACE,
+  stringifyEntityRef,
 } from '@backstage/catalog-model';
 
 /**
@@ -54,14 +56,18 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     }
 
     const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
+    const urlWithData = `${jsonDataUrl}${entity.metadata.namespace ?? DEFAULT_NAMESPACE}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
 
-    const result: EntityScore = await fetch(urlWithData).then(res => {
+    this.logConsole(`ScoringDataJsonClient: fetching score from: ${urlWithData}`);
+    const result: EntityScore | undefined = await fetch(urlWithData).then(async res => {
       switch (res.status) {
         case 404:
-          return null;
+          return undefined;
         case 200:
-          return res.json();
+          return await res.json().then(json => {
+            this.logConsole(`result: ${JSON.stringify(json)}`);
+            return json as EntityScore;
+          });
         default:
           throw new Error(`error from server (code ${res.status})`);
       }
@@ -75,13 +81,17 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
+    this.logConsole(`ScoringDataJsonClient: fetching all scored from ${urlWithData}`);
     let result: EntityScore[] | undefined = await fetch(urlWithData).then(
-      res => {
+      async res => {
         switch (res.status) {
           case 404:
             return undefined;
           case 200:
-            return res.json();
+            return await res.json().then(json => {
+              this.logConsole(`result: ${JSON.stringify(json)}`);
+              return json as EntityScore[];
+            });
           default:
             throw new Error(`error from server (code ${res.status})`);
         }
@@ -119,6 +129,11 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   // ---- HELPER METHODS ---- //
 
+  private logConsole(_: string) {
+    // eslint-disable-next-line no-console
+    // DEBUG: console.log(msg);
+  }
+
   private getJsonDataUrl() {
     return (
       this.configApi.getOptionalString('scorecards.jsonDataUrl') ??
@@ -150,13 +165,14 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       reviewer = { name: score.scoringReviewer as string, kind: 'User', namespace: 'default' };
     } else if ((score.scoringReviewer as CompoundEntityRef)?.name) {
       const scoringReviewer = score.scoringReviewer as CompoundEntityRef
-      reviewer = { name: scoringReviewer.name, kind: scoringReviewer?.kind ?? "User", namespace: scoringReviewer?.namespace ?? 'default' };
+      reviewer = { name: scoringReviewer.name, kind: scoringReviewer?.kind ?? "User", namespace: scoringReviewer?.namespace ?? DEFAULT_NAMESPACE };
     }
 
     const reviewDate = score.scoringReviewDate
       ? new Date(score.scoringReviewDate)
       : undefined;
     return {
+      id: stringifyEntityRef(score.entityRef),
       owner: owner ? parseEntityRef(owner) : undefined,
       reviewer: reviewer,
       reviewDate: reviewDate,

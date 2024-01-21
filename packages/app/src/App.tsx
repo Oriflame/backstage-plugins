@@ -43,7 +43,7 @@ const app = createApp({
 
 const routes = (
   <FlatRoutes>
-    <Navigate key="/" to="catalog" />
+    <Route path="/" element={<Navigate to="catalog" />} />
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"

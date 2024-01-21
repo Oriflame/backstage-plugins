@@ -6,10 +6,10 @@
     "OSWDVLPPlatform@oriflame.com",
     "GlobalITCOEdevelopmentTooling@Oriflame.com"
   ],
-  "version": "0.1.19",
+  "version": "0.2.0",
   "private": true,
   "engines": {
-    "node": "14 || 16"
+    "node": "18 || 20"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\" \"http-server -p 8090 --cors 2>&1\"",
@@ -17,20 +17,20 @@
     "start-backend": "yarn workspace backend start",
     "build": "backstage-cli repo build --all",
     "tsc": "tsc",
-    "tsc:full": "backstage-cli clean && tsc --skipLibCheck true --incremental false",
-    "clean": "backstage-cli clean && lerna run clean",
-    "diff": "lerna run diff --",
-    "test": "backstage-cli test",
-    "test:all": "lerna run test -- --coverage",
-    "test:e2e": "yarn workspace app cypress run",
+    "tsc:full": "backstage-cli repo clean && tsc --skipLibCheck true --incremental false",
+    "clean": "backstage-cli repo clean",
+    "test": "backstage-cli repo test",
+    "test:all": "backstage-cli repo test --coverage",
+    "test:e2e": "tsc && playwright test",
+    "fix": "backstage-cli repo fix",
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
-    "lint:type-deps": "node scripts/check-type-dependencies.js",
-    "create-plugin": "backstage-cli create-plugin --scope ori --no-private",
-    "remove-plugin": "backstage-cli remove-plugin",
-    "release": "node scripts/prepare-release.js && changeset version && yarn diff --yes && yarn prettier --write '{packages,plugins}/*/{package.json,CHANGELOG.md}' '.changeset/*.json' && yarn install",
+    "lint:type-deps": "backstage-repo-tools type-deps",
+    "new": "backstage-cli new --scope ori --baseVersion 0.0.0 --no-private",
+    "create-plugin": "echo \"use 'yarn new' instead\"",
+    "release": "node scripts/prepare-release.js && changeset version && yarn prettier --write '{packages,plugins}/*/{package.json,CHANGELOG.md}' '.changeset/*.json' && yarn install --no-immutable",
     "prettier:check": "prettier --check .",
-    "lerna": "lerna",
+    "prettier:fix": "prettier --write .",
     "lock:check": "yarn-lock-check"
   },
   "workspaces": {
@@ -40,26 +40,29 @@
     ]
   },
   "resolutions": {
-    "@types/react": "^17",
-    "@types/react-dom": "^17",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "dockerode": "3.3.4",
-    "@types/dockerode": "3.3.9"
+    "@types/dockerode": "3.3.9",
+    "jest-environment-jsdom": "30.0.0-alpha.2"
   },
   "dependencies": {
-    "@changesets/cli": "2.25.2"
+    "@changesets/cli": "2.25.2",
+    "jest-environment-jsdom": "30.0.0-alpha.2"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.22.1",
+    "@backstage/cli": "^0.25.1",
+    "@backstage/e2e-test-utils": "^0.1.0",
+    "@backstage/repo-tools": "^0.5.2",
     "@spotify/prettier-config": "14.1.4",
     "@types/webpack": "5.28.0",
     "concurrently": "7.5.0",
     "eslint-plugin-notice": "0.9.10",
-    "lerna": "5.6.2",
     "prettier": "2.7.1",
-    "typescript": "4.8.4",
-    "@types/react": "17.0.52",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "typescript": "~5.2.0",
+    "@types/react": "^18",
+    "react": "^18.0.0",
+    "@types/react-dom": "^18"
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
