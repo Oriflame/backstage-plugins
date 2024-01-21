@@ -59,7 +59,7 @@
     "prettier": "2.7.1",
     "typescript": "~5.2.0",
     "@types/react": "^18",
-    "react": "17.0.2",
+    "react": "^18.0.0",
     "@types/react-dom": "^18"
   },
   "prettier": "@spotify/prettier-config",
