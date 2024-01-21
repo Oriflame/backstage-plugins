@@ -57,12 +57,16 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}${entity.metadata.namespace ?? DEFAULT_NAMESPACE}/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
 
-    const result: EntityScore = await fetch(urlWithData).then(res => {
+    console.log(`ScoringDataJsonClient: fetching score from: ${urlWithData}`);
+    const result: EntityScore | undefined = await fetch(urlWithData).then(async res => {
       switch (res.status) {
         case 404:
-          return null;
+          return undefined;
         case 200:
-          return res.json();
+          return await res.json().then(json => {
+            console.log(`result: ${JSON.stringify(json)}`);
+            return json as EntityScore;
+          });
         default:
           throw new Error(`error from server (code ${res.status})`);
       }
@@ -76,13 +80,17 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   public async getAllScores(entityKindFilter?: string[]): Promise<EntityScoreExtended[] | undefined> {
     const jsonDataUrl = this.getJsonDataUrl();
     const urlWithData = `${jsonDataUrl}all.json`;
+    console.log(`ScoringDataJsonClient: fetching all scored from ${urlWithData}`);
     let result: EntityScore[] | undefined = await fetch(urlWithData).then(
-      res => {
+      async res => {
         switch (res.status) {
           case 404:
             return undefined;
           case 200:
-            return res.json();
+            return await res.json().then(json => {
+              console.log(`result: ${JSON.stringify(json)}`);
+              return json as EntityScore[];
+            });
           default:
             throw new Error(`error from server (code ${res.status})`);
         }
