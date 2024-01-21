@@ -33,11 +33,11 @@ If you are proposing a feature:
 
 As the number of plugins included in this repository increases, so does importance of good E2E tests which will make sure everything runs as it is expected. In order to contribute to this, very important aspect, of this repository, we urge you to follow guidelines below:
 
-E2E tests are integrated under `/packages/app/cypress` folder where you will find specific E2E test for every plugin under `/packages/app/cypress/integrations`. This means you should follow that pattern and add tests in appropriate plugin test files. We would also encourage you to add more fixtures under `/packages/app/cypress/fixtures`. For testing purposes you can use `test-entity.yaml` file which can be found under `/packages/entities`, which we have created especially for this purpose.
+E2E tests are integrated under `/packages/app/e2e-tests` folder where you will find specific E2E test for every plugin. This means you should follow that pattern and add tests in appropriate plugin test files. For testing purposes you can use `test-entity.yaml` file which can be found under `/packages/entities`, which we have created especially for this purpose.
 
-To execute end to end test locally you would need to install [Cypress dependencies](https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies).
+As an engine for the testing we are using [Playwright](https://playwright.dev/).
 
-A special note for **WSL** users: you need a few more [extra steps](https://dev.to/nickymeuleman/using-graphical-user-interfaces-like-cypress-in-wsl2-249j). TL/DR: modify `~/.bashrc` like `echo "# set DISPLAY variable to the IP automatically assigned to WSL2" >> ~/.bashrc; echo "export DISPLAY=\$(cat /etc/resolv.conf | grep nameserver | awk '{print \$2; exit;}'):0.0" >> ~/.bashrc; echo 'sudo /etc/init.d/dbus start &> /dev/null' >> ~/.bashrc`.
+To execute end to end test locally you would need to install [dependencies](https://playwright.dev/docs/browsers#install-system-dependencies). TL/DR: run `npx playwright install-deps`.
 
 ### Add your company to ADOPTERS
 
