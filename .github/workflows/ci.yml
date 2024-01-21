@@ -60,7 +60,7 @@ jobs:
 
       - name: test
         run: |
-          yarn lerna -- run test -- --coverage --runInBand
+          yarn backstage-cli repo test --maxWorkers=3 --workerIdleMemoryLimit=1300M
 
       - name: Cypress e2e tests
         uses: cypress-io/github-action@v2
