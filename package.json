@@ -12,7 +12,7 @@
     "node": "18 || 20"
   },
   "scripts": {
-    "dev": "concurrently \"yarn start\" \"yarn start-backend\" \"http-server -p 8090 --cors 2>&1\"",
+    "dev": "concurrently 'yarn start' 'yarn start-backend' 'http-server -p 8090 --cors 2>&1'",
     "start": "yarn workspace app start",
     "start-backend": "yarn workspace backend start",
     "build": "backstage-cli repo build --all",
@@ -47,22 +47,24 @@
     "jest-environment-jsdom": "30.0.0-alpha.2"
   },
   "dependencies": {
-    "@changesets/cli": "2.25.2",
     "jest-environment-jsdom": "30.0.0-alpha.2"
   },
   "devDependencies": {
     "@backstage/cli": "^0.25.1",
     "@backstage/e2e-test-utils": "^0.1.0",
     "@backstage/repo-tools": "^0.5.2",
+    "@changesets/cli": "2.25.2",
+    "@playwright/test": "^1.32.3",
     "@spotify/prettier-config": "14.1.4",
-    "@types/webpack": "5.28.0",
-    "concurrently": "7.5.0",
-    "eslint-plugin-notice": "0.9.10",
-    "prettier": "2.7.1",
-    "typescript": "~5.2.0",
     "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/webpack": "5.28.0",
+    "concurrently": "^8.0.0",
+    "eslint-plugin-notice": "0.9.10",
+    "http-server": "14.1.1",
+    "prettier": "2.7.1",
     "react": "^18.0.0",
-    "@types/react-dom": "^18"
+    "typescript": "~5.2.0"
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
@@ -76,5 +78,6 @@
     "*.md": [
       "node ./scripts/check-docs-quality"
     ]
-  }
+  },
+  "packageManager": "yarn@4.0.2"
 }
