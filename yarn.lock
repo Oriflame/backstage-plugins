@@ -10960,13 +10960,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dockerode@npm:3.3.9":
-  version: 3.3.9
-  resolution: "@types/dockerode@npm:3.3.9"
+"@types/dockerode@npm:3.3.23":
+  version: 3.3.23
+  resolution: "@types/dockerode@npm:3.3.23"
   dependencies:
     "@types/docker-modem": "npm:*"
     "@types/node": "npm:*"
-  checksum: 4372eb873d379e5b1c56c1ba565d5f05bf53991a85e01773a133dd09416f9a5f6929a2fc4cebd78cb18ce4755f5336c19d97221340722c12f517b1a7c3a52457
+  checksum: b6bdb2851487ac7168d2a790ef35b50f0521cbf01e636feaca8f7192fe9c4c687c22f71c56767f41b25ceb87d60ebbc052c1e28c6f7d6cc7a69327050569c863
   languageName: node
   linkType: hard
 
@@ -13166,13 +13166,13 @@ __metadata:
     "@backstage/plugin-scaffolder-backend": "npm:^1.20.0"
     "@gitbeaker/node": "npm:35.7.0"
     "@octokit/rest": "npm:18.12.0"
-    "@types/dockerode": "npm:3.3.9"
+    "@types/dockerode": "npm:3.3.23"
     "@types/express": "npm:4.17.15"
     "@types/express-serve-static-core": "npm:4.17.32"
     "@types/luxon": "npm:3.1.0"
     app: "link:../app"
     better-sqlite3: "npm:9.0.0"
-    dockerode: "npm:3.3.4"
+    dockerode: "npm:3.3.5"
     express: "npm:4.18.2"
     express-promise-router: "npm:4.1.1"
     knex: "npm:2.4.1"
@@ -15816,14 +15816,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dockerode@npm:3.3.4":
-  version: 3.3.4
-  resolution: "dockerode@npm:3.3.4"
+"dockerode@npm:3.3.5":
+  version: 3.3.5
+  resolution: "dockerode@npm:3.3.5"
   dependencies:
     "@balena/dockerignore": "npm:^1.0.2"
     docker-modem: "npm:^3.0.0"
     tar-fs: "npm:~2.0.1"
-  checksum: 2a876c5b4e24e2ef695792f83f7d4056842470cd255036e9d5aa25fbef3bb960ab7aadd66c2ffb6f3885249c01db28d81dcc8a8ceeeb1f7e2afb24da69dcde92
+  checksum: c45fa8ed3ad76f13fe7799d539a60fe466f8e34bea06b30d75be9e08bc00536cc9ff2d54e38fbb3b2a8a382bf9d4459a27741e6454ce7d0cda5cd35c51224c73
   languageName: node
   linkType: hard
 
