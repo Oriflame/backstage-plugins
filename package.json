@@ -79,5 +79,5 @@
       "node ./scripts/check-docs-quality"
     ]
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@3.7.0"
 }
