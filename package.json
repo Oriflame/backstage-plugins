@@ -42,8 +42,8 @@
   "resolutions": {
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "dockerode": "3.3.4",
-    "@types/dockerode": "3.3.9",
+    "dockerode": "3.3.5",
+    "@types/dockerode": "3.3.23",
     "jest-environment-jsdom": "30.0.0-alpha.2"
   },
   "dependencies": {
