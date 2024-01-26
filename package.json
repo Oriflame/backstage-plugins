@@ -53,7 +53,7 @@
     "@backstage/cli": "^0.25.1",
     "@backstage/e2e-test-utils": "^0.1.0",
     "@backstage/repo-tools": "^0.5.2",
-    "@changesets/cli": "2.25.2",
+    "@changesets/cli": "2.27.1",
     "@playwright/test": "^1.32.3",
     "@spotify/prettier-config": "14.1.6",
     "@types/react": "^18",
