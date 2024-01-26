@@ -9525,12 +9525,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@spotify/prettier-config@npm:14.1.4":
-  version: 14.1.4
-  resolution: "@spotify/prettier-config@npm:14.1.4"
+"@spotify/prettier-config@npm:14.1.6":
+  version: 14.1.6
+  resolution: "@spotify/prettier-config@npm:14.1.6"
   peerDependencies:
     prettier: 2.x
-  checksum: a843e23910a9bd213220b21e5cb9b05112fe930ef86abe18e950c7438f8d8bd849b981e1814d624d60267c080b998e6a597188e72a9042ba2bcc229b81c4115c
+  checksum: a0df8527f2b9c245748731f539c4fe68b30868a9863da05e5f15eb18e4a7621a6bb01fc916fffb56b8390d539fa2a9dff716485c7ea31aa31b59ac4dd84c0851
   languageName: node
   linkType: hard
 
@@ -24038,7 +24038,7 @@ __metadata:
     "@backstage/repo-tools": "npm:^0.5.2"
     "@changesets/cli": "npm:2.25.2"
     "@playwright/test": "npm:^1.32.3"
-    "@spotify/prettier-config": "npm:14.1.4"
+    "@spotify/prettier-config": "npm:14.1.6"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     "@types/webpack": "npm:5.28.0"
