@@ -2549,6 +2549,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.14.8":
+  version: 7.23.9
+  resolution: "@babel/runtime@npm:7.23.9"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: e71205fdd7082b2656512cc98e647d9ea7e222e4fe5c36e9e5adc026446fcc3ba7b3cdff8b0b694a0b78bb85db83e7b1e3d4c56ef90726682b74f13249cf952d
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.15, @babel/template@npm:^7.3.3":
   version: 7.22.15
   resolution: "@babel/template@npm:7.22.15"
@@ -6510,7 +6519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material-ui/icons@npm:4.11.3, @material-ui/icons@npm:^4.11.2, @material-ui/icons@npm:^4.9.1":
+"@material-ui/icons@npm:^4.9.1":
   version: 4.11.3
   resolution: "@material-ui/icons@npm:4.11.3"
   dependencies:
@@ -6842,6 +6851,38 @@ __metadata:
   version: 5.15.6
   resolution: "@mui/core-downloads-tracker@npm:5.15.6"
   checksum: 62d3491755b568c2fdbe1eb73603df58e713c4267db0d71a86629d3e6b101b0733f5aefcadb03580b1e95e50c440d73eb271533112d3ab814de1651768cc5354
+  languageName: node
+  linkType: hard
+
+"@mui/icons-material@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@mui/icons-material@npm:5.0.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.14.8"
+  peerDependencies:
+    "@mui/material": ^5.0.0-rc.0
+    "@types/react": ^16.8.6 || ^17.0.0
+    react: ^17.0.2
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 044442ae1d4d9dc6d04a0aa0bea6574384b214f85619049c3536556ec2b5dbd4f6f30ef99dce2c2860e6f4b09912bc5d07f6c027c863ddb9d5fea027c25fd31c
+  languageName: node
+  linkType: hard
+
+"@mui/icons-material@npm:^5.0.0":
+  version: 5.15.6
+  resolution: "@mui/icons-material@npm:5.15.6"
+  dependencies:
+    "@babel/runtime": "npm:^7.23.8"
+  peerDependencies:
+    "@mui/material": ^5.0.0
+    "@types/react": ^17.0.0 || ^18.0.0
+    react: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 9d3a9806dc1c578f5809b60022be1806b003a7f4c9d415e1f7531486d931c54f39b3750102c505379694be8ec6d22b49a51610b07a97d611b31f978bb4cd8fe7
   languageName: node
   linkType: hard
 
@@ -7885,8 +7926,8 @@ __metadata:
     "@backstage/types": "npm:^1.1.1"
     "@backstage/version-bridge": "npm:^1.0.7"
     "@material-ui/core": "npm:^4.12.2"
-    "@material-ui/icons": "npm:^4.11.2"
     "@material-ui/lab": "npm:^4.0.0-alpha.57"
+    "@mui/icons-material": "npm:^5.0.0"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
@@ -12553,7 +12594,7 @@ __metadata:
     "@backstage/test-utils": "npm:^1.4.7"
     "@backstage/theme": "npm:^0.5.0"
     "@material-ui/core": "npm:4.12.4"
-    "@material-ui/icons": "npm:4.11.3"
+    "@mui/icons-material": "npm:5.0.0"
     "@oriflame/backstage-plugin-score-card": "npm:^0.8.0"
     "@playwright/test": "npm:^1.41.1"
     "@testing-library/dom": "npm:^9.0.0"
