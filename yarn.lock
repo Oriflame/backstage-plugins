@@ -11680,14 +11680,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack@npm:5.28.0":
-  version: 5.28.0
-  resolution: "@types/webpack@npm:5.28.0"
+"@types/webpack@npm:5.28.5":
+  version: 5.28.5
+  resolution: "@types/webpack@npm:5.28.5"
   dependencies:
     "@types/node": "npm:*"
     tapable: "npm:^2.2.0"
     webpack: "npm:^5"
-  checksum: 9e86e6b2bd8998c93058230d73e590fece972e8363af05d387cb966be18b648422013ec12963929a532f9c2821bbcd620dbaebc33865aefbf33056b4e3cca8b9
+  checksum: d1fec1f678af79dd0d84333740bdd2ce128c7f4fd1f8d14bb0ec0f4c5af70580af68350f677e3696003a8cb2e2b5f510f8c0ed7ee5ad2bc7874c87f80ecd7c8d
   languageName: node
   linkType: hard
 
@@ -24041,7 +24041,7 @@ __metadata:
     "@spotify/prettier-config": "npm:14.1.6"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
-    "@types/webpack": "npm:5.28.0"
+    "@types/webpack": "npm:5.28.5"
     concurrently: "npm:^8.0.0"
     eslint-plugin-notice: "npm:0.9.10"
     http-server: "npm:14.1.1"
