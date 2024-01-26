@@ -40,8 +40,8 @@
     ]
   },
   "resolutions": {
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
     "dockerode": "3.3.5",
     "@types/dockerode": "3.3.23",
     "jest-environment-jsdom": "30.0.0-alpha.2"
@@ -56,8 +56,8 @@
     "@changesets/cli": "2.25.2",
     "@playwright/test": "^1.32.3",
     "@spotify/prettier-config": "14.1.6",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
     "@types/webpack": "5.28.0",
     "concurrently": "^8.0.0",
     "eslint-plugin-notice": "0.9.10",
