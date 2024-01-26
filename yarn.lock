@@ -7897,7 +7897,7 @@ __metadata:
     "@types/react-dom": "npm:*"
     cross-fetch: "npm:3.1.5"
     http-server: "npm:14.1.1"
-    msw: "npm:0.47.3"
+    msw: "npm:0.49.3"
     react-use: "npm:^17.2.4"
   peerDependencies:
     react: ^18.0.0
@@ -23132,9 +23132,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:0.47.3":
-  version: 0.47.3
-  resolution: "msw@npm:0.47.3"
+"msw@npm:0.49.3":
+  version: 0.49.3
+  resolution: "msw@npm:0.49.3"
   dependencies:
     "@mswjs/cookies": "npm:^0.2.2"
     "@mswjs/interceptors": "npm:^0.17.5"
@@ -23152,18 +23152,17 @@ __metadata:
     node-fetch: "npm:^2.6.7"
     outvariant: "npm:^1.3.0"
     path-to-regexp: "npm:^6.2.0"
-    statuses: "npm:^2.0.0"
-    strict-event-emitter: "npm:^0.2.0"
+    strict-event-emitter: "npm:^0.4.3"
     type-fest: "npm:^2.19.0"
     yargs: "npm:^17.3.1"
   peerDependencies:
-    typescript: ">= 4.2.x <= 4.8.x"
+    typescript: ">= 4.4.x <= 4.9.x"
   peerDependenciesMeta:
     typescript:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 186d6f102ad385da9f8175d4824e8ee490a435eb1d9dd27aef5a5432830cbdd1ae849049970c12dc3d197c613a89e6d4e520f8574cf73883678021a3f955c841
+  checksum: 993e87ce639eae8edcbb492a7bbc4772bafe8ae2760ce543933e4598c24e371df9b20fe31f9d022e838810cc1fdc46438782fc6c7430be77d78d9526bd82ebee
   languageName: node
   linkType: hard
 
@@ -28219,7 +28218,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"statuses@npm:2.0.1, statuses@npm:^2.0.0":
+"statuses@npm:2.0.1":
   version: 2.0.1
   resolution: "statuses@npm:2.0.1"
   checksum: 34378b207a1620a24804ce8b5d230fea0c279f00b18a7209646d5d47e419d1cc23e7cbf33a25a1e51ac38973dc2ac2e1e9c647a8e481ef365f77668d72becfd0
@@ -28330,12 +28329,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strict-event-emitter@npm:^0.2.0, strict-event-emitter@npm:^0.2.4":
+"strict-event-emitter@npm:^0.2.4":
   version: 0.2.8
   resolution: "strict-event-emitter@npm:0.2.8"
   dependencies:
     events: "npm:^3.3.0"
   checksum: 6891e19fea4f0289e4da2fe7050d85906eaca7f774aa38fe674f0e58fdece1b63b868614fa23974c4cb862aa99358caa987523b705fdfff4639231c62e384394
+  languageName: node
+  linkType: hard
+
+"strict-event-emitter@npm:^0.4.3":
+  version: 0.4.6
+  resolution: "strict-event-emitter@npm:0.4.6"
+  checksum: d0231ef081cb1937b1445da59a1ec202d1c097d825c504f398600532490a4104e200b0dce4137467a8eaac5f8f9718d01c99869687afad78cad3b14c4b2e6a39
   languageName: node
   linkType: hard
 
