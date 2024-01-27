@@ -13163,7 +13163,7 @@ __metadata:
     dockerode: "npm:3.3.5"
     express: "npm:4.18.2"
     express-promise-router: "npm:4.1.1"
-    knex: "npm:2.4.2"
+    knex: "npm:2.5.1"
     luxon: "npm:3.2.1"
     node-gyp: "npm:^9.0.0"
     serialize-error: "npm:8.1.0"
@@ -21318,12 +21318,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knex@npm:2.4.2":
-  version: 2.4.2
-  resolution: "knex@npm:2.4.2"
+"knex@npm:2.5.1":
+  version: 2.5.1
+  resolution: "knex@npm:2.5.1"
   dependencies:
     colorette: "npm:2.0.19"
-    commander: "npm:^9.1.0"
+    commander: "npm:^10.0.0"
     debug: "npm:4.3.4"
     escalade: "npm:^3.1.1"
     esm: "npm:^3.2.25"
@@ -21331,7 +21331,7 @@ __metadata:
     getopts: "npm:2.3.0"
     interpret: "npm:^2.2.0"
     lodash: "npm:^4.17.21"
-    pg-connection-string: "npm:2.5.0"
+    pg-connection-string: "npm:2.6.1"
     rechoir: "npm:^0.8.0"
     resolve-from: "npm:^5.0.0"
     tarn: "npm:^3.0.2"
@@ -21353,7 +21353,7 @@ __metadata:
       optional: true
   bin:
     knex: bin/cli.js
-  checksum: b6e2582671ac1503edf073e011b1db1b4d5c719a7acad5d8453d70b45b45296c3fba43f91ea3d26956986fb0ec70a7d26b8af4dfcf5ac1507c6674fc2186400b
+  checksum: 33580641feaa93074bdc10e78f06382e5017d46a3cd22821c09057e7da303c35772add39a110fffe685c2f438a78751a0eb6f50aad1c4bdb032e8ec9b7879b69
   languageName: node
   linkType: hard
 
@@ -24657,10 +24657,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg-connection-string@npm:2.5.0":
-  version: 2.5.0
-  resolution: "pg-connection-string@npm:2.5.0"
-  checksum: 4b1650132d8000d68864db774c4a99d98acf1cb90525045402b93d3b5a5f36500e5934c653598256cd86b3a310ba4639fbf1e8e1e04cefa46840838541b7626c
+"pg-connection-string@npm:2.6.1":
+  version: 2.6.1
+  resolution: "pg-connection-string@npm:2.6.1"
+  checksum: e5a71a2da143b8dc17143a9db7737679b210643771aa678d3bc60c7bc70da11bbb8e2d531be91c8c4eddd6ac6046307811e793f5850b9ba595a11785c948a417
   languageName: node
   linkType: hard
 
