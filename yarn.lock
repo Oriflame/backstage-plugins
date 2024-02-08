@@ -5401,7 +5401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gitbeaker/core@npm:^35.7.0, @gitbeaker/core@npm:^35.8.0, @gitbeaker/core@npm:^35.8.1":
+"@gitbeaker/core@npm:^35.8.0, @gitbeaker/core@npm:^35.8.1":
   version: 35.8.1
   resolution: "@gitbeaker/core@npm:35.8.1"
   dependencies:
@@ -5426,20 +5426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gitbeaker/node@npm:35.7.0":
-  version: 35.7.0
-  resolution: "@gitbeaker/node@npm:35.7.0"
-  dependencies:
-    "@gitbeaker/core": "npm:^35.7.0"
-    "@gitbeaker/requester-utils": "npm:^35.7.0"
-    delay: "npm:^5.0.0"
-    got: "npm:^11.8.3"
-    xcase: "npm:^2.0.1"
-  checksum: 1f5720abc1d96f499a8684d2ed6d31c0be5360da611064de3c5bcaf89d88091ea908b0618d35047f43d652af7048279b40cb719fa826668bbe7650f9fd5cb500
-  languageName: node
-  linkType: hard
-
-"@gitbeaker/node@npm:^35.8.0":
+"@gitbeaker/node@npm:35.8.1, @gitbeaker/node@npm:^35.8.0":
   version: 35.8.1
   resolution: "@gitbeaker/node@npm:35.8.1"
   dependencies:
@@ -5452,7 +5439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gitbeaker/requester-utils@npm:^35.7.0, @gitbeaker/requester-utils@npm:^35.8.1":
+"@gitbeaker/requester-utils@npm:^35.8.1":
   version: 35.8.1
   resolution: "@gitbeaker/requester-utils@npm:35.8.1"
   dependencies:
@@ -13121,7 +13108,7 @@ __metadata:
     "@backstage/plugin-permission-node": "npm:^0.7.20"
     "@backstage/plugin-proxy-backend": "npm:^0.4.7"
     "@backstage/plugin-scaffolder-backend": "npm:^1.20.0"
-    "@gitbeaker/node": "npm:35.7.0"
+    "@gitbeaker/node": "npm:35.8.1"
     "@octokit/rest": "npm:18.12.0"
     "@types/dockerode": "npm:3.3.23"
     "@types/express": "npm:4.17.21"
