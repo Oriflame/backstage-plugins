@@ -16,18 +16,35 @@
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import React from 'react';
 import { EntityScoreExtended } from '../../../api/types';
+import { DisplayPolicies, DisplayPolicy } from '../../../config/types';
 
-export function getReviewerLink(value: EntityScoreExtended) {
+export function getReviewerLink(
+  value: EntityScoreExtended,
+  displayPolicies: DisplayPolicies,
+) {
+  const displayReviewer = displayPolicies.reviewer !== DisplayPolicy.Never;
+  const displayReviewDate = displayPolicies.reviewDate !== DisplayPolicy.Never;
+
+  if (!displayReviewer && !displayReviewDate) {
+    return null;
+  }
+
   return (
     <div style={{ textAlign: 'right', margin: '0.2rem' }}>
       {value.reviewer ? (
         <>
-          Review done by&nbsp;
-          <EntityRefLink entityRef={value.reviewer}>
-            {value.reviewer?.name}
-          </EntityRefLink>
-          &nbsp;at&nbsp;
-          {value.reviewDate ? value.reviewDate.toLocaleDateString() : 'unknown'}
+          Review done
+          {displayReviewer && ' by '}
+          {displayReviewer && (
+            <EntityRefLink entityRef={value.reviewer}>
+              {value.reviewer?.name}
+            </EntityRefLink>
+          )}
+          {displayReviewDate &&
+            ` at
+              ${(value.reviewDate
+                ? value.reviewDate.toLocaleDateString()
+                : 'unknown')}`}
         </>
       ) : (
         <>Not yet reviewed.</>
