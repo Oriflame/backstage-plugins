@@ -16,11 +16,11 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 import { ScoreCardTable } from './ScoreCardTable';
-import { TestApiProvider } from '@backstage/test-utils';
+import { MockConfigApi, TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
 import { EntityScoreExtended } from '../../api/types';
-import { errorApiRef } from '@backstage/core-plugin-api';
+import { configApiRef, errorApiRef } from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
 import { MemoryRouter as Router } from 'react-router-dom';
@@ -53,6 +53,7 @@ describe('ScoreBoardPage-EmptyData', () => {
           apis={[
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
+            [configApiRef, new MockConfigApi({})],
           ]}
         >
           <ScoreCardTable />
@@ -67,6 +68,68 @@ describe('ScoreBoardPage-EmptyData', () => {
 
     await findByTestId('score-board-table');
     jest.useRealTimers();
+  });
+
+  it.each([
+    ['always', 1],
+    ['if-data-present', 0],
+    ['never', 0],
+  ])('should apply reviewer column display policy', async (displayPolicy, isPresent) => {
+    const errorApi = { post: () => {} };
+    const displayPolicies = { reviewer: displayPolicy };
+    const configApi = new MockConfigApi({ scorecards: {display: displayPolicies} });
+    const { findByTestId, queryAllByText } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, errorApi],
+            [scoringDataApiRef, mockClient],
+            [configApiRef, configApi],
+          ]}
+        >
+          <Router>
+            <ScoreCardTable />
+          </Router>
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByTestId('score-board-table');
+
+    const reviewerColumn = await queryAllByText('Reviewer')
+
+    expect(reviewerColumn).toHaveLength(isPresent)
+  });
+
+  it.each([
+    ['always', 1],
+    ['if-data-present', 0],
+    ['never', 0],
+  ])('should apply review date column display policy', async (displayPolicy, isPresent) => {
+    const errorApi = { post: () => {} };
+    const displayPolicies = { reviewDate: displayPolicy };
+    const configApi = new MockConfigApi({ scorecards: {display: displayPolicies} });
+    const { findByTestId, queryAllByText } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, errorApi],
+            [scoringDataApiRef, mockClient],
+            [configApiRef, configApi],
+          ]}
+        >
+          <Router>
+            <ScoreCardTable />
+          </Router>
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByTestId('score-board-table');
+
+    const reviewerColumn = await queryAllByText('Date')
+
+    expect(reviewerColumn).toHaveLength(isPresent)
   });
 });
 
@@ -119,6 +182,7 @@ describe('ScoreCard-TestWithData', () => {
           apis={[
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
+            [configApiRef, new MockConfigApi({})],
           ]}
         >
           <Router>
@@ -134,5 +198,67 @@ describe('ScoreCard-TestWithData', () => {
     const podcastRow = podcastColumn.closest('tr');
 
     expect(podcastRow).toHaveTextContent('podcastsystemAB+DFFC');
+  });
+
+  it.each([
+    ['always', 1],
+    ['if-data-present', 1],
+    ['never', 0],
+  ])('should apply reviewer column display policy', async (displayPolicy, isPresent) => {
+    const errorApi = { post: () => {} };
+    const displayPolicies = { reviewer: displayPolicy };
+    const configApi = new MockConfigApi({ scorecards: {display: displayPolicies} });
+    const { findByTestId, queryAllByText } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, errorApi],
+            [scoringDataApiRef, mockClient],
+            [configApiRef, configApi],
+          ]}
+        >
+          <Router>
+            <ScoreCardTable />
+          </Router>
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByTestId('score-board-table');
+
+    const reviewerColumn = await queryAllByText('Reviewer')
+
+    expect(reviewerColumn).toHaveLength(isPresent)
+  });
+
+  it.each([
+    ['always', 1],
+    ['if-data-present', 1],
+    ['never', 0],
+  ])('should apply review date column display policy', async (displayPolicy, isPresent) => {
+    const errorApi = { post: () => {} };
+    const displayPolicies = { reviewDate: displayPolicy };
+    const configApi = new MockConfigApi({ scorecards: {display: displayPolicies} });
+    const { findByTestId, queryAllByText } = render(
+      <ThemeProvider theme={lightTheme}>
+        <TestApiProvider
+          apis={[
+            [errorApiRef, errorApi],
+            [scoringDataApiRef, mockClient],
+            [configApiRef, configApi],
+          ]}
+        >
+          <Router>
+            <ScoreCardTable />
+          </Router>
+        </TestApiProvider>
+      </ThemeProvider>,
+    );
+
+    await findByTestId('score-board-table');
+
+    const reviewerColumn = await queryAllByText('Date')
+
+    expect(reviewerColumn).toHaveLength(isPresent)
   });
 });

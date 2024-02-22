@@ -24,6 +24,8 @@ import { scoringDataApiRef } from '../../api';
 import { EntityScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
 import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
+import { useDisplayConfig } from '../../config/DisplayConfig';
+import { DisplayPolicy } from '../../config/types';
 
 const useScoringAllDataLoader = (entityKindFilter?: string[]) => {
   const errorApi = useApi(errorApiRef);
@@ -49,6 +51,8 @@ type ScoreTableProps = {
 };
 
 export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
+  const displayPolicies = useDisplayConfig().getDisplayPolicies();
+
   const columns: TableColumn<EntityScoreExtended>[] = [
     {
       title: 'Name',
@@ -85,7 +89,14 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
           </>
         ) : null,
     },
-    {
+  ];
+
+  if (
+    displayPolicies.reviewer === DisplayPolicy.Always ||
+    (displayPolicies.reviewer === DisplayPolicy.IfDataPresent &&
+      scores.some(s => !!s.scoringReviewer))
+  ) {
+    columns.push({
       title: 'Reviewer',
       field: 'scoringReviewer',
       render: entityScore =>
@@ -96,16 +107,24 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
             </EntityRefLink>
           </>
         ) : null,
-    },
-    {
+    });
+  }
+
+  if (
+    displayPolicies.reviewDate === DisplayPolicy.Always ||
+    (displayPolicies.reviewDate === DisplayPolicy.IfDataPresent &&
+      scores.some(s => !!s.scoringReviewDate))
+  ) {
+    columns.push({
       title: 'Date',
       field: 'scoringReviewDate',
       render: entityScore =>
         entityScore.reviewDate ? (
           <>{entityScore.reviewDate.toLocaleDateString()}</>
         ) : null,
-    },
-  ];
+    });
+  }
+
   scores
     .flatMap(s => {
       return s.areaScores ?? [];
