@@ -13116,7 +13116,7 @@ __metadata:
     "@types/express-serve-static-core": "npm:4.17.43"
     "@types/luxon": "npm:3.1.0"
     app: "link:../app"
-    better-sqlite3: "npm:9.4.0"
+    better-sqlite3: "npm:9.4.3"
     dockerode: "npm:3.3.5"
     express: "npm:4.18.2"
     express-promise-router: "npm:4.1.1"
@@ -13204,14 +13204,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:9.4.0":
-  version: 9.4.0
-  resolution: "better-sqlite3@npm:9.4.0"
+"better-sqlite3@npm:9.4.3":
+  version: 9.4.3
+  resolution: "better-sqlite3@npm:9.4.3"
   dependencies:
     bindings: "npm:^1.5.0"
     node-gyp: "npm:latest"
     prebuild-install: "npm:^7.1.1"
-  checksum: 42b2edfa46d62763514b87122245a3513a5ff20f05fef4fb49fec33f3de0a51a29025596178f57c634b8013f16bbdf8169a308fb3e3b8d126d715788d72d1e74
+  checksum: efc8b1440388ff0ada7bd1d41021dd5a5a9cfa440d3e66a661e3f89c8d72229de939887aa0a9b24695843f88710ff79b34c5990aaf951b55a00858801a3b134c
   languageName: node
   linkType: hard
 
