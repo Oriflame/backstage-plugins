@@ -29,7 +29,12 @@ import {
   Table,
   TableColumn,
 } from '@backstage/core-components';
-import { configApiRef, errorApiRef, useApi } from '@backstage/core-plugin-api';
+import {
+  configApiRef,
+  errorApiRef,
+  useApi,
+  githubAuthApiRef,
+} from '@backstage/core-plugin-api';
 import { scoreToColorConverter } from '../../helpers/scoreToColorConverter';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import {
@@ -65,9 +70,10 @@ const useScoringDataLoader = () => {
   const scorigDataApi = useApi(scoringDataApiRef);
   const config = useApi(configApiRef);
   const { entity } = useEntity();
+  const auth = useApi(githubAuthApiRef);
 
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getScore(entity),
+    async () => scorigDataApi.getScore(entity, auth),
     [scorigDataApi, entity],
   );
 

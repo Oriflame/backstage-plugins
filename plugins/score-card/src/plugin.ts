@@ -22,12 +22,11 @@ import {
   configApiRef,
 } from '@backstage/core-plugin-api';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';
-import { ScoringDataJsonClient } from './api';
-import { scoringDataApiRef } from './api';
-
+import { ScoringDataJsonClient, scoringDataApiRef } from './api';
 import { rootRouteRef } from './routes';
 
 export { ScoreCardTable } from './components/ScoreCardTable';
+export { EntityScoreBoardTable } from './components/EntityScoreBoardTable';
 
 export const scoreCardPlugin = createPlugin({
   id: 'score-card',

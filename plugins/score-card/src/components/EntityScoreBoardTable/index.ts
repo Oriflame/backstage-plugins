@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Oriflame
+ * Copyright 2023 Oriflame
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,4 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-import { Entity } from '@backstage/catalog-model';
-import { createApiRef } from '@backstage/core-plugin-api';
-import { EntityScoreExtended } from './types';
-
-export const scoringDataApiRef = createApiRef<ScoringDataApi>({
-  id: 'plugin.scoringdata.service',
-});
-
-export type ScoringDataApi = {
-  getScore(
-    entity?: Entity,
-    auth?: any,
-  ): Promise<EntityScoreExtended | undefined>;
-  getAllScores(
-    entityKindFilter?: string[],
-    entity?: Entity,
-    auth?: any,
-  ): Promise<EntityScoreExtended[] | undefined>;
-};
+ */ export { EntityScoreBoardTable } from './EntityScoreBoardTable';
