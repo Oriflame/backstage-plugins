@@ -26,6 +26,7 @@ import { ScmAuthApi } from '@backstage/integration-react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { setupRequestMockHandlers } from '@backstage/test-utils';
+import { ScmIntegrationRegistry } from '@backstage/integration';
 
 // Catalog items used as mock
 const items = [
