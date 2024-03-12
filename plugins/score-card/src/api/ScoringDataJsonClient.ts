@@ -25,8 +25,7 @@ import {
   DEFAULT_NAMESPACE,
   stringifyEntityRef,
 } from '@backstage/catalog-model';
-
-import { Octokit } from '@octokit/rest';
+import { ScmAuthApi } from '@backstage/integration-react';
 
 /**
  * Default JSON data client. Expects JSON files in a format see /sample-data
@@ -35,19 +34,23 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   configApi: ConfigApi;
   catalogApi: CatalogApi;
   fetchApi: FetchApi;
+  scmAuthApi: ScmAuthApi;
 
   constructor({
     configApi,
     catalogApi,
     fetchApi,
+    scmAuthApi,
   }: {
     configApi: ConfigApi;
     catalogApi: CatalogApi;
     fetchApi: FetchApi;
+    scmAuthApi: ScmAuthApi;
   }) {
     this.configApi = configApi;
     this.catalogApi = catalogApi;
     this.fetchApi = fetchApi;
+    this.scmAuthApi = scmAuthApi;
   }
 
   private getAnnotationValue(entity: Entity, annotation: string) {
@@ -61,140 +64,88 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     return entity.metadata.annotations[annotation];
   }
 
-  private async getResult<T>(
-    jsonDataUrl: string,
-    projectSlug: string,
-    auth?: any,
-  ): Promise<T> {
-    const token = await auth.getAccessToken(['repo']);
+  private async getResult<T>(jsonDataUrl: string): Promise<T | undefined> {
+    let auth;
+    try {
+      auth = await this.scmAuthApi.getCredentials({ url: jsonDataUrl });
+    } catch (error) {
+      this.logConsole(
+        `No authencation config found for ${jsonDataUrl}, proceeding without authentication`,
+      );
+    }
 
-    const octokit = new Octokit({ auth: token });
-    const owner = projectSlug?.split('/')[0] || '';
-    const repo = projectSlug?.split('/')[1] || '';
-
-    const result: T = await octokit
-      .request(`GET /repos/{owner}/{repo}/contents/${jsonDataUrl}`, {
-        baseUrl: 'https://api.github.com',
-        owner,
-        repo,
-        headers: {
-          Accept: 'application/vnd.github.v3.raw',
-        },
-      })
-      .then(res => {
-        switch (res.status) {
-          case 404:
-            return null;
-          case 200:
-            return JSON.parse(res.data);
-          default:
-            throw new Error(`error from server (code ${res.status})`);
-        }
+    try {
+      const result = await this.fetchApi.fetch(jsonDataUrl, {
+        headers: auth && auth.headers,
       });
 
-    return result;
+      if (result.status === 404) {
+        return undefined;
+      } else if (result.status !== 200) {
+        return undefined;
+      }
+      const json = (await result.json()) as T;
+      this.logConsole(`result: ${JSON.stringify(json)}`);
+      return json;
+    } catch (error) {
+      throw new Error(`error from server (code ${error.status})`);
+    }
   }
 
   public async getScore(
     entity?: Entity,
-    auth?: any,
   ): Promise<EntityScoreExtended | undefined> {
     if (!entity) {
       return undefined;
     }
-
     const jsonFromAnnotation = this.getAnnotationValue(
       entity,
       'scorecard/jsonDataUrl',
     );
-    const projectSlug = this.getAnnotationValue(
-      entity,
-      'github.com/project-slug',
-    );
 
-    let result: EntityScore | undefined;
-    if (jsonFromAnnotation !== undefined && projectSlug !== undefined) {
-      result = await this.getResult<EntityScore>(
-        jsonFromAnnotation,
-        projectSlug,
-        auth,
-      );
+    let urlWithData: string;
+
+    if (jsonFromAnnotation) {
+      urlWithData = jsonFromAnnotation;
     } else {
       const jsonDataUrl = this.getJsonDataUrl();
-      const urlWithData = `${jsonDataUrl}${
+      urlWithData = `${jsonDataUrl}${
         entity.metadata.namespace ?? DEFAULT_NAMESPACE
       }/${entity.kind}/${entity.metadata.name}.json`.toLowerCase();
-
-      this.logConsole(
-        `ScoringDataJsonClient: fetching score from: ${urlWithData}`,
-      );
-      result = await fetch(urlWithData).then(async res => {
-        switch (res.status) {
-          case 404:
-            return undefined;
-          case 200:
-            return await res.json().then(json => {
-              this.logConsole(`result: ${JSON.stringify(json)}`);
-              return json as EntityScore;
-            });
-          default:
-            throw new Error(`error from server (code ${res.status})`);
-        }
-      });
     }
+
+    this.logConsole(
+      `ScoringDataJsonClient: fetching score from: ${urlWithData}`,
+    );
+    const result: EntityScore | undefined = await this.getResult<EntityScore>(
+      urlWithData,
+    );
     if (!result) {
       return undefined;
     }
-    return this.extendEntityScore(result, undefined);
+    return this.extendEntityScore(result, [entity]);
   }
 
   public async getAllScores(
     entityKindFilter?: string[],
-    entity?: Entity,
-    auth?: any,
   ): Promise<EntityScoreExtended[] | undefined> {
-    let jsonFromAnnotation = undefined;
-    let projectSlug = undefined;
-    let result: EntityScore[] | undefined;
+    const jsonDataUrl = this.getJsonDataUrl();
+    const urlWithData = `${jsonDataUrl}all.json`;
+    this.logConsole(
+      `ScoringDataJsonClient: fetching all scored from ${urlWithData}`,
+    );
+    let result: EntityScore[] | undefined = await this.getResult<EntityScore[]>(
+      urlWithData,
+    );
 
-    if (entity !== undefined) {
-      jsonFromAnnotation = this.getAnnotationValue(
-        entity,
-        'scorecard/jsonDataUrl',
-      );
-      projectSlug = this.getAnnotationValue(entity, 'github.com/project-slug');
-    }
-    if (jsonFromAnnotation !== undefined && projectSlug !== undefined) {
-      result = await this.getResult<EntityScore[]>(
-        jsonFromAnnotation,
-        projectSlug,
-        auth,
-      );
-    } else {
-      const jsonDataUrl = this.getJsonDataUrl();
-      const urlWithData = `${jsonDataUrl}all.json`;
-      result = await fetch(urlWithData).then(async res => {
-        switch (res.status) {
-          case 404:
-            return undefined;
-          case 200:
-            return await res.json().then(json => {
-              this.logConsole(`result: ${JSON.stringify(json)}`);
-              return json as EntityScore[];
-            });
-          default:
-            throw new Error(`error from server (code ${res.status})`);
-        }
-      });
-    }
     if (!result) return undefined;
 
     // Filter entities by kind
-    if (entityKindFilter?.length) {
-      result = result.filter((ent: { entityRef: { kind: string } }) =>
+    if (entityKindFilter && entityKindFilter.length) {
+      result = result.filter(entity =>
         entityKindFilter
           .map(f => f.toLocaleLowerCase())
-          .includes(ent.entityRef?.kind.toLowerCase()),
+          .includes(entity.entityRef?.kind.toLowerCase() as string),
       );
     }
 
@@ -234,7 +185,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   private getJsonDataUrl() {
     return (
       this.configApi.getOptionalString('scorecards.jsonDataUrl') ??
-      'https://unknown-url-please-configure'
+      'https://unknown-url-please-configure/'
     );
   }
 

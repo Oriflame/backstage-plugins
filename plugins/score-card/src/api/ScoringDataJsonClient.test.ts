@@ -18,27 +18,14 @@ import { MockConfigApi, MockFetchApi } from '@backstage/test-utils';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
 import { Entity } from '@backstage/catalog-model';
 import { ScoringDataJsonClient } from './ScoringDataJsonClient';
-
 import {
   GetEntitiesRequest,
   GetEntitiesResponse,
 } from '@backstage/catalog-client';
-
-const mockOctokit = {
-  request: jest.fn(),
-};
-
-jest.mock('@octokit/rest', () => ({
-  Octokit: class {
-    constructor() {
-      return mockOctokit;
-    }
-  },
-}));
-
-const mockAuth = {
-  getAccessToken: jest.fn(),
-};
+import { ScmAuthApi } from '@backstage/integration-react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { setupRequestMockHandlers } from '@backstage/test-utils';
 
 // Catalog items used as mock
 const items = [
@@ -47,10 +34,6 @@ const items = [
     kind: 'API',
     metadata: {
       name: 'Api 1',
-      annotations: {
-        'scorecard/jsonDataUrl': 'dummy',
-        'github.com/project-slug': 'org/repo',
-      },
     },
     spec: {
       type: 'openapi',
@@ -93,16 +76,6 @@ const getEntitiesMock = (
       : items,
   } as GetEntitiesResponse);
 };
-const mockedScoreEnt1 = {
-  entityRef: {
-    kind: 'api',
-    name: 'Api 1',
-  },
-  scorePercent: 75,
-  scoringReviewDate: '2022-01-01T08:00:00Z',
-  scoringReviewer: { kind: 'User', name: 'Reviewer 1', namespace: 'default' },
-  areaScores: [],
-};
 
 const getAllEntitiesMock = (
   request?: GetEntitiesRequest,
@@ -124,40 +97,45 @@ const getAllEntitiesMock = (
   } as GetEntitiesResponse);
 };
 
+const scmAuthApi: jest.Mocked<ScmAuthApi> =
+  {} as unknown as jest.Mocked<ScmAuthApi>;
+
+const sampleData = [
+  {
+    entityRef: {
+      kind: 'api',
+      name: 'Api 1',
+    },
+    scorePercent: 75,
+    scoringReviewDate: '2022-01-01T08:00:00Z',
+    scoringReviewer: 'Reviewer 1',
+    areaScores: [],
+  },
+  {
+    entityRef: {
+      kind: 'system',
+      name: 'System 1',
+    },
+    scorePercent: 80,
+    scoringReviewDate: '2022-01-01T08:00:00Z',
+    scoringReviewer: 'Reviewer 2',
+    areaScores: [],
+  },
+];
+
 describe('ScoringDataJsonClient-getAllScores', () => {
+  const server = setupServer();
+  setupRequestMockHandlers(server);
   beforeEach(() => {
-    jest.spyOn(global, 'fetch').mockImplementation(
-      jest.fn(() =>
-        Promise.resolve({
-          status: 200,
-          json: () =>
-            new Promise(resolve => {
-              const sampleData = [
-                {
-                  entityRef: {
-                    kind: 'api',
-                    name: 'Api 1',
-                  },
-                  scorePercent: 75,
-                  scoringReviewDate: '2022-01-01T08:00:00Z',
-                  scoringReviewer: 'Reviewer 1',
-                  areaScores: [],
-                },
-                {
-                  entityRef: {
-                    kind: 'system',
-                    name: 'System 1',
-                  },
-                  scorePercent: 80,
-                  scoringReviewDate: '2022-01-01T08:00:00Z',
-                  scoringReviewer: 'Reviewer 2',
-                  areaScores: [],
-                },
-              ];
-              resolve(sampleData);
-            }),
-        }),
-      ) as jest.Mock,
+    scmAuthApi.getCredentials = jest.fn().mockResolvedValue({ headers: {} });
+
+    server.use(
+      rest.get(
+        'https://unknown-url-please-configure/all.json',
+        (_req, res, ctx) => {
+          return res(ctx.status(200), ctx.json(sampleData));
+        },
+      ),
     );
   });
 
@@ -206,6 +184,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       configApi: mockConfig,
       fetchApi: mockFetch,
       catalogApi: catalogApi,
+      scmAuthApi,
     });
 
     const entities = await api.getAllScores();
@@ -254,6 +233,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       configApi: mockConfig,
       fetchApi: mockFetch,
       catalogApi: catalogApi,
+      scmAuthApi,
     });
 
     const entities = await api.getAllScores();
@@ -290,227 +270,89 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       configApi: mockConfig,
       fetchApi: mockFetch,
       catalogApi: catalogApi,
+      scmAuthApi,
     });
 
     const entities = await api.getAllScores(['api']);
     expect(entities).toEqual(expected);
   });
-});
+  describe('getScores', () => {
+    it('should retrieve json from location in annotation', async () => {
+      const entity = {
+        apiVersion: 'backstage.io/v1alpha1',
+        kind: 'component',
+        metadata: {
+          name: 'custom-annotation-location',
+          annotations: {
+            'scorecard/jsonDataUrl':
+              'https://custom-score-url/custom-scores.json',
+          },
+        },
+        relations: [
+          {
+            type: 'ownedBy',
+            targetRef: 'group:default/team1',
+          },
+        ],
+      } as Entity;
 
-describe('ScoringDataJsonClient-getAllScores-annotation', () => {
-  beforeEach(() => {
-    const mockedAllJson = [
-      mockedScoreEnt1,
-      {
+      const catalogApi: jest.Mocked<CatalogApi> = {
+        getEntities: jest.fn(),
+      } as any;
+
+      catalogApi.getEntities.mockResolvedValue({
+        items: [entity],
+      });
+
+      const customData = {
         entityRef: {
-          kind: 'system',
-          name: 'System 1',
+          kind: 'component',
+          name: 'custom-annotation-location',
         },
-        scorePercent: 80,
-        scoringReviewDate: '2022-01-01T08:00:00Z',
-        scoringReviewer: 'Reviewer 2',
-        areaScores: [],
-      },
-    ];
-    mockOctokit.request.mockResolvedValue({
-      status: 200,
-      data: JSON.stringify(mockedAllJson),
-    });
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it('should get all scores', async () => {
-    const catalogApi: jest.Mocked<CatalogApi> = {
-      getEntities: jest.fn(),
-    } as any;
-
-    catalogApi.getEntities.mockImplementation(getEntitiesMock);
-
-    const mockConfig = new MockConfigApi({
-      app: { baseUrl: 'https://example.com' },
-    });
-
-    const expected = [
-      {
-        areaScores: [],
-        entityRef: { kind: 'api', name: 'Api 1' },
-        id: 'api:default/api 1',
-        owner: { kind: 'group', name: 'team1', namespace: 'default' },
-        reviewDate: new Date('2022-01-01T08:00:00.000Z'),
-        reviewer: { kind: 'User', name: 'Reviewer 1', namespace: 'default' },
         scorePercent: 75,
         scoringReviewDate: '2022-01-01T08:00:00Z',
-        scoringReviewer: {
-          kind: 'User',
-          name: 'Reviewer 1',
-          namespace: 'default',
-        },
-      },
-      {
+        scoringReviewer: 'CustomReviewier 1',
         areaScores: [],
-        entityRef: { kind: 'system', name: 'System 1' },
-        id: 'system:default/system 1',
-        owner: { kind: 'group', name: 'team2', namespace: 'default' },
-        reviewDate: new Date('2022-01-01T08:00:00.000Z'),
-        reviewer: { kind: 'User', name: 'Reviewer 2', namespace: 'default' },
-        scorePercent: 80,
-        scoringReviewDate: '2022-01-01T08:00:00Z',
-        scoringReviewer: 'Reviewer 2',
-      },
-    ];
+      };
 
-    const mockFetch = new MockFetchApi();
+      server.use(
+        rest.get(
+          'https://custom-score-url/custom-scores.json',
+          (_req, res, ctx) => {
+            return res(ctx.status(200), ctx.json(customData));
+          },
+        ),
+      );
 
-    const api = new ScoringDataJsonClient({
-      configApi: mockConfig,
-      fetchApi: mockFetch,
-      catalogApi: catalogApi,
-    });
+      const mockConfig = new MockConfigApi({
+        app: { baseUrl: 'https://example.com' },
+      });
+      const mockFetch = new MockFetchApi();
 
-    const entities = await api.getAllScores(undefined, items[0], mockAuth);
-    expect(entities).toEqual(expected);
-  });
-
-  it('should return error on getAllScore()', async () => {
-    const catalogApi: jest.Mocked<CatalogApi> = {
-      getEntities: jest.fn(),
-    } as any;
-
-    catalogApi.getEntities.mockImplementation(getEntitiesMock);
-
-    const mockConfig = new MockConfigApi({
-      app: { baseUrl: 'https://example.com' },
-    });
-
-    const mockFetch = new MockFetchApi();
-
-    const api = new ScoringDataJsonClient({
-      configApi: mockConfig,
-      fetchApi: mockFetch,
-      catalogApi: catalogApi,
-    });
-
-    mockOctokit.request.mockResolvedValue({
-      status: 500,
-    });
-
-    await expect(
-      api.getAllScores(undefined, items[0], mockAuth),
-    ).rejects.toThrow('error from server (code 500)');
-  });
-
-  it('should filter entities by kind', async () => {
-    const catalogApi: jest.Mocked<CatalogApi> = {
-      getEntities: jest.fn(),
-    } as any;
-
-    catalogApi.getEntities.mockImplementation(getEntitiesMock);
-
-    const mockConfig = new MockConfigApi({
-      app: { baseUrl: 'https://example.com' },
-    });
-
-    const expected = [
-      {
+      const expected = {
         areaScores: [],
-        entityRef: { kind: 'api', name: 'Api 1' },
-        id: 'api:default/api 1',
+        entityRef: { kind: 'component', name: 'custom-annotation-location' },
+        id: 'component:default/custom-annotation-location',
         owner: { kind: 'group', name: 'team1', namespace: 'default' },
         reviewDate: new Date('2022-01-01T08:00:00.000Z'),
-        reviewer: { kind: 'User', name: 'Reviewer 1', namespace: 'default' },
-        scorePercent: 75,
-        scoringReviewDate: '2022-01-01T08:00:00Z',
-        scoringReviewer: {
+        reviewer: {
           kind: 'User',
-          name: 'Reviewer 1',
+          name: 'CustomReviewier 1',
           namespace: 'default',
         },
-      },
-    ];
+        scorePercent: 75,
+        scoringReviewDate: '2022-01-01T08:00:00Z',
+        scoringReviewer: 'CustomReviewier 1',
+      };
+      const api = new ScoringDataJsonClient({
+        configApi: mockConfig,
+        fetchApi: mockFetch,
+        catalogApi: catalogApi,
+        scmAuthApi,
+      });
 
-    const mockFetch = new MockFetchApi();
-
-    const api = new ScoringDataJsonClient({
-      configApi: mockConfig,
-      fetchApi: mockFetch,
-      catalogApi: catalogApi,
+      const entities = await api.getScore(entity);
+      expect(entities).toEqual(expected);
     });
-
-    const entities = await api.getAllScores(['api'], items[0], mockAuth);
-    expect(entities).toEqual(expected);
-  });
-
-  it('should get component scores', async () => {
-    const catalogApi: jest.Mocked<CatalogApi> = {
-      getEntities: jest.fn(),
-    } as any;
-
-    catalogApi.getEntities.mockImplementation(getEntitiesMock);
-
-    const mockConfig = new MockConfigApi({
-      app: { baseUrl: 'https://example.com' },
-    });
-    mockOctokit.request.mockResolvedValue({
-      status: 200,
-      data: JSON.stringify(mockedScoreEnt1),
-    });
-
-    const expected = {
-      areaScores: [],
-      entityRef: { kind: 'api', name: 'Api 1' },
-      id: 'api:default/api 1',
-      owner: undefined,
-      reviewDate: new Date('2022-01-01T08:00:00.000Z'),
-      reviewer: { kind: 'User', name: 'Reviewer 1', namespace: 'default' },
-      scorePercent: 75,
-      scoringReviewDate: '2022-01-01T08:00:00Z',
-      scoringReviewer: {
-        kind: 'User',
-        name: 'Reviewer 1',
-        namespace: 'default',
-      },
-    };
-    const mockFetch = new MockFetchApi();
-
-    const api = new ScoringDataJsonClient({
-      configApi: mockConfig,
-      fetchApi: mockFetch,
-      catalogApi: catalogApi,
-    });
-
-    const entities = await api.getScore(items[0], mockAuth);
-
-    expect(entities).toEqual(expected);
-  });
-
-  it('should return error on getScore', async () => {
-    const catalogApi: jest.Mocked<CatalogApi> = {
-      getEntities: jest.fn(),
-    } as any;
-
-    catalogApi.getEntities.mockImplementation(getEntitiesMock);
-
-    const mockConfig = new MockConfigApi({
-      app: { baseUrl: 'https://example.com' },
-    });
-
-    const mockFetch = new MockFetchApi();
-
-    const api = new ScoringDataJsonClient({
-      configApi: mockConfig,
-      fetchApi: mockFetch,
-      catalogApi: catalogApi,
-    });
-
-    mockOctokit.request.mockResolvedValue({
-      status: 500,
-    });
-
-    await expect(api.getScore(items[0], mockAuth)).rejects.toThrow(
-      'error from server (code 500)',
-    );
   });
 });
