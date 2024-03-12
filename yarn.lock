@@ -7902,6 +7902,7 @@ __metadata:
     "@backstage/core-components": "npm:^0.13.10"
     "@backstage/core-plugin-api": "npm:^1.8.2"
     "@backstage/dev-utils": "npm:^1.0.26"
+    "@backstage/integration": "npm:^1.9.0"
     "@backstage/integration-react": "npm:^1.1.24"
     "@backstage/plugin-catalog": "npm:^1.16.1"
     "@backstage/plugin-catalog-common": "npm:^1.0.20"

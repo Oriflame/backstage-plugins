@@ -99,6 +99,8 @@ const getAllEntitiesMock = (
 
 const scmAuthApi: jest.Mocked<ScmAuthApi> =
   {} as unknown as jest.Mocked<ScmAuthApi>;
+const scmIntegrationsApi: jest.Mocked<ScmIntegrationRegistry> =
+  {} as unknown as jest.Mocked<ScmIntegrationRegistry>;
 
 const sampleData = [
   {
@@ -128,7 +130,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
   setupRequestMockHandlers(server);
   beforeEach(() => {
     scmAuthApi.getCredentials = jest.fn().mockResolvedValue({ headers: {} });
-
+    scmIntegrationsApi.byUrl = jest.fn().mockResolvedValue({});
     server.use(
       rest.get(
         'https://unknown-url-please-configure/all.json',
@@ -185,6 +187,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       fetchApi: mockFetch,
       catalogApi: catalogApi,
       scmAuthApi,
+      scmIntegrationsApi,
     });
 
     const entities = await api.getAllScores();
@@ -234,6 +237,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       fetchApi: mockFetch,
       catalogApi: catalogApi,
       scmAuthApi,
+      scmIntegrationsApi,
     });
 
     const entities = await api.getAllScores();
@@ -271,6 +275,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
       fetchApi: mockFetch,
       catalogApi: catalogApi,
       scmAuthApi,
+      scmIntegrationsApi,
     });
 
     const entities = await api.getAllScores(['api']);
@@ -349,6 +354,7 @@ describe('ScoringDataJsonClient-getAllScores', () => {
         fetchApi: mockFetch,
         catalogApi: catalogApi,
         scmAuthApi,
+        scmIntegrationsApi,
       });
 
       const entities = await api.getScore(entity);

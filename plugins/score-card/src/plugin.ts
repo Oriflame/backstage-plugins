@@ -21,7 +21,10 @@ import {
   fetchApiRef,
   configApiRef,
 } from '@backstage/core-plugin-api';
-import { scmAuthApiRef } from '@backstage/integration-react';
+import {
+  scmAuthApiRef,
+  scmIntegrationsApiRef,
+} from '@backstage/integration-react';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';
 import { ScoringDataJsonClient, scoringDataApiRef } from './api';
 import { rootRouteRef } from './routes';
@@ -41,13 +44,21 @@ export const scoreCardPlugin = createPlugin({
         catalogApi: catalogApiRef,
         fetchApi: fetchApiRef,
         scmAuthApi: scmAuthApiRef,
+        scmIntegrationsApi: scmIntegrationsApiRef,
       },
-      factory: ({ configApi, catalogApi, fetchApi, scmAuthApi }) => {
+      factory: ({
+        configApi,
+        catalogApi,
+        fetchApi,
+        scmAuthApi,
+        scmIntegrationsApi,
+      }) => {
         return new ScoringDataJsonClient({
           configApi,
           catalogApi,
           fetchApi,
           scmAuthApi,
+          scmIntegrationsApi,
         });
       },
     }),

@@ -26,7 +26,11 @@ import {
   stringifyEntityRef,
 } from '@backstage/catalog-model';
 import { ScmAuthApi } from '@backstage/integration-react';
-
+import {
+  ScmIntegrationRegistry,
+  GithubIntegration,
+  getGithubFileFetchUrl,
+} from '@backstage/integration';
 /**
  * Default JSON data client. Expects JSON files in a format see /sample-data
  */
@@ -35,22 +39,26 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   catalogApi: CatalogApi;
   fetchApi: FetchApi;
   scmAuthApi: ScmAuthApi;
+  scmIntegrationsApi: ScmIntegrationRegistry;
 
   constructor({
     configApi,
     catalogApi,
     fetchApi,
     scmAuthApi,
+    scmIntegrationsApi,
   }: {
     configApi: ConfigApi;
     catalogApi: CatalogApi;
     fetchApi: FetchApi;
     scmAuthApi: ScmAuthApi;
+    scmIntegrationsApi: ScmIntegrationRegistry;
   }) {
     this.configApi = configApi;
     this.catalogApi = catalogApi;
     this.fetchApi = fetchApi;
     this.scmAuthApi = scmAuthApi;
+    this.scmIntegrationsApi = scmIntegrationsApi;
   }
 
   private getAnnotationValue(entity: Entity, annotation: string) {
@@ -65,18 +73,42 @@ export class ScoringDataJsonClient implements ScoringDataApi {
   }
 
   private async getResult<T>(jsonDataUrl: string): Promise<T | undefined> {
+    // Find out if we have an configured integration for the given URL
+    const integration = this.scmIntegrationsApi.byUrl(jsonDataUrl);
+
+    // Find any configured authentication for the URL
     let auth;
     try {
       auth = await this.scmAuthApi.getCredentials({ url: jsonDataUrl });
     } catch (error) {
       this.logConsole(
-        `No authencation config found for ${jsonDataUrl}, proceeding without authentication`,
+        `No authentication config found for ${jsonDataUrl}, proceeding without authentication`,
       );
     }
 
+    // perform any custom config for the integration type
+    let requestUrl;
+    let headers = {};
+    switch (integration?.type) {
+      case 'github':
+        requestUrl = getGithubFileFetchUrl(
+          jsonDataUrl,
+          (integration as GithubIntegration).config,
+          { ...auth, type: 'token' },
+        );
+        headers = {
+          ...(auth && auth.headers),
+          Accept: 'application/vnd.github.v3.raw',
+        };
+        break;
+      default:
+        requestUrl = jsonDataUrl;
+        break;
+    }
+
     try {
-      const result = await this.fetchApi.fetch(jsonDataUrl, {
-        headers: auth && auth.headers,
+      const result = await this.fetchApi.fetch(requestUrl, {
+        headers,
       });
 
       if (result.status === 404) {
@@ -179,7 +211,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   private logConsole(_: string) {
     // eslint-disable-next-line no-console
-    // DEBUG: console.log(msg);
+    console.log(_);
   }
 
   private getJsonDataUrl() {
