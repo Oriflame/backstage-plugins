@@ -97,9 +97,20 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   public async getAllScores(
     entityKindFilter?: string[],
+    entity?: Entity,
   ): Promise<EntityScoreExtended[] | undefined> {
-    const jsonDataUrl = this.getJsonDataUrl();
-    const urlWithData = `${jsonDataUrl}all.json`;
+    const jsonFromAnnotation = entity
+      ? this.getAnnotationValue(entity, 'scorecard/jsonDataUrl')
+      : undefined;
+
+    let urlWithData;
+    if (jsonFromAnnotation) {
+      urlWithData = jsonFromAnnotation;
+    } else {
+      const jsonDataUrl = this.getJsonDataUrl();
+      urlWithData = `${jsonDataUrl}all.json`;
+    }
+
     this.logConsole(
       `ScoringDataJsonClient: fetching all scored from ${urlWithData}`,
     );

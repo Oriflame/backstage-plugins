@@ -25,5 +25,6 @@ export type ScoringDataApi = {
   getScore(entity?: Entity): Promise<EntityScoreExtended | undefined>;
   getAllScores(
     entityKindFilter?: string[],
+    entity?: Entity,
   ): Promise<EntityScoreExtended[] | undefined>;
 };

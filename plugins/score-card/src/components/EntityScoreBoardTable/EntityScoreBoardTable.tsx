@@ -16,11 +16,7 @@
 import React, { useEffect } from 'react';
 import { Progress } from '@backstage/core-components';
 import useAsync from 'react-use/lib/useAsync';
-import {
-  errorApiRef,
-  useApi,
-  githubAuthApiRef,
-} from '@backstage/core-plugin-api';
+import { errorApiRef, useApi } from '@backstage/core-plugin-api';
 import { getWarningPanel } from '../../helpers/getWarningPanel';
 import { scoringDataApiRef } from '../../api';
 import { ScoreTable } from '../ScoreCardTable/ScoreCardTable';
@@ -30,9 +26,9 @@ const useScoringAllDataLoader = (entityKindFilter?: string[]) => {
   const errorApi = useApi(errorApiRef);
   const scorigDataApi = useApi(scoringDataApiRef);
   const { entity } = useEntity();
-  const auth = useApi(githubAuthApiRef);
+
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getAllScores(entityKindFilter, entity, auth),
+    async () => scorigDataApi.getAllScores(entityKindFilter, entity),
     [scorigDataApi],
   );
 
