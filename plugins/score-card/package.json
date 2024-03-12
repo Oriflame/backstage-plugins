@@ -47,7 +47,6 @@
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
-    "@octokit/rest": "^19.0.3",
     "@types/react": "^18.0.0",
     "react-router-dom": "6.4.3",
     "react-use": "^17.2.4"
@@ -73,8 +72,7 @@
     "@types/react-dom": "*",
     "cross-fetch": "3.1.5",
     "http-server": "14.1.1",
-    "msw": "1.3.2",
-    "react-router-dom": "^6.14.1"
+    "msw": "1.3.2"
   },
   "files": [
     "dist",
