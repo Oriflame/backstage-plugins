@@ -61,69 +61,6 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     this.scmIntegrationsApi = scmIntegrationsApi;
   }
 
-  private getAnnotationValue(entity: Entity, annotation: string) {
-    if (!entity.metadata.annotations) {
-      return undefined;
-    }
-
-    if (annotation && !entity.metadata.annotations[annotation]) {
-      return undefined;
-    }
-    return entity.metadata.annotations[annotation];
-  }
-
-  private async getResult<T>(jsonDataUrl: string): Promise<T | undefined> {
-    // Find out if we have an configured integration for the given URL
-    const integration = this.scmIntegrationsApi.byUrl(jsonDataUrl);
-
-    // Find any configured authentication for the URL
-    let auth;
-    try {
-      auth = await this.scmAuthApi.getCredentials({ url: jsonDataUrl });
-    } catch (error) {
-      this.logConsole(
-        `No authentication config found for ${jsonDataUrl}, proceeding without authentication`,
-      );
-    }
-
-    // perform any custom config for the integration type
-    let requestUrl;
-    let headers = {};
-    switch (integration?.type) {
-      case 'github':
-        requestUrl = getGithubFileFetchUrl(
-          jsonDataUrl,
-          (integration as GithubIntegration).config,
-          { ...auth, type: 'token' },
-        );
-        headers = {
-          ...(auth && auth.headers),
-          Accept: 'application/vnd.github.v3.raw',
-        };
-        break;
-      default:
-        requestUrl = jsonDataUrl;
-        break;
-    }
-
-    try {
-      const result = await this.fetchApi.fetch(requestUrl, {
-        headers,
-      });
-
-      if (result.status === 404) {
-        return undefined;
-      } else if (result.status !== 200) {
-        return undefined;
-      }
-      const json = (await result.json()) as T;
-      this.logConsole(`result: ${JSON.stringify(json)}`);
-      return json;
-    } catch (error) {
-      throw new Error(`error from server (code ${error.status})`);
-    }
-  }
-
   public async getScore(
     entity?: Entity,
   ): Promise<EntityScoreExtended | undefined> {
@@ -211,7 +148,59 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   private logConsole(_: string) {
     // eslint-disable-next-line no-console
-    console.log(_);
+    // DEBUG: console.log(msg);
+  }
+
+  private async getResult<T>(jsonDataUrl: string): Promise<T | undefined> {
+    // Find out if we have an configured integration for the given URL
+    const integration = this.scmIntegrationsApi.byUrl(jsonDataUrl);
+
+    // Find any configured authentication for the URL
+    let auth;
+    try {
+      auth = await this.scmAuthApi.getCredentials({ url: jsonDataUrl });
+    } catch (error) {
+      this.logConsole(
+        `No authentication config found for ${jsonDataUrl}, proceeding without authentication`,
+      );
+    }
+
+    // perform any custom config for the integration type
+    let requestUrl;
+    let headers = {};
+    switch (integration?.type) {
+      case 'github':
+        requestUrl = getGithubFileFetchUrl(
+          jsonDataUrl,
+          (integration as GithubIntegration).config,
+          { ...auth, type: 'token' },
+        );
+        headers = {
+          ...(auth && auth.headers),
+          Accept: 'application/vnd.github.v3.raw',
+        };
+        break;
+      default:
+        requestUrl = jsonDataUrl;
+        break;
+    }
+
+    try {
+      const result = await this.fetchApi.fetch(requestUrl, {
+        headers,
+      });
+
+      if (result.status === 404) {
+        return undefined;
+      } else if (result.status !== 200) {
+        return undefined;
+      }
+      const json = (await result.json()) as T;
+      this.logConsole(`result: ${JSON.stringify(json)}`);
+      return json;
+    } catch (error) {
+      throw new Error(`error from server (code ${error.status})`);
+    }
   }
 
   private getJsonDataUrl() {
@@ -269,5 +258,16 @@ export class ScoringDataJsonClient implements ScoringDataApi {
       reviewDate: reviewDate,
       ...score,
     };
+  }
+
+  private getAnnotationValue(entity: Entity, annotation: string) {
+    if (!entity.metadata.annotations) {
+      return undefined;
+    }
+
+    if (annotation && !entity.metadata.annotations[annotation]) {
+      return undefined;
+    }
+    return entity.metadata.annotations[annotation];
   }
 }
