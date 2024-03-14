@@ -21,10 +21,12 @@ import {
   fetchApiRef,
   configApiRef,
 } from '@backstage/core-plugin-api';
+import {
+  scmAuthApiRef,
+  scmIntegrationsApiRef,
+} from '@backstage/integration-react';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';
-import { ScoringDataJsonClient } from './api';
-import { scoringDataApiRef } from './api';
-
+import { ScoringDataJsonClient, scoringDataApiRef } from './api';
 import { rootRouteRef } from './routes';
 
 export { ScoreCardTable } from './components/ScoreCardTable';
@@ -41,13 +43,24 @@ export const scoreCardPlugin = createPlugin({
         configApi: configApiRef,
         catalogApi: catalogApiRef,
         fetchApi: fetchApiRef,
+        scmAuthApi: scmAuthApiRef,
+        scmIntegrationsApi: scmIntegrationsApiRef,
       },
-      factory: ({ configApi, catalogApi, fetchApi }) =>
-        new ScoringDataJsonClient({
+      factory: ({
+        configApi,
+        catalogApi,
+        fetchApi,
+        scmAuthApi,
+        scmIntegrationsApi,
+      }) => {
+        return new ScoringDataJsonClient({
           configApi,
           catalogApi,
           fetchApi,
-        }),
+          scmAuthApi,
+          scmIntegrationsApi,
+        });
+      },
     }),
   ],
 });
@@ -66,6 +79,18 @@ export const EntityScoreCardContent = scoreCardPlugin.provide(
     name: 'score-board-card',
     component: {
       lazy: () => import('./components/ScoreCard').then(m => m.ScoreCard),
+    },
+  }),
+);
+
+export const EntityScoreBoardTable = scoreCardPlugin.provide(
+  createComponentExtension({
+    name: 'score-board-entity-table',
+    component: {
+      lazy: () =>
+        import('./components/EntityScoreBoardTable').then(
+          m => m.EntityScoreBoardTable,
+        ),
     },
   }),
 );

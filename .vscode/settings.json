@@ -1,0 +1,4 @@
+{
+    "jest.jestCommandLine": "node_modules/.bin/jest --config node_modules/@backstage/cli/config/jest.js",
+
+}

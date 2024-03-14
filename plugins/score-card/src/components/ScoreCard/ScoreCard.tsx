@@ -78,8 +78,7 @@ const useScoringDataLoader = () => {
   }, [error, errorApi]);
 
   const wikiLinkTemplate =
-    config.getOptionalString('scorecards.wikiLinkTemplate') ??
-    '';
+    config.getOptionalString('scorecards.wikiLinkTemplate') ?? '';
 
   return { loading, value, wikiLinkTemplate, error };
 };
