@@ -122,10 +122,10 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
     // Filter entities by kind
     if (entityKindFilter && entityKindFilter.length) {
-      result = result.filter(entity =>
+      result = result.filter(e =>
         entityKindFilter
           .map(f => f.toLocaleLowerCase())
-          .includes(entity.entityRef?.kind.toLowerCase() as string),
+          .includes(e.entityRef?.kind.toLowerCase() as string),
       );
     }
 
