@@ -7866,7 +7866,7 @@ __metadata:
     "@types/jest": "npm:*"
     "@types/node": "npm:^20.11.5"
     "@types/react": "npm:^18.0.0"
-    "@types/react-dom": "npm:*"
+    "@types/react-dom": "npm:18.2.23"
     cross-fetch: "npm:3.1.5"
     http-server: "npm:14.1.1"
     msw: "npm:0.47.3"
@@ -11391,7 +11391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18":
+"@types/react-dom@npm:18.2.18":
   version: 18.2.18
   resolution: "@types/react-dom@npm:18.2.18"
   dependencies:
@@ -11439,7 +11439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18":
+"@types/react@npm:18.2.48":
   version: 18.2.48
   resolution: "@types/react@npm:18.2.48"
   dependencies:
@@ -12519,7 +12519,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.0.0"
     "@types/jest": "npm:*"
     "@types/node": "npm:^20.11.5"
-    "@types/react-dom": "npm:*"
+    "@types/react-dom": "npm:18.2.23"
     cross-env: "npm:7.0.3"
     history: "npm:5.3.0"
     prop-types: "npm:15.8.1"
@@ -23985,8 +23985,8 @@ __metadata:
     "@changesets/cli": "npm:2.27.1"
     "@playwright/test": "npm:^1.41.1"
     "@spotify/prettier-config": "npm:14.1.6"
-    "@types/react": "npm:^18"
-    "@types/react-dom": "npm:^18"
+    "@types/react": "npm:18.2.48"
+    "@types/react-dom": "npm:18.2.18"
     "@types/webpack": "npm:5.28.0"
     concurrently: "npm:^8.0.0"
     eslint-plugin-notice: "npm:0.9.10"
