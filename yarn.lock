@@ -2647,8 +2647,8 @@ __metadata:
   linkType: hard
 
 "@backstage/backend-common@npm:^0.20.1":
-  version: 0.20.1
-  resolution: "@backstage/backend-common@npm:0.20.1"
+  version: 0.20.2
+  resolution: "@backstage/backend-common@npm:0.20.2"
   dependencies:
     "@aws-sdk/abort-controller": "npm:^3.347.0"
     "@aws-sdk/client-s3": "npm:^3.350.0"
@@ -2710,7 +2710,7 @@ __metadata:
   peerDependenciesMeta:
     pg-connection-string:
       optional: true
-  checksum: bf159e56c46d9cf16df9947ec29718a1f173cfcce17dfd684081db7c94ff9bac0ae05c96674d58b58a06aa51b12a1dd9f2ee88e84f7e00337f033e5e87a8caf7
+  checksum: 91efb14e2f09d8bd1f489c0d3815ff7ade7fbeb7a2494770bce68b1da9b867b512a3543c887b0d26432639a66f901810e9ce59232df0cc70fa52e852cef0f807
   languageName: node
   linkType: hard
 
