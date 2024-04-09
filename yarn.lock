@@ -11201,14 +11201,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:3.1.0":
-  version: 3.1.0
-  resolution: "@types/luxon@npm:3.1.0"
-  checksum: 7e348748843dc71a9700ffde50ce00a510fdf4c17133f1e2fab8683ab27f6a695fb23a19d465befb9540d270fe0dbb2f3cf4ff379b9e574fadea74582b3b0705
-  languageName: node
-  linkType: hard
-
-"@types/luxon@npm:^3.0.0":
+"@types/luxon@npm:3.4.2, @types/luxon@npm:^3.0.0":
   version: 3.4.2
   resolution: "@types/luxon@npm:3.4.2"
   checksum: d835467de3daf7e17ba78b50bb5a14efd94272439ca067990d71332a54b311544459c69623eddd243b511b28d70194c9591a9ee8cf9c038962c965f991affd7e
@@ -13114,14 +13107,14 @@ __metadata:
     "@types/dockerode": "npm:3.3.23"
     "@types/express": "npm:4.17.21"
     "@types/express-serve-static-core": "npm:4.17.43"
-    "@types/luxon": "npm:3.1.0"
+    "@types/luxon": "npm:3.4.2"
     app: "link:../app"
     better-sqlite3: "npm:9.4.0"
     dockerode: "npm:3.3.5"
     express: "npm:4.18.2"
     express-promise-router: "npm:4.1.1"
     knex: "npm:2.5.1"
-    luxon: "npm:3.2.1"
+    luxon: "npm:3.4.4"
     node-gyp: "npm:^9.0.0"
     serialize-error: "npm:8.1.0"
     winston: "npm:3.8.2"
@@ -21865,14 +21858,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:3.2.1":
-  version: 3.2.1
-  resolution: "luxon@npm:3.2.1"
-  checksum: 2edd1400c7a785b01fa24ab491675c490a763054e0e147507b7b64caa6caad50329b48d482300c7ab5dc1a2630aaf84997496ffe7d2e166f9ea223f6caa719d9
-  languageName: node
-  linkType: hard
-
-"luxon@npm:^3.0.0, luxon@npm:^3.4.3":
+"luxon@npm:3.4.4, luxon@npm:^3.0.0, luxon@npm:^3.4.3":
   version: 3.4.4
   resolution: "luxon@npm:3.4.4"
   checksum: 02e26a0b039c11fd5b75e1d734c8f0332c95510f6a514a9a0991023e43fb233884da02d7f966823ffb230632a733fc86d4a4b1e63c3fbe00058b8ee0f8c728af
