@@ -12,3 +12,6 @@ backend:
 
 scorecards:
   jsonDataUrl: http://127.0.0.1:8090/sample-data/ #this needs to be served via http-server as we get http 200 with WDS server instead of http 404 for nonExistent entity
+  display:
+    reviewer: always
+    reviewDate: always
