@@ -7860,7 +7860,7 @@ __metadata:
     "@material-ui/icons": "npm:^4.11.2"
     "@material-ui/lab": "npm:^4.0.0-alpha.57"
     "@testing-library/dom": "npm:^9.0.0"
-    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/jest-dom": "npm:^6.2.1"
     "@testing-library/react": "npm:^14.0.0"
     "@testing-library/user-event": "npm:^14.0.0"
     "@types/jest": "npm:*"
@@ -10648,9 +10648,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^6.0.0":
-  version: 6.2.1
-  resolution: "@testing-library/jest-dom@npm:6.2.1"
+"@testing-library/jest-dom@npm:^6.2.1":
+  version: 6.4.2
+  resolution: "@testing-library/jest-dom@npm:6.4.2"
   dependencies:
     "@adobe/css-tools": "npm:^4.3.2"
     "@babel/runtime": "npm:^7.9.2"
@@ -10677,7 +10677,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10c0/ade94aa06af3910e471f4728f300518f662fc745e95d158a6edf51223ad75b64e7a92714976bd8ab75ddc8b4b733dc53ece7f709a5ceeb365844b00ee1c4ff68
+  checksum: 10c0/e7eba527b34ce30cde94424d2ec685bdfed51daaafb7df9b68b51aec6052e99a50c8bfe654612dacdf857a1eb81d68cf294fc89de558ee3a992bf7a6019fffcc
   languageName: node
   linkType: hard
 
@@ -12508,7 +12508,7 @@ __metadata:
     "@oriflame/backstage-plugin-score-card": "npm:^0.8.0"
     "@playwright/test": "npm:^1.43.0"
     "@testing-library/dom": "npm:^9.0.0"
-    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/jest-dom": "npm:^6.2.1"
     "@testing-library/react": "npm:^14.0.0"
     "@testing-library/user-event": "npm:^14.0.0"
     "@types/jest": "npm:*"
