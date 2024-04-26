@@ -3115,7 +3115,7 @@ __metadata:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0
     react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: 197898973a4284f8b428db5274880ef4ae59b0675d8400505d52a0b922e2c824bfa25ebd62b48562bc97aaf652dbeb37dc083a8fe3eb74a2f50f868f0cf1fb72
+  checksum: 10c0/197898973a4284f8b428db5274880ef4ae59b0675d8400505d52a0b922e2c824bfa25ebd62b48562bc97aaf652dbeb37dc083a8fe3eb74a2f50f868f0cf1fb72
   languageName: node
   linkType: hard
 
@@ -3245,7 +3245,7 @@ __metadata:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0
     react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
     react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  checksum: b3100a76408278e802fa7e7ac870cdd0e0cf8585cbc3bb66da48e9ce119dd97a7cdbb1a51496a772610e48b46aa7fee27419df113e42e6e1e4cd8dc44f3cd1b4
+  checksum: 10c0/b3100a76408278e802fa7e7ac870cdd0e0cf8585cbc3bb66da48e9ce119dd97a7cdbb1a51496a772610e48b46aa7fee27419df113e42e6e1e4cd8dc44f3cd1b4
   languageName: node
   linkType: hard
 
@@ -3278,7 +3278,7 @@ __metadata:
     git-url-parse: "npm:^14.0.0"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.0.0"
-  checksum: 944b9505ef6f063925867f4019c97922ef812160edd29a42d6699c6d203a78ce443778a8ad3b07c5289bf1a4442d488099a8da8d6f021ed7e266686b4914365d
+  checksum: 10c0/944b9505ef6f063925867f4019c97922ef812160edd29a42d6699c6d203a78ce443778a8ad3b07c5289bf1a4442d488099a8da8d6f021ed7e266686b4914365d
   languageName: node
   linkType: hard
 
@@ -8655,7 +8655,7 @@ __metadata:
 "@remix-run/router@npm:1.0.3":
   version: 1.0.3
   resolution: "@remix-run/router@npm:1.0.3"
-  checksum: ccaa13272014a7f068478eb981bfba6d432a8eae8992b47fb6f85d270aadcb061c2e01f70edd635c4a9e36c21727ccb60075c1b1e3ad03c731e803e8fca511d8
+  checksum: 10c0/ccaa13272014a7f068478eb981bfba6d432a8eae8992b47fb6f85d270aadcb061c2e01f70edd635c4a9e36c21727ccb60075c1b1e3ad03c731e803e8fca511d8
   languageName: node
   linkType: hard
 
@@ -13875,16 +13875,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:4.1.1":
-  version: 4.1.1
-  resolution: "chalk@npm:4.1.1"
-  dependencies:
-    ansi-styles: "npm:^4.1.0"
-    supports-color: "npm:^7.1.0"
-  checksum: 10c0/3866c8b96eca56b5ff4e1e9a243b65e4f77694a486a2cc49316d54af9dae463d2c52bd99b9f0b7a924b87faf3a16dd6ed12d3a7442ac385b608f285e54696c18
-  languageName: node
-  linkType: hard
-
 "chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
@@ -18215,7 +18205,7 @@ __metadata:
   resolution: "git-url-parse@npm:14.0.0"
   dependencies:
     git-up: "npm:^7.0.0"
-  checksum: d360cf23c6278e302b74603f3dc490c3fe22e533d58b7f35e0295fad9af209ce5046a55950ccbf2f0d18de7931faefb4353e3f3fd3dda87fce77b409d48e0ba9
+  checksum: 10c0/d360cf23c6278e302b74603f3dc490c3fe22e533d58b7f35e0295fad9af209ce5046a55950ccbf2f0d18de7931faefb4353e3f3fd3dda87fce77b409d48e0ba9
   languageName: node
   linkType: hard
 
@@ -18794,13 +18784,6 @@ __metadata:
   version: 3.2.5
   resolution: "headers-polyfill@npm:3.2.5"
   checksum: 10c0/10202f4ebfaecd6aa31305f29664f876ac01d9174a3fb8fcc5a0df3eaf9c1767fb0d6cf6f961484f2bfd2101b6768090976f146bd88aeedd07af4e741cb2dcb7
-  languageName: node
-  linkType: hard
-
-"headers-polyfill@npm:^3.1.0":
-  version: 3.3.0
-  resolution: "headers-polyfill@npm:3.3.0"
-  checksum: 10c0/9123396366bd81dbe8caed83b21f3b174edbfca18e2492ac8d09e30e309cdee01216d45ba2dd302a1654a234f16e9aee049ee7a1cb6c9f059edc10dd4c5b8098
   languageName: node
   linkType: hard
 
@@ -23226,7 +23209,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 10c0/186d6f102ad385da9f8175d4824e8ee490a435eb1d9dd27aef5a5432830cbdd1ae849049970c12dc3d197c613a89e6d4e520f8574cf73883678021a3f955c841
+  checksum: 10c0/c644d8e80b12b15c7b366aa6e0b39442f3ffd3b94824171e562066d8535c720fd824d84986d738a427720e59228660c11991bf724e4dd9face00b0b0f2af8f0d
   languageName: node
   linkType: hard
 
@@ -26339,7 +26322,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: e1f1b7c13cd800dff0f6fefb840e89bc46113db66ac96e7e251e4c59367ac5d4aac9a9bff45446e47b784d111ce10018b3a880e66aea6ea02f14fd116294af85
+  checksum: 10c0/e1f1b7c13cd800dff0f6fefb840e89bc46113db66ac96e7e251e4c59367ac5d4aac9a9bff45446e47b784d111ce10018b3a880e66aea6ea02f14fd116294af85
   languageName: node
   linkType: hard
 
@@ -26363,7 +26346,7 @@ __metadata:
     "@remix-run/router": "npm:1.0.3"
   peerDependencies:
     react: ">=16.8"
-  checksum: 58493e0ce7f7ccee0d5f813b07e7bc7838ec7831c71bf31fe576ed8a4208fe49de125fd73f31fa380a78fef82aed3808dade1612f5646f5e8f9611b02bd53917
+  checksum: 10c0/58493e0ce7f7ccee0d5f813b07e7bc7838ec7831c71bf31fe576ed8a4208fe49de125fd73f31fa380a78fef82aed3808dade1612f5646f5e8f9611b02bd53917
   languageName: node
   linkType: hard
 
@@ -28420,7 +28403,7 @@ __metadata:
 "strict-event-emitter@npm:^0.4.3":
   version: 0.4.6
   resolution: "strict-event-emitter@npm:0.4.6"
-  checksum: d0231ef081cb1937b1445da59a1ec202d1c097d825c504f398600532490a4104e200b0dce4137467a8eaac5f8f9718d01c99869687afad78cad3b14c4b2e6a39
+  checksum: 10c0/d0231ef081cb1937b1445da59a1ec202d1c097d825c504f398600532490a4104e200b0dce4137467a8eaac5f8f9718d01c99869687afad78cad3b14c4b2e6a39
   languageName: node
   linkType: hard
 
