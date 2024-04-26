@@ -24,6 +24,18 @@ export interface Config {
      * @visibility frontend
      */
     jsonDataUrl?: string;
+    display?: {
+      /**
+       * Whether to display the reviewer column in the score card table.
+       * @visibility frontend
+       */
+      reviewer?: string;
+      /**
+       * Whether to display the review date column in the score card table.
+       * @visibility frontend
+       */
+      reviewDate?: string;
+    };
     /**
      * The template for the link to the wiki, e.g. "https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"
      * @visibility frontend

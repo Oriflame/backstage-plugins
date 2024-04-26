@@ -42,6 +42,7 @@ import { scorePercentColumn } from './columns/scorePercentColumn';
 import { titleColumn } from './columns/titleColumn';
 import { getReviewerLink } from './sub-components/getReviewerLink';
 import { scoringDataApiRef } from '../../api';
+import { useDisplayConfig } from '../../config/DisplayConfig';
 
 // lets prepare some styles
 const useStyles = makeStyles(theme => ({
@@ -121,6 +122,8 @@ export const ScoreCard = ({
 
   const allEntries = getScoreTableEntries(data);
 
+  const displayPolicies = useDisplayConfig().getDisplayPolicies();
+
   return (
     <InfoCard
       title="Scoring"
@@ -173,7 +176,7 @@ export const ScoreCard = ({
               }}
             />
 
-            {getReviewerLink(data)}
+            {getReviewerLink(data, displayPolicies)}
           </Grid>
         </div>
       )}
