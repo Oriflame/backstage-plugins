@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import {
@@ -36,7 +35,10 @@ import {
   EntityOwnershipCard,
 } from '@backstage/plugin-org';
 
-import { EntityScoreCardContent } from '@oriflame/backstage-plugin-score-card';
+import {
+  EntityScoreCardTable,
+  EntityScoreCardContent,
+} from '@oriflame/backstage-plugin-score-card';
 
 const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
@@ -54,6 +56,13 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -62,6 +71,13 @@ const websiteEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -69,6 +85,13 @@ const defaultEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
     </EntityLayout.Route>
   </EntityLayout>
 );
@@ -158,7 +181,7 @@ const systemPage = (
     <EntityLayout.Route path="/score" title="Score">
       <Grid container spacing={3} alignItems="stretch">
         <Grid item xs={12}>
-          <EntityScoreCardContent />
+          <EntityScoreCardTable />
         </Grid>
       </Grid>
     </EntityLayout.Route>

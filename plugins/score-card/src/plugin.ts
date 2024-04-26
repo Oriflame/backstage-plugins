@@ -83,13 +83,13 @@ export const EntityScoreCardContent = scoreCardPlugin.provide(
   }),
 );
 
-export const EntityScoreBoardTable = scoreCardPlugin.provide(
+export const EntityScoreCardTable = scoreCardPlugin.provide(
   createComponentExtension({
-    name: 'score-board-entity-table',
+    name: 'entity-score-card-table',
     component: {
       lazy: () =>
-        import('./components/EntityScoreBoardTable').then(
-          m => m.EntityScoreBoardTable,
+        import('./components/EntityScoreCardTable').then(
+          m => m.EntityScoreCardTable,
         ),
     },
   }),

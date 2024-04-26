@@ -18,7 +18,7 @@ export {
   ScoreBoardPage,
   ScoreCardTable,
   EntityScoreCardContent,
-  EntityScoreBoardTable,
+  EntityScoreCardTable,
 } from './plugin';
 
 /**

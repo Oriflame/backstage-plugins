@@ -112,7 +112,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
     }
 
     this.logConsole(
-      `ScoringDataJsonClient: fetching all scored from ${urlWithData}`,
+      `ScoringDataJsonClient: fetching all scores from ${urlWithData}`,
     );
     let result: EntityScore[] | undefined = await this.getResult<EntityScore[]>(
       urlWithData,
@@ -157,9 +157,9 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   // ---- HELPER METHODS ---- //
 
-  private logConsole(_: string) {
+  private logConsole(msg: string) {
     // eslint-disable-next-line no-console
-    // DEBUG: console.log(msg);
+    // console.log(msg);
   }
 
   private async getResult<T>(jsonDataUrl: string): Promise<T | undefined> {

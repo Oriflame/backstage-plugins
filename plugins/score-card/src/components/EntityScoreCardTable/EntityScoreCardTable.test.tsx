@@ -16,7 +16,7 @@
  */
 import React from 'react';
 import { act, render } from '@testing-library/react';
-import { EntityScoreBoardTable } from './EntityScoreBoardTable';
+import { EntityScoreCardTable } from './EntityScoreCardTable';
 import { MockConfigApi, TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
@@ -97,7 +97,7 @@ const mockConfig = new MockConfigApi({});
 
 const sharedGithubAuthApi = authObj;
 
-describe('ScoreBoardPage-EmptyData', () => {
+describe('EntityScoreCardTable-EmptyData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
@@ -131,7 +131,7 @@ describe('ScoreBoardPage-EmptyData', () => {
         >
           <Router>
             <EntityProvider entity={entity}>
-              <EntityScoreBoardTable />
+              <EntityScoreCardTable />
             </EntityProvider>
           </Router>
         </TestApiProvider>
@@ -148,7 +148,7 @@ describe('ScoreBoardPage-EmptyData', () => {
   });
 });
 
-describe('ScoreCard-TestWithData', () => {
+describe('EntityScoreCardTable-TestWithData', () => {
   class MockClient implements ScoringDataApi {
     getScore(
       _entity?: Entity | undefined,
@@ -181,7 +181,7 @@ describe('ScoreCard-TestWithData', () => {
         >
           <Router>
             <EntityProvider entity={entity}>
-              <EntityScoreBoardTable />
+              <EntityScoreCardTable />
             </EntityProvider>
           </Router>
         </TestApiProvider>
@@ -212,7 +212,7 @@ describe('ScoreCard-TestWithData', () => {
         >
           <Router>
             <EntityProvider entity={entity}>
-              <EntityScoreBoardTable title="testTitle" />
+              <EntityScoreCardTable title="testTitle" />
             </EntityProvider>
           </Router>
         </TestApiProvider>

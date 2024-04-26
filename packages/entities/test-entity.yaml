@@ -78,3 +78,32 @@ spec:
   lifecycle: experimental
   providesApis:
     - sample-service-3
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sample-service-entity-source
+  description: |
+    A service for testing the annotation location
+  annotations:
+    scorecard/jsonDataUrl: http://localhost:7008/plugins/score-card/sample-data/custom-annotation-location/service.json
+
+spec:
+  type: service
+  owner: roadie
+  lifecycle: experimental
+  providesApis:
+    - sample-service-3
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: sample-system-entity-source
+  description: |
+    A system for testing the annotation location
+  annotations:
+    scorecard/jsonDataUrl: http://localhost:7008/plugins/score-card/sample-data/custom-annotation-location/system.json
+
+spec:
+  owner: roadie
+  lifecycle: experimental
