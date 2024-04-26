@@ -157,7 +157,7 @@ export class ScoringDataJsonClient implements ScoringDataApi {
 
   // ---- HELPER METHODS ---- //
 
-  private logConsole(msg: string) {
+  private logConsole(_: string) {
     // eslint-disable-next-line no-console
     // console.log(msg);
   }
