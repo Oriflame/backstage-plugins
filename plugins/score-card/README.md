@@ -31,15 +31,15 @@ You may drill down to the details of each score together with explanation why it
 
 ![Score Card Detail](./docs/.assets/score-card-detail.png)
 
-### EntityScoreBoardTable
+### EntityScoreCardTable
 
-Table that displays list of entities and their scores. This is different from ScoreCardTable as this component could be directly used in Entity Context within catalog as shown below:
+EntityScoreCardTable is component that allows you to see a table of results within an entity. This is useful for example at a system level to show the scores of all of the component within a system.
 
-```
+```tsx
 <EntityLayout.Route path="/score" title="Score">
   <Grid container spacing={3} alignItems="stretch">
     <Grid item xs={12}>
-      <EntityScoreBoardTable />
+      <EntityScoreCardTable />
     </Grid>
   </Grid>
 </EntityLayout.Route>
@@ -81,16 +81,15 @@ Also the server providing the data needs to have correctly configured CORS polic
 
 #### Configuring through catalog-info.yaml annotations
 
-The JSON file can also be dynamically passed through the annotations field of `catalog-info.yaml`. To achieve this, configuration of `scorecard/jsonDataUrl` alongside `github.com/project-slug` annotations is required within the `catalog-info.yaml` file, demonstrated below:
+The JSON file can also be dynamically passed through the annotations field of `catalog-info.yaml`. To achieve this, configuration of the `scorecard/jsonDataUrl` annotations is required within the `catalog-info.yaml` file, demonstrated below:
 
 ```yaml
 metadata:
   annotations:
-    github.com/project-slug: org/project-alpha
-    scorecard/jsonDataUrl: 'score.json'
+    scorecard/jsonDataUrl: 'https://github.com/oriflame/backstage-plugins/blob/master/results.json'
 ```
 
-**Important note**: The `score.json` file, referenced in the example above, needs to be placed at the root level of the repository. Octokit APIs utilize `github.com/project-slug` to obtain details of the Organization and Repository name, enabling the request to read the content of `score.json`.
+**Important note**: The `results.json` file in the example above is inside a github repository. If you use private github repos you need to configure github authentication in your backstage instance. The users authentication token will then be used to retrieve the file automatically. You can use any other http location as well, but no authentication will be brokered for those.
 
 ### Configuration
 
@@ -166,12 +165,12 @@ All configuration options:
    );
    ```
 
-5. If we want to have tabular Score board containing high level score of more than one component, we could add EntityScoreBoardTable as shown below. Note that the difference between EntityScoreBoardTable and ScoreCardTable is that EntityScoreBoardTable works in the context of an Entity. That means that the Score JSON could also be read from the Component's catalog-info.yaml's Scorecard annotation as mentioned in [ Configuring through catalog-info.yaml annotations](#configuring-through-catalog-infoyaml-annotations)
+5. If we want to have tabular Score board containing high level score of more than one component, we could add EntityScoreCardTable as shown below. Note that the difference between EntityScoreCardTable and ScoreCardTable is that EntityScoreCardTable works in the context of an Entity. That means that the Score JSON could also be read from the Component's catalog-info.yaml's Scorecard annotation as mentioned in [ Configuring through catalog-info.yaml annotations](#configuring-through-catalog-infoyaml-annotations)
 
-Add EntityScoreBoardTable to `packages/app/src/components/catalog/EntityPage.tsx` if you would like to view multiple component scores in tabular format:
+Add EntityScoreCardTable to `packages/app/src/components/catalog/EntityPage.tsx` if you would like to view multiple component scores in tabular format:
 
 ```diff
-+import { EntityScoreBoardTable } from '@oriflame/backstage-plugin-score-card';
++import { EntityScoreCardTable } from '@oriflame/backstage-plugin-score-card';
 
 const systemPage = (
    <EntityLayoutWrapper>
@@ -182,7 +181,7 @@ const systemPage = (
 +    <EntityLayout.Route path="/score" title="Score">
 +      <Grid container spacing={3} alignItems="stretch">
 +        <Grid item xs={12}>
-+          <EntityScoreBoardTable />
++          <EntityScoreCardTable />
 +        </Grid>
 +      </Grid>
 +    </EntityLayout.Route>
