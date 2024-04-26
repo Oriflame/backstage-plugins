@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { scoreCardPlugin, ScoreCardTable, ScoreBoardPage, EntityScoreCardContent } from '.';
+import {
+  scoreCardPlugin,
+  ScoreCardTable,
+  ScoreBoardPage,
+  EntityScoreCardContent,
+} from '.';
 
 describe('score-card exports', () => {
   it('should export plugin', () => {

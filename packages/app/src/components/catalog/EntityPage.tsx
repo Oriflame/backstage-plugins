@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import {
@@ -54,6 +53,13 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -62,6 +68,13 @@ const websiteEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
     </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
+    </EntityLayout.Route>
   </EntityLayout>
 );
 
@@ -69,6 +82,13 @@ const defaultEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/score" title="Score">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12}>
+          <EntityScoreCardContent />
+        </Grid>
+      </Grid>
     </EntityLayout.Route>
   </EntityLayout>
 );

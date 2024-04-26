@@ -63,13 +63,13 @@ const useStyles = makeStyles(theme => ({
 // data loader
 const useScoringDataLoader = () => {
   const errorApi = useApi(errorApiRef);
-  const scorigDataApi = useApi(scoringDataApiRef);
+  const scoringDataApi = useApi(scoringDataApiRef);
   const config = useApi(configApiRef);
   const { entity } = useEntity();
 
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getScore(entity),
-    [scorigDataApi, entity],
+    async () => scoringDataApi.getScore(entity),
+    [scoringDataApi, entity],
   );
 
   useEffect(() => {
@@ -79,8 +79,7 @@ const useScoringDataLoader = () => {
   }, [error, errorApi]);
 
   const wikiLinkTemplate =
-    config.getOptionalString('scorecards.wikiLinkTemplate') ??
-    '';
+    config.getOptionalString('scorecards.wikiLinkTemplate') ?? '';
 
   return { loading, value, wikiLinkTemplate, error };
 };

@@ -16,10 +16,10 @@ Table that displays list of entities and their scores.
 
 ![Score card table](./docs/.assets/score-card-table.png)
 
-| Props              | type                           | Description             | Default                  |
-|--------------------|--------------------------------|-------------------------|--------------------------|
-| `title`            | string                         | Title of the table      | Entities scores overview |
-| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                |
+| Props              | type                           | Description             | Default                   |
+| ------------------ | ------------------------------ | ----------------------- | ------------------------- |
+| `title`            | string                         | Title of the table      | Entities scores overview  |
+| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                 |
 
 ### ScoreCard
 
@@ -31,7 +31,32 @@ You may drill down to the details of each score together with explanation why it
 
 ![Score Card Detail](./docs/.assets/score-card-detail.png)
 
+### EntityScoreCardTable
+
+EntityScoreCardTable is component that allows you to see a table of results within an entity. This is useful for example at a system level to show the scores of all of the component within a system.
+
+```tsx
+<EntityLayout.Route path="/score" title="Score">
+  <Grid container spacing={3} alignItems="stretch">
+    <Grid item xs={12}>
+      <EntityScoreCardTable />
+    </Grid>
+  </Grid>
+</EntityLayout.Route>
+```
+
+![Entity Score card table](./docs/.assets/score-card-table.png)
+
+| Props              | type                           | Description             | Default                   |
+| ------------------ | ------------------------------ | ----------------------- | ------------------------- |
+| `title`            | string                         | Title of the table      | Entities scores overview  |
+| `entityKindFilter` | [string[]](./src/api/types.ts) | Filter entities by kind | undefined                 |
+
 ### ScoringDataJsonClient
+
+There are two approaches in configuring JSON file location
+
+#### Configuring through app-config.yaml
 
 Implementation of `ScoringDataApi` that the above components are using to load data. This client simply reads it from a JSON files located e.g. on a blob storage account.
 
@@ -49,10 +74,22 @@ In the above location it expects data in a format see [scoring data](./sample-da
 ```yaml
 backend:
   csp:
-    default-src: ["'self'", "raw.githubusercontent.com"]
+    default-src: ["'self'", 'raw.githubusercontent.com']
 ```
 
 Also the server providing the data needs to have correctly configured CORS policy, i.e. return HTTP header `Access-Control-Allow-Origin` that should list domain from where you serve your backstage instance. See e.g. [how to configure CORS for Azure Blob Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
+
+#### Configuring through catalog-info.yaml annotations
+
+The JSON file can also be dynamically passed through the annotations field of `catalog-info.yaml`. To achieve this, configuration of the `scorecard/jsonDataUrl` annotations is required within the `catalog-info.yaml` file, demonstrated below:
+
+```yaml
+metadata:
+  annotations:
+    scorecard/jsonDataUrl: 'https://github.com/oriflame/backstage-plugins/blob/master/results.json'
+```
+
+**Important note**: The `results.json` file in the example above is inside a github repository. If you use private github repos you need to configure github authentication in your backstage instance. The users authentication token will then be used to retrieve the file automatically. You can use any other http location as well, but no authentication will be brokered for those.
 
 ### Configuration
 
@@ -127,6 +164,31 @@ All configuration options:
       </EntityLayoutWrapper>
    );
    ```
+
+5. If we want to have tabular Score board containing high level score of more than one component, we could add EntityScoreCardTable as shown below. Note that the difference between EntityScoreCardTable and ScoreCardTable is that EntityScoreCardTable works in the context of an Entity. That means that the Score JSON could also be read from the Component's catalog-info.yaml's Scorecard annotation as mentioned in [ Configuring through catalog-info.yaml annotations](#configuring-through-catalog-infoyaml-annotations)
+
+Add EntityScoreCardTable to `packages/app/src/components/catalog/EntityPage.tsx` if you would like to view multiple component scores in tabular format:
+
+```diff
++import { EntityScoreCardTable } from '@oriflame/backstage-plugin-score-card';
+
+const systemPage = (
+   <EntityLayoutWrapper>
+     <EntityLayout.Route path="/" title="Overview">
+       ...
+     </EntityLayout.Route>
++
++    <EntityLayout.Route path="/score" title="Score">
++      <Grid container spacing={3} alignItems="stretch">
++        <Grid item xs={12}>
++          <EntityScoreCardTable />
++        </Grid>
++      </Grid>
++    </EntityLayout.Route>
++
+   </EntityLayoutWrapper>
+);
+```
 
 ## Scoring process
 

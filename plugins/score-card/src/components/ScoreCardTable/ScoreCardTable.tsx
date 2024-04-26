@@ -23,16 +23,19 @@ import { getWarningPanel } from '../../helpers/getWarningPanel';
 import { scoringDataApiRef } from '../../api';
 import { EntityScoreExtended } from '../../api/types';
 import { EntityRefLink } from '@backstage/plugin-catalog-react';
-import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
+import { DEFAULT_NAMESPACE, Entity } from '@backstage/catalog-model';
 import { useDisplayConfig } from '../../config/DisplayConfig';
 import { DisplayPolicy } from '../../config/types';
 
-const useScoringAllDataLoader = (entityKindFilter?: string[]) => {
+const useScoringAllDataLoader = (
+  entityKindFilter?: string[],
+  entity?: Entity,
+) => {
   const errorApi = useApi(errorApiRef);
   const scorigDataApi = useApi(scoringDataApiRef);
 
   const { error, value, loading } = useAsync(
-    async () => scorigDataApi.getAllScores(entityKindFilter),
+    async () => scorigDataApi.getAllScores(entityKindFilter, entity),
     [scorigDataApi],
   );
 
@@ -59,29 +62,35 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
       field: 'entityRef.name',
       render: entityScore => {
         if (!entityScore.entityRef?.name) {
-          return <>Missing entityRef.name key</>
+          return <>Missing entityRef.name key</>;
         }
 
-        return (<Link
-          to={`/catalog/${entityScore.entityRef.namespace ?? DEFAULT_NAMESPACE}/${entityScore.entityRef.kind}/${entityScore.entityRef.name}/score`}
-          data-id={entityScore.entityRef.name}
+        return (
+          <Link
+            to={`/catalog/${
+              entityScore.entityRef.namespace ?? DEFAULT_NAMESPACE
+            }/${entityScore.entityRef.kind}/${
+              entityScore.entityRef.name
+            }/score`}
+            data-id={entityScore.entityRef.name}
           >
             {entityScore.entityRef.name}
-          </Link>)
-      }
+          </Link>
+        );
+      },
     },
     {
       title: 'Kind',
       field: 'entityRef.kind',
       render: entityScore => {
-          return <>{entityScore.entityRef.kind}</>
-      }
+        return <>{entityScore.entityRef.kind}</>;
+      },
     },
     {
       title: 'Owner',
       field: 'owner.name',
       render: entityScore =>
-      entityScore.owner ? (
+        entityScore.owner ? (
           <>
             <EntityRefLink entityRef={entityScore.owner}>
               {entityScore.owner.name}
@@ -158,12 +167,11 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
             ),
             minWidth: '4rem',
           };
-          const label = currentScoreEntry?.scoreLabel ?? `${currentScoreEntry?.scorePercent} %`;
+          const label =
+            currentScoreEntry?.scoreLabel ??
+            `${currentScoreEntry?.scorePercent} %`;
           return typeof currentScoreEntry?.scorePercent !== 'undefined' ? (
-            <Chip
-              label={label}
-              style={chipStyle}
-            />
+            <Chip label={label} style={chipStyle} />
           ) : null;
         },
       });
@@ -181,7 +189,8 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
         float: 'right',
         minWidth: '4rem',
       };
-      const label = entityScoreEntry?.scoreLabel ?? `${entityScoreEntry?.scorePercent} %`;
+      const label =
+        entityScoreEntry?.scoreLabel ?? `${entityScoreEntry?.scorePercent} %`;
       return typeof entityScoreEntry.scorePercent !== 'undefined' ? (
         <Chip label={label} style={chipStyle} />
       ) : null;
@@ -209,7 +218,7 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
   return (
     <div data-testid="score-board-table">
       <Table<EntityScoreExtended>
-        title={title ?? "Entities scores overview"}
+        title={title ?? 'Entities scores overview'}
         options={{
           search: true,
           paging: true,
@@ -227,9 +236,18 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
 type ScoreCardTableProps = {
   title?: string;
   entityKindFilter?: string[];
+  entity?: Entity;
 };
-export const ScoreCardTable = ({title, entityKindFilter}: ScoreCardTableProps) => {
-  const { loading, error, value: data } = useScoringAllDataLoader(entityKindFilter);
+export const ScoreCardTable = ({
+  title,
+  entityKindFilter,
+  entity,
+}: ScoreCardTableProps) => {
+  const {
+    loading,
+    error,
+    value: data,
+  } = useScoringAllDataLoader(entityKindFilter, entity);
 
   if (loading) {
     return <Progress />;
@@ -237,5 +255,5 @@ export const ScoreCardTable = ({title, entityKindFilter}: ScoreCardTableProps) =
     return getWarningPanel(error);
   }
 
-  return <ScoreTable title={title}  scores={data || []} />;
+  return <ScoreTable title={title} scores={data || []} />;
 };
