@@ -17,11 +17,15 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 import { EntityScoreBoardTable } from './EntityScoreBoardTable';
-import { TestApiProvider } from '@backstage/test-utils';
+import { MockConfigApi, TestApiProvider } from '@backstage/test-utils';
 import { ScoringDataApi, scoringDataApiRef } from '../../api';
 import { Entity } from '@backstage/catalog-model';
 import { EntityScoreExtended } from '../../api/types';
-import { errorApiRef, githubAuthApiRef } from '@backstage/core-plugin-api';
+import {
+  configApiRef,
+  errorApiRef,
+  githubAuthApiRef,
+} from '@backstage/core-plugin-api';
 import { lightTheme } from '@backstage/theme';
 import { ThemeProvider } from '@material-ui/core';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
@@ -89,6 +93,8 @@ const authObj: any = {
   },
 };
 
+const mockConfig = new MockConfigApi({});
+
 const sharedGithubAuthApi = authObj;
 
 describe('ScoreBoardPage-EmptyData', () => {
@@ -120,6 +126,7 @@ describe('ScoreBoardPage-EmptyData', () => {
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
             [githubAuthApiRef, mockAuth],
+            [configApiRef, mockConfig],
           ]}
         >
           <Router>
@@ -169,6 +176,7 @@ describe('ScoreCard-TestWithData', () => {
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
             [githubAuthApiRef, mockAuth],
+            [configApiRef, mockConfig],
           ]}
         >
           <Router>
@@ -199,6 +207,7 @@ describe('ScoreCard-TestWithData', () => {
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
             [githubAuthApiRef, sharedGithubAuthApi],
+            [configApiRef, mockConfig],
           ]}
         >
           <Router>
@@ -249,6 +258,7 @@ describe('ScoreCardTable', () => {
             [errorApiRef, errorApi],
             [scoringDataApiRef, mockClient],
             [githubAuthApiRef, sharedGithubAuthApi],
+            [configApiRef, mockConfig],
           ]}
         >
           <Router>
