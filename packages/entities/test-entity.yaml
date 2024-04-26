@@ -86,7 +86,7 @@ metadata:
   description: |
     A service for testing the annotation location
   annotations:
-    scorecard/jsonDataUrl: http://localhost:7008/plugins/score-card/sample-data/custom-annotation-location/service.json
+    scorecard/jsonDataUrl: http://localhost:8090/plugins/score-card/sample-data/custom-annotation-location/service.json
 
 spec:
   type: service
@@ -102,7 +102,7 @@ metadata:
   description: |
     A system for testing the annotation location
   annotations:
-    scorecard/jsonDataUrl: http://localhost:7008/plugins/score-card/sample-data/custom-annotation-location/system.json
+    scorecard/jsonDataUrl: http://localhost:8090/plugins/score-card/sample-data/custom-annotation-location/system.json
 
 spec:
   owner: roadie
