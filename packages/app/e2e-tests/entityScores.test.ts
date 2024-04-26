@@ -30,7 +30,9 @@ test('Entity Score board: displays the score board based on sample data', async 
     );
   });
 
-  await page.goto('/catalog/default/component/sample-service-entity-source');
+  await page.goto(
+    '/catalog/default/component/sample-service-entity-source/score',
+  );
 
   await expect(page.getByText('Scoring')).toBeVisible();
   await expect(page.getByText('Total score: Yellow')).toBeVisible();
