@@ -7925,12 +7925,12 @@ __metadata:
     cross-fetch: "npm:3.1.5"
     http-server: "npm:14.1.1"
     msw: "npm:1.3.2"
-    react-router-dom: "npm:6.4.3"
+    react-router-dom: "npm:6.4.5"
     react-use: "npm:^17.2.4"
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-    react-router-dom: ^6.4.3
+    react-router-dom: ^6.4.5
   languageName: unknown
   linkType: soft
 
@@ -8649,13 +8649,6 @@ __metadata:
     js-cookie:
       optional: true
   checksum: 10c0/03cadf04cee10e0fd4d5ee85c717ac44c36d5567d9f3895aeab4b91a89be099a21dbb79e1a2296eab0c923e794a5aea08b5892a26f8168ea0bc0e9b83fd987e5
-  languageName: node
-  linkType: hard
-
-"@remix-run/router@npm:1.0.3":
-  version: 1.0.3
-  resolution: "@remix-run/router@npm:1.0.3"
-  checksum: 10c0/ccaa13272014a7f068478eb981bfba6d432a8eae8992b47fb6f85d270aadcb061c2e01f70edd635c4a9e36c21727ccb60075c1b1e3ad03c731e803e8fca511d8
   languageName: node
   linkType: hard
 
@@ -26313,19 +26306,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:6.4.3":
-  version: 6.4.3
-  resolution: "react-router-dom@npm:6.4.3"
-  dependencies:
-    "@remix-run/router": "npm:1.0.3"
-    react-router: "npm:6.4.3"
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: 10c0/e1f1b7c13cd800dff0f6fefb840e89bc46113db66ac96e7e251e4c59367ac5d4aac9a9bff45446e47b784d111ce10018b3a880e66aea6ea02f14fd116294af85
-  languageName: node
-  linkType: hard
-
 "react-router-dom@npm:6.4.5":
   version: 6.4.5
   resolution: "react-router-dom@npm:6.4.5"
@@ -26336,17 +26316,6 @@ __metadata:
     react: ">=16.8"
     react-dom: ">=16.8"
   checksum: 10c0/0c593d979a9652eccdbf11c4e6509f188f6c05607b29632cf0535497809b2b4a77bf8f7dbac21344d88c7da3550f07aff8fd0d9182bf72b5104dd098b1cdc030
-  languageName: node
-  linkType: hard
-
-"react-router@npm:6.4.3":
-  version: 6.4.3
-  resolution: "react-router@npm:6.4.3"
-  dependencies:
-    "@remix-run/router": "npm:1.0.3"
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 10c0/58493e0ce7f7ccee0d5f813b07e7bc7838ec7831c71bf31fe576ed8a4208fe49de125fd73f31fa380a78fef82aed3808dade1612f5646f5e8f9611b02bd53917
   languageName: node
   linkType: hard
 

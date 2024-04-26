@@ -48,13 +48,13 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@types/react": "^18.0.0",
-    "react-router-dom": "6.4.3",
+    "react-router-dom": "6.4.5",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
     "@backstage/catalog-client": "^1.5.2",
