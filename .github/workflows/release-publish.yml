@@ -46,7 +46,7 @@ jobs:
           registry-url: https://registry.npmjs.org/ # Needed for auth
 
       - name: yarn install --frozen-lockfile
-        uses: backstage/actions/yarn-install@v0.6.5
+        uses: backstage/actions/yarn-install@v0.6.11
         with:
           cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
@@ -106,7 +106,7 @@ jobs:
           registry-url: https://registry.npmjs.org/ # Needed for auth
 
       - name: yarn install --frozen-lockfile
-        uses: backstage/actions/yarn-install@v0.6.5
+        uses: backstage/actions/yarn-install@v0.6.11
         with:
           cache-prefix: ${{ runner.os }}-v${{ matrix.node-version }}
 
