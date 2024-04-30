@@ -21,7 +21,7 @@ jobs:
         node-version: [20.x]
     steps:
       - name: Checkout non PR
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.4
         # Do not trigger a checkout when opening PRs from a fork (helps avoid
         # "pwn request". See https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request_target )
         if: github.event_name != 'pull_request_target'
@@ -29,7 +29,7 @@ jobs:
           fetch-depth: '0'
 
       - name: Checkout PR
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.4
         if: github.event_name == 'pull_request_target'
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"

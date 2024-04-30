@@ -37,7 +37,7 @@ jobs:
         run: if [ '${{ github.event.before }}' = '0000000000000000000000000000000000000000' ]; then echo "::warning title=Missing github.event.before::You are running this CD workflow on a newly created branch. Release won't be created..."; fi
 
       - name: Checkout repository
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.4
 
       - name: use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4.0.2
@@ -97,7 +97,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.4
 
       - name: use node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4.0.2
