@@ -41,7 +41,7 @@
     "luxon": "3.4.4",
     "node-gyp": "^9.0.0",
     "serialize-error": "8.1.0",
-    "winston": "3.8.2"
+    "winston": "3.13.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.25.1",
