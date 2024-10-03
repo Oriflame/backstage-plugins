@@ -1,5 +1,12 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.9.1
+
+### Patch Changes
+
+- c3cbaf0: Updated dependency `react-router` to `6.26.2`.
+  Updated dependency `react-router-dom` to `6.26.2`.
+
 ## 0.9.0
 
 ### Minor Changes
