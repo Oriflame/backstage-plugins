@@ -7913,17 +7913,15 @@ __metadata:
     "@testing-library/user-event": "npm:^14.0.0"
     "@types/jest": "npm:*"
     "@types/node": "npm:^20.11.5"
-    "@types/react": "npm:^18.0.0"
-    "@types/react-dom": "npm:*"
+    "@types/react": "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
     cross-fetch: "npm:3.1.5"
     http-server: "npm:14.1.1"
     msw: "npm:1.3.2"
-    react-router-dom: "npm:6.26.2"
     react-use: "npm:^17.2.4"
   peerDependencies:
-    react: ^18.0.0
-    react-dom: ^18.0.0
-    react-router-dom: ^6.4.5
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
+    react-router-dom: 6.0.0-beta.0 || ^6.3.0
   languageName: unknown
   linkType: soft
 
