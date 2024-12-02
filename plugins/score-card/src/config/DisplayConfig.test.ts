@@ -22,17 +22,29 @@ describe('display config', () => {
   it.each([
     [
       { reviewer: 'always', reviewDate: 'always' },
-      { reviewer: DisplayPolicy.Always, reviewDate: DisplayPolicy.Always },
+      { 
+        reviewer: DisplayPolicy.Always,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
+      },
     ],
     [
       { reviewer: 'never', reviewDate: 'never' },
-      { reviewer: DisplayPolicy.Never, reviewDate: DisplayPolicy.Never },
+      { 
+        reviewer: DisplayPolicy.Never, 
+        reviewDate: DisplayPolicy.Never,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
+      },
     ],
     [
       { reviewer: 'if-data-present', reviewDate: 'if-data-present' },
       {
         reviewer: DisplayPolicy.IfDataPresent,
         reviewDate: DisplayPolicy.IfDataPresent,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
       },
     ],
     [
@@ -40,13 +52,55 @@ describe('display config', () => {
       {
         reviewer: DisplayPolicy.Always,
         reviewDate: DisplayPolicy.IfDataPresent,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
       },
     ],
     [
       { reviewer: 'never' },
-      { reviewer: DisplayPolicy.Never, reviewDate: DisplayPolicy.Always },
+      { 
+        reviewer: DisplayPolicy.Never,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
+      },
     ],
-    [{}, { reviewer: DisplayPolicy.Always, reviewDate: DisplayPolicy.Always }],
+    [
+      { owner: 'never' },
+      { 
+        reviewer: DisplayPolicy.Always,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.Never,
+        kind: DisplayPolicy.Always,
+      },
+    ],
+    [
+      { owner: 'if-data-present' },
+      { 
+        reviewer: DisplayPolicy.Always,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.IfDataPresent,
+        kind: DisplayPolicy.Always,
+      },
+    ],
+    [
+      { kind: 'never' },
+      { 
+        reviewer: DisplayPolicy.Always,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Never,
+      },
+    ],
+    [
+      {}, 
+      { 
+        reviewer: DisplayPolicy.Always,
+        reviewDate: DisplayPolicy.Always,
+        owner: DisplayPolicy.Always,
+        kind: DisplayPolicy.Always,
+      }
+    ],
   ])('gets expected display policies from config', (policies, expected) => {
     const mockConfig = new MockConfigApi({ scorecards: { display: policies } });
 

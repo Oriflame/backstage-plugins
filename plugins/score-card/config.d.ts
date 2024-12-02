@@ -26,6 +26,16 @@ export interface Config {
     jsonDataUrl?: string;
     display?: {
       /**
+       * Whether to display the kind column in the score card table.
+       * @visibility frontend
+       */
+      kind?: string;
+      /**
+       * Whether to display the owner column in the score card table.
+       * @visibility frontend
+       */
+      owner?: string;
+      /**
        * Whether to display the reviewer column in the score card table.
        * @visibility frontend
        */

@@ -79,14 +79,24 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
         );
       },
     },
-    {
+  ];
+
+  if (displayPolicies.kind === DisplayPolicy.Always) {
+    columns.push({
       title: 'Kind',
       field: 'entityRef.kind',
       render: entityScore => {
         return <>{entityScore.entityRef.kind}</>;
       },
-    },
-    {
+    });
+  }
+
+  if (
+    displayPolicies.owner === DisplayPolicy.Always ||
+    (displayPolicies.owner === DisplayPolicy.IfDataPresent &&
+      scores.some(s => !!s.owner))
+  ) {
+    columns.push({
       title: 'Owner',
       field: 'owner.name',
       render: entityScore =>
@@ -97,8 +107,8 @@ export const ScoreTable = ({ title, scores }: ScoreTableProps) => {
             </EntityRefLink>
           </>
         ) : null,
-    },
-  ];
+    });
+  }
 
   if (
     displayPolicies.reviewer === DisplayPolicy.Always ||

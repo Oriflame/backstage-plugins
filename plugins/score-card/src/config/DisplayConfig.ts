@@ -31,6 +31,12 @@ export class DisplayConfig {
       reviewer:
         (displayConfig?.getOptionalString('reviewer') as DisplayPolicy) ??
         DisplayPolicy.Always,
+      owner:
+        (displayConfig?.getOptionalString('owner') as DisplayPolicy) ??
+        DisplayPolicy.Always,
+      kind:
+        (displayConfig?.getOptionalString('kind') as DisplayPolicy) ??
+        DisplayPolicy.Always,
       reviewDate:
         (displayConfig?.getOptionalString('reviewDate') as DisplayPolicy) ??
         DisplayPolicy.Always,
