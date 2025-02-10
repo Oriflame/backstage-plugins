@@ -1,5 +1,11 @@
 # @oriflame/backstage-plugin-score-card
 
+## 0.10.0
+
+### Minor Changes
+
+- 1984fbb: Configure display policies to hide/show owner and kind columns
+
 ## 0.9.1
 
 ### Patch Changes
