@@ -7883,7 +7883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oriflame/backstage-plugin-score-card@npm:^0.9.0, @oriflame/backstage-plugin-score-card@workspace:plugins/score-card":
+"@oriflame/backstage-plugin-score-card@npm:^0.10.0, @oriflame/backstage-plugin-score-card@workspace:plugins/score-card":
   version: 0.0.0-use.local
   resolution: "@oriflame/backstage-plugin-score-card@workspace:plugins/score-card"
   dependencies:
@@ -12544,7 +12544,7 @@ __metadata:
     "@backstage/theme": "npm:^0.5.0"
     "@material-ui/core": "npm:4.12.4"
     "@material-ui/icons": "npm:4.11.3"
-    "@oriflame/backstage-plugin-score-card": "npm:^0.9.0"
+    "@oriflame/backstage-plugin-score-card": "npm:^0.10.0"
     "@playwright/test": "npm:^1.43.0"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
