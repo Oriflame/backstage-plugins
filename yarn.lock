@@ -2777,7 +2777,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/catalog-client@npm:^1.5.2":
+"@backstage/catalog-client@npm:1.5.2, @backstage/catalog-client@npm:^1.5.2":
   version: 1.5.2
   resolution: "@backstage/catalog-client@npm:1.5.2"
   dependencies:
@@ -2824,7 +2824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/cli@npm:^0.25.1":
+"@backstage/cli@npm:0.25.1, @backstage/cli@npm:^0.25.1":
   version: 0.25.1
   resolution: "@backstage/cli@npm:0.25.1"
   dependencies:
@@ -2992,7 +2992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-app-api@npm:^1.11.3":
+"@backstage/core-app-api@npm:1.11.3, @backstage/core-app-api@npm:^1.11.3":
   version: 1.11.3
   resolution: "@backstage/core-app-api@npm:1.11.3"
   dependencies:
@@ -3119,7 +3119,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/dev-utils@npm:^1.0.26":
+"@backstage/dev-utils@npm:1.0.26":
   version: 1.0.26
   resolution: "@backstage/dev-utils@npm:1.0.26"
   dependencies:
@@ -3143,7 +3143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/e2e-test-utils@npm:^0.1.0":
+"@backstage/e2e-test-utils@npm:0.1.0":
   version: 0.1.0
   resolution: "@backstage/e2e-test-utils@npm:0.1.0"
   dependencies:
@@ -3716,7 +3716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/plugin-catalog@npm:^1.16.1":
+"@backstage/plugin-catalog@npm:1.16.1, @backstage/plugin-catalog@npm:^1.16.1":
   version: 1.16.1
   resolution: "@backstage/plugin-catalog@npm:1.16.1"
   dependencies:
@@ -4339,7 +4339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/repo-tools@npm:^0.5.2":
+"@backstage/repo-tools@npm:0.5.2":
   version: 0.5.2
   resolution: "@backstage/repo-tools@npm:0.5.2"
   dependencies:
@@ -4390,7 +4390,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/test-utils@npm:^1.4.7":
+"@backstage/test-utils@npm:1.4.7":
   version: 1.4.7
   resolution: "@backstage/test-utils@npm:1.4.7"
   dependencies:
@@ -7887,32 +7887,32 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@oriflame/backstage-plugin-score-card@workspace:plugins/score-card"
   dependencies:
-    "@backstage/catalog-client": "npm:^1.5.2"
+    "@backstage/catalog-client": "npm:1.5.2"
     "@backstage/catalog-model": "npm:^1.4.3"
-    "@backstage/cli": "npm:^0.25.1"
+    "@backstage/cli": "npm:0.25.1"
     "@backstage/config": "npm:^1.1.1"
-    "@backstage/core-app-api": "npm:^1.11.3"
+    "@backstage/core-app-api": "npm:1.11.3"
     "@backstage/core-components": "npm:^0.13.10"
     "@backstage/core-plugin-api": "npm:^1.8.2"
-    "@backstage/dev-utils": "npm:^1.0.26"
+    "@backstage/dev-utils": "npm:1.0.26"
     "@backstage/integration": "npm:^1.9.0"
     "@backstage/integration-react": "npm:^1.1.24"
-    "@backstage/plugin-catalog": "npm:^1.16.1"
+    "@backstage/plugin-catalog": "npm:1.16.1"
     "@backstage/plugin-catalog-common": "npm:^1.0.20"
     "@backstage/plugin-catalog-react": "npm:^1.9.3"
-    "@backstage/test-utils": "npm:^1.4.7"
+    "@backstage/test-utils": "npm:1.4.7"
     "@backstage/theme": "npm:^0.5.0"
     "@backstage/types": "npm:^1.1.1"
     "@backstage/version-bridge": "npm:^1.0.7"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.11.2"
     "@material-ui/lab": "npm:^4.0.0-alpha.57"
-    "@testing-library/dom": "npm:^9.0.0"
-    "@testing-library/jest-dom": "npm:^6.0.0"
-    "@testing-library/react": "npm:^14.0.0"
-    "@testing-library/user-event": "npm:^14.0.0"
-    "@types/jest": "npm:*"
-    "@types/node": "npm:^20.11.5"
+    "@testing-library/dom": "npm:9.3.4"
+    "@testing-library/jest-dom": "npm:6.2.1"
+    "@testing-library/react": "npm:14.1.2"
+    "@testing-library/user-event": "npm:14.5.2"
+    "@types/jest": "npm:29.5.11"
+    "@types/node": "npm:20.11.5"
     "@types/react": "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
     cross-fetch: "npm:3.1.5"
     http-server: "npm:14.1.1"
@@ -7932,7 +7932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.43.0":
+"@playwright/test@npm:1.43.1":
   version: 1.43.1
   resolution: "@playwright/test@npm:1.43.1"
   dependencies:
@@ -10679,7 +10679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^9.0.0":
+"@testing-library/dom@npm:9.3.4, @testing-library/dom@npm:^9.0.0":
   version: 9.3.4
   resolution: "@testing-library/dom@npm:9.3.4"
   dependencies:
@@ -10695,7 +10695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^6.0.0":
+"@testing-library/jest-dom@npm:6.2.1":
   version: 6.2.1
   resolution: "@testing-library/jest-dom@npm:6.2.1"
   dependencies:
@@ -10728,7 +10728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^14.0.0":
+"@testing-library/react@npm:14.1.2":
   version: 14.1.2
   resolution: "@testing-library/react@npm:14.1.2"
   dependencies:
@@ -10742,7 +10742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^14.0.0":
+"@testing-library/user-event@npm:14.5.2":
   version: 14.5.2
   resolution: "@testing-library/user-event@npm:14.5.2"
   peerDependencies:
@@ -11154,7 +11154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:^29.0.0":
+"@types/jest@npm:29.5.11, @types/jest@npm:^29.0.0":
   version: 29.5.11
   resolution: "@types/jest@npm:29.5.11"
   dependencies:
@@ -11318,7 +11318,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^20.1.1, @types/node@npm:^20.11.5":
+"@types/node@npm:*, @types/node@npm:20.11.5, @types/node@npm:>=12.12.47, @types/node@npm:>=13.7.0, @types/node@npm:^20.1.1":
   version: 20.11.5
   resolution: "@types/node@npm:20.11.5"
   dependencies:
@@ -12526,7 +12526,7 @@ __metadata:
     "@backstage/core-app-api": "npm:^1.11.3"
     "@backstage/core-components": "npm:^0.13.10"
     "@backstage/core-plugin-api": "npm:^1.8.2"
-    "@backstage/e2e-test-utils": "npm:^0.1.0"
+    "@backstage/e2e-test-utils": "npm:0.1.0"
     "@backstage/integration-react": "npm:^1.1.23"
     "@backstage/plugin-api-docs": "npm:^0.10.3"
     "@backstage/plugin-catalog": "npm:^1.16.1"
@@ -12540,18 +12540,18 @@ __metadata:
     "@backstage/plugin-search": "npm:^1.4.5"
     "@backstage/plugin-tech-radar": "npm:^0.6.12"
     "@backstage/plugin-user-settings": "npm:^0.8.0"
-    "@backstage/test-utils": "npm:^1.4.7"
+    "@backstage/test-utils": "npm:1.4.7"
     "@backstage/theme": "npm:^0.5.0"
     "@material-ui/core": "npm:4.12.4"
     "@material-ui/icons": "npm:4.11.3"
     "@oriflame/backstage-plugin-score-card": "npm:^0.9.0"
-    "@playwright/test": "npm:^1.43.0"
-    "@testing-library/dom": "npm:^9.0.0"
-    "@testing-library/jest-dom": "npm:^6.0.0"
-    "@testing-library/react": "npm:^14.0.0"
-    "@testing-library/user-event": "npm:^14.0.0"
-    "@types/jest": "npm:*"
-    "@types/node": "npm:^20.11.5"
+    "@playwright/test": "npm:1.43.1"
+    "@testing-library/dom": "npm:9.3.4"
+    "@testing-library/jest-dom": "npm:6.2.1"
+    "@testing-library/react": "npm:14.1.2"
+    "@testing-library/user-event": "npm:14.5.2"
+    "@types/jest": "npm:29.5.11"
+    "@types/node": "npm:20.11.5"
     "@types/react-dom": "npm:*"
     cross-env: "npm:7.0.3"
     history: "npm:5.3.0"
@@ -13132,7 +13132,7 @@ __metadata:
     "@backstage/backend-tasks": "npm:^0.5.14"
     "@backstage/catalog-client": "npm:^1.5.2"
     "@backstage/catalog-model": "npm:^1.4.3"
-    "@backstage/cli": "npm:^0.25.1"
+    "@backstage/cli": "npm:0.25.1"
     "@backstage/config": "npm:^1.1.1"
     "@backstage/integration": "npm:^1.8.0"
     "@backstage/plugin-app-backend": "npm:^0.3.57"
@@ -14516,7 +14516,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:^8.0.0":
+"concurrently@npm:8.2.2":
   version: 8.2.2
   resolution: "concurrently@npm:8.2.2"
   dependencies:
@@ -24055,22 +24055,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ori-backstage-plugins@workspace:."
   dependencies:
-    "@backstage/cli": "npm:^0.25.1"
-    "@backstage/e2e-test-utils": "npm:^0.1.0"
-    "@backstage/repo-tools": "npm:^0.5.2"
+    "@backstage/cli": "npm:0.25.1"
+    "@backstage/e2e-test-utils": "npm:0.1.0"
+    "@backstage/repo-tools": "npm:0.5.2"
     "@changesets/cli": "npm:2.27.1"
-    "@playwright/test": "npm:^1.43.0"
+    "@playwright/test": "npm:1.43.1"
     "@spotify/prettier-config": "npm:14.1.6"
     "@types/react": "npm:^18.2.48"
     "@types/react-dom": "npm:^18.2.18"
     "@types/webpack": "npm:5.28.0"
-    concurrently: "npm:^8.0.0"
+    concurrently: "npm:8.2.2"
     eslint-plugin-notice: "npm:0.9.10"
     http-server: "npm:14.1.1"
     jest-environment-jsdom: "npm:30.0.0-alpha.2"
     prettier: "npm:2.8.8"
-    react: "npm:^18.0.0"
-    typescript: "npm:~5.4.0"
+    react: "npm:18.2.0"
+    typescript: "npm:5.4.5"
   languageName: unknown
   linkType: soft
 
@@ -26451,7 +26451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.0.0":
+"react@npm:18.2.0, react@npm:^18.0.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -29597,6 +29597,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:5.4.5":
+  version: 5.4.5
+  resolution: "typescript@npm:5.4.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
+  languageName: node
+  linkType: hard
+
 "typescript@npm:~5.1.0":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
@@ -29604,16 +29614,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/45ac28e2df8365fd28dac42f5d62edfe69a7203d5ec646732cadc04065331f34f9078f81f150fde42ed9754eed6fa3b06a8f3523c40b821e557b727f1992e025
-  languageName: node
-  linkType: hard
-
-"typescript@npm:~5.4.0":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
   languageName: node
   linkType: hard
 
@@ -29627,6 +29627,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>":
+  version: 5.4.5
+  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A~5.1.0#optional!builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"
@@ -29634,16 +29644,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/c2bded58ab897a8341fdbb0c1d92ea2362f498cfffebdc8a529d03e15ea2454142dfbf122dabbd9a5cb79b7123790d27def16e11844887d20636226773ed329a
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A~5.4.0#optional!builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
   languageName: node
   linkType: hard
 
