@@ -44,10 +44,10 @@
     "@types/react-dom": "^18.2.18",
     "dockerode": "3.3.5",
     "@types/dockerode": "3.3.28",
-    "jest-environment-jsdom": "30.0.0-alpha.2"
+    "jest-environment-jsdom": "30.0.0-alpha.7"
   },
   "dependencies": {
-    "jest-environment-jsdom": "30.0.0-alpha.2"
+    "jest-environment-jsdom": "30.0.0-alpha.7"
   },
   "devDependencies": {
     "@backstage/cli": "^0.25.1",
