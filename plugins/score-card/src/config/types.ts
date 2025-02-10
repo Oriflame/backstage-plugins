@@ -21,6 +21,8 @@ export enum DisplayPolicy {
 }
 
 export interface DisplayPolicies {
+  kind: DisplayPolicy,
+  owner: DisplayPolicy,
   reviewer: DisplayPolicy;
   reviewDate: DisplayPolicy;
 }
