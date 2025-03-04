@@ -50,6 +50,12 @@ export interface Config {
      * The template for the link to the wiki, e.g. "https://TBD/XXX/_wiki/wikis/XXX.wiki/{id}"
      * @visibility frontend
      */
-     wikiLinkTemplate?: string;
+    wikiLinkTemplate?: string;
+    /**
+     * If set to true, will fetch all the entities from the catalog and filter them afterwards.
+     * By default the entities are loaded from the catalog using a filter by name, which may result in 414 Request-URI Too Large.
+     * @visibility frontend
+     */
+    fetchAllEntities?: boolean;
   };
 }
