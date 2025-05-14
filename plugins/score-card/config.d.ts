@@ -51,5 +51,11 @@ export interface Config {
      * @visibility frontend
      */
      wikiLinkTemplate?: string;
+
+    /**
+     * Whether to pull all entities and filter after pull or filter on request, can cause a http request URI too long error
+     * @visibility frontend
+     */
+     fetchAllEntities?: boolean
   };
 }
