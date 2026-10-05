@@ -60,7 +60,7 @@
     "@types/node": "^20.11.5",
     "@types/react-dom": "*",
     "cross-env": "7.0.3",
-    "start-server-and-test": "1.14.0"
+    "start-server-and-test": "1.15.4"
   },
   "browserslist": {
     "production": [
